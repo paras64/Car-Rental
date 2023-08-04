@@ -7,11 +7,13 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import VehicalModels from "./component/VehicalModels";
 import Login from "./component/LoginRegistration/Login";
 import Registration from "./component/LoginRegistration/Registration";
+import ForgotPassword from "./component/LoginRegistration/ForgotPassword";
+import ConfirmPassword from "./component/LoginRegistration/ConfirmPassword";
+import NotFound from "./NotFound";
 function App() {
   return (
     <>
       <Router>
-        <Navbar />
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route exact path="/about" element={<About />} />
@@ -20,6 +22,13 @@ function App() {
           <Route exact path="/vehicalsmodels" element={<VehicalModels />} />
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/register" element={<Registration />} />
+          <Route exact path="/forgotpassword" element={<ForgotPassword />} />
+          <Route
+            exact
+            path="/confirmpassword/:userEmail"
+            element={<ConfirmPassword />}
+          />
+          <Route exact path="*" element={<NotFound />} />
         </Routes>
       </Router>
     </>

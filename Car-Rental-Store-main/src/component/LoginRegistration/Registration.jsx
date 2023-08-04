@@ -7,6 +7,7 @@ import { GlobalStyle } from "../styles/GlobalStyle";
 import { capitalize } from "@mui/material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import Navbar from "../Navbar";
 const Registration = () => {
   const navigate = useNavigate();
 
@@ -71,6 +72,7 @@ const Registration = () => {
   return (
     <>
       <GlobalStyle />
+      <Navbar />
       <section className="registration">
         <div className="registration-container">
           <div className="registration-content">

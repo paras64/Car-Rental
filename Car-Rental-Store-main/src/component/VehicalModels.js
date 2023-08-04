@@ -1,4 +1,5 @@
 import React from "react";
+import Navbar from "./Navbar";
 import AboutHome from "./AboutSectionComponents/AboutHome";
 // import Navbar from './Navbar'
 import Booking from "./HomePageComponents/Booking";
@@ -23,6 +24,7 @@ export default function VehicalModels() {
   `;
   return (
     <>
+    <Navbar />
       <AboutHome
         img={HomeImg}
         headingText={"Drive Your"}

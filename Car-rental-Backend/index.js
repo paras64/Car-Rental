@@ -19,6 +19,7 @@ const ProductRouter = require("./routes/products.js");
 const SubscribeRouter = require("./routes/subscribe.js");
 const UserRouter = require("./routes/auth.js");
 const TestimonialRouter = require("./routes/testimonial.js");
+const ForgotPasswordRouter = require("./routes/forgotuserpassword.js");
 
 //MIDDLEWARES
 app.use(cors());
@@ -27,7 +28,7 @@ app.use("/products", ProductRouter.router);
 app.use("/subscribe", SubscribeRouter.router);
 app.use("/testimonials", TestimonialRouter.router);
 app.use("/auth", UserRouter.router);
-
+app.use("/forgotpassword", ForgotPasswordRouter.router);
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });

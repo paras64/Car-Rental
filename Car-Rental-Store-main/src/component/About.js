@@ -8,6 +8,7 @@ import PhotoGallery from "./AboutSectionComponents/PhotoGallery";
 import Details from "./AboutSectionComponents/Details";
 import styled from "styled-components";
 import HomeImg1 from './images/About section images/aboutHome.jpg'
+import Navbar from "./Navbar";
 export default function About() {
   const WhyUssection = styled.section`
     height: 38rem;
@@ -26,6 +27,7 @@ export default function About() {
 
   return (
     <>
+    <Navbar />
     <AboutHome headingText={"FUELED BY"} spanText={"PASSION."} Subheading={"Reliable, Convenient & Valued"} img={HomeImg1} />
       <WhyUssection className="AboutHomeSection-container-hero">
         <div className="AboutHomeSection-container-main-content">

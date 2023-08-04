@@ -1,4 +1,4 @@
-import React, { useState, useRef, createContext, useContext } from "react";
+import React, { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Style.css";
 import axios from "axios";
@@ -6,17 +6,16 @@ import { NavLink } from "react-router-dom";
 import { GlobalStyle } from "../styles/GlobalStyle";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
-
-const UserContext = createContext(undefined);
+import Navbar from "../Navbar";
 
 const Login = () => {
   const navigate = useNavigate();
-  const [confirmedUserData, SetconfirmedUserData] = useState(undefined);
   const passwordData = useRef("");
   const [data, SetData] = useState({
     email: "",
     password: "",
   });
+
   const [visibility, SetVisibility] = useState(false);
 
   const resetAll = (e) => {
@@ -31,8 +30,11 @@ const Login = () => {
     if (data.email && data.password) {
       const doc = axios.post("http://localhost:8000/auth/login", data);
       doc
-        .then((data) => {
-          SetconfirmedUserData(data);
+        .then((response) => {
+          localStorage.setItem(
+            "UserDetails",
+            JSON.stringify(response.data.data)
+          );
           SetData({
             email: "",
             password: "",
@@ -68,77 +70,81 @@ const Login = () => {
 
   return (
     <>
-      <UserContext.Provider value={confirmedUserData}>
-        <GlobalStyle />
-        <section className="login">
-          <div className="login-container">
-            <div className="login-content">
-              <h1 className="login-heading">
-                Welcome back to Car Rental Store
-              </h1>
-              <h1 className="login-heading">
-                Log in to continue
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 100 100"
-                  width="13"
-                  height="13"
-                  style={{ margin: "0 5px" }}
-                >
-                  <circle cx="50" cy="50" r="40" fill="rgb(100 100 214)" />
-                </svg>
-              </h1>
-              <p className="login-link">
-                Dont have an account?{" "}
-                <NavLink to="/register">Create a new account</NavLink>
-              </p>
-              <form className="login-form">
-                <div>
-                  <label htmlFor="login">Email</label>
+      <GlobalStyle />
+      <Navbar />
+      <section className="login">
+        <div className="login-container">
+          <div className="login-content">
+            <h1 className="login-heading">Welcome back to Car Rental Store</h1>
+            <h1 className="login-heading">
+              Log in to continue
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 100 100"
+                width="13"
+                height="13"
+                style={{ margin: "0 5px" }}
+              >
+                <circle cx="50" cy="50" r="40" fill="rgb(100 100 214)" />
+              </svg>
+            </h1>
+            <p className="login-link">
+              Dont have an account?{" "}
+              <NavLink to="/register">Create a new account</NavLink>
+            </p>
+            <form className="login-form">
+              <div>
+                <label htmlFor="login">Email</label>
+                <input
+                  type="email"
+                  name="email"
+                  id="login"
+                  value={data.email}
+                  onChange={handleChange}
+                />
+              </div>
+              <div>
+                <label htmlFor="password">Password</label>
+                <article className="password-article">
                   <input
-                    type="email"
-                    name="email"
-                    id="login"
-                    value={data.email}
+                    ref={passwordData}
+                    type="password"
+                    name="password"
+                    id="password"
+                    value={data.password}
                     onChange={handleChange}
                   />
-                </div>
-                <div>
-                  <label htmlFor="password">Password</label>
-                  <article className="password-article">
-                    <input
-                      ref={passwordData}
-                      type="password"
-                      name="password"
-                      id="password"
-                      value={data.password}
-                      onChange={handleChange}
+                  {visibility ? (
+                    <VisibilityIcon
+                      onClick={VisibilityToggle}
+                      style={{ cursor: "pointer" }}
                     />
-                    {visibility ? (
-                      <VisibilityIcon
-                        onClick={VisibilityToggle}
-                        style={{ cursor: "pointer" }}
-                      />
-                    ) : (
-                      <VisibilityOffIcon
-                        onClick={VisibilityToggle}
-                        style={{ cursor: "pointer" }}
-                      />
-                    )}
-                  </article>
-                </div>
-                <div>
-                  <button onClick={resetAll}>Reset All</button>
-                  <button onClick={handleSubmit}>Sign In</button>
-                </div>
-              </form>
-            </div>
-            <aside className="login-image"></aside>
+                  ) : (
+                    <VisibilityOffIcon
+                      onClick={VisibilityToggle}
+                      style={{ cursor: "pointer" }}
+                    />
+                  )}
+                </article>
+              </div>
+
+              <div>
+                <button onClick={resetAll}>Reset All</button>
+                <button onClick={handleSubmit}>Sign In</button>
+              </div>
+              <button
+                className="forgot-password"
+                onClick={() => navigate("/forgotpassword")}
+              >
+                Forgot Password ?
+              </button>
+            </form>
           </div>
-        </section>
-      </UserContext.Provider>
+          <aside className="login-image"></aside>
+        </div>
+      </section>
     </>
   );
 };
+
 export default Login;
-export const UseUserData = () => useContext(UserContext);

@@ -1,14 +1,19 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { GlobalStyle } from "./styles/GlobalStyle";
 import logo from "./images/Logo.png";
 import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { UseUserData } from "./LoginRegistration/Login";
+import { Button } from "@mui/material";
 export default function Navbar() {
-  const UserDetails = UseUserData();
-  console.log(UserDetails);
+  const [UserDetails, SetUserDetails] = useState(undefined);
 
+  useEffect(() => {
+    const data = JSON.parse(localStorage.getItem("UserDetails"));
+    if (data) {
+      SetUserDetails(data);
+    }
+  }, []);
   const navigate = useNavigate();
   const gotoLogin = () => {
     navigate("/login");
@@ -71,7 +76,7 @@ export default function Navbar() {
       justify-content: center;
       gap: 25px;
       height: 50px;
-      width: 13.2rem;
+      width: 15.2rem;
       font-family: Rubik, sans-serif;
     }
 
@@ -94,6 +99,9 @@ export default function Navbar() {
       background-color: transparent;
       border: none;
       cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
     .navbar-links li a:hover,
@@ -139,16 +147,40 @@ export default function Navbar() {
             </ul>
           </div>
           <div className="right-section">
-            <button onClick={() => gotoLogin()} className="btn" id="left-btn">
-              Sign In
-            </button>
-            <button
-              onClick={() => gotoRegister()}
-              className="btn"
-              id="right-btn"
-            >
-              Register
-            </button>
+            {!UserDetails ? (
+              <>
+                <button
+                  onClick={() => gotoLogin()}
+                  className="btn"
+                  id="left-btn"
+                >
+                  Sign In
+                </button>
+                <button
+                  onClick={() => gotoRegister()}
+                  className="btn"
+                  id="right-btn"
+                >
+                  Register
+                </button>
+              </>
+            ) : (
+              <>
+                <p className="btn" id="left-btn">
+                  Hello, {UserDetails.firstname}
+                </p>
+                <Button
+                  className="btn"
+                  id="right-btn"
+                  onClick={() => {
+                    localStorage.clear();
+                    navigate("/login");
+                  }}
+                >
+                  Log Out
+                </Button>
+              </>
+            )}
           </div>
         </nav>
       </HeaderTop>

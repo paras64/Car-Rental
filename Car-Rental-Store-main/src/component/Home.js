@@ -1,6 +1,6 @@
 import React from "react";
 import HomeSection from "./HomePageComponents/HomeSection";
-// import Navbar from './Navbar';
+import Navbar from './Navbar';
 import Service from "./HomePageComponents/Service";
 import Booking from "./HomePageComponents/Booking";
 import WhyUs from "./HomePageComponents/WhyUs";
@@ -17,6 +17,7 @@ export default function App() {
   return (
     <>
       {/* <Navbar/>    */}
+      <Navbar />
       <HomeSection />
       <Service />
       <Booking vaild={false} />

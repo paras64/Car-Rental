@@ -43,7 +43,7 @@ exports.login = async (req, res) => {
           res.status(200).json({ message: "Login successful", data: data });
         })
         .catch((err) => {
-          res.status(400).json({ message: "Invalid email", err: err });
+          res.status(400).json({ message: "Invalid Password", err: err });
         });
     } else {
       res.status(401).json({
