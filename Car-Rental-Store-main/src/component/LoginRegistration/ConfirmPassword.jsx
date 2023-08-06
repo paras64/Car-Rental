@@ -7,19 +7,18 @@ import { GlobalStyle } from "../styles/GlobalStyle";
 import axios from "axios";
 const ConfirmPassword = () => {
   const navigate = useNavigate();
-
   const [visibility, SetVisibility] = useState({
     firstPasswordBox: false,
     SecondPasswordBox: false,
+    message: "",
+    loading: false,
   });
   const { userEmail } = useParams();
-  console.log(userEmail);
   const [confirmPassword, setconfirmPassword] = useState({
     newPassword: "",
     confirmNewPassword: "",
   });
   const passwordData = useRef([]);
-
   const VisibilityToggle = (index) => {
     console.log(index);
     if (index == 0) {
@@ -89,6 +88,12 @@ const ConfirmPassword = () => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
+    SetVisibility((prevdata) => {
+      return {
+        ...prevdata,
+        loading: true,
+      };
+    });
     if (confirmPassword.newPassword && confirmPassword.confirmNewPassword) {
       if (confirmPassword.newPassword === confirmPassword.confirmNewPassword) {
         const doc = axios.post(`http://localhost:8000/forgotpassword/update`, {
@@ -98,17 +103,55 @@ const ConfirmPassword = () => {
         });
         doc
           .then((response) => {
-            console.log(response.data);
-            navigate("/login");
+            setTimeout(() => {
+              SetVisibility((prevdata) => {
+                return {
+                  ...prevdata,
+                  message: response.data,
+                  loading: false,
+                };
+              });
+              alert("Password has been updated");
+              navigate("/login");
+            }, 2000);
           })
           .catch((err) => {
-            console.log(err);
+            console.log("hfk", err);
+            setTimeout(() => {
+              SetVisibility((prevdata) => {
+                return {
+                  ...prevdata,
+                  message: err.response.data,
+                  loading: false,
+                };
+              });
+            }, 2000);
           });
       } else {
-        console.log("Password does not matched");
+        SetVisibility((prevdata) => {
+          return {
+            ...prevdata,
+            loading: true,
+          };
+        });
+        setTimeout(() => {
+          SetVisibility((prevdata) => {
+            return {
+              ...prevdata,
+              message: "Passwords does not match",
+              loading: false,
+            };
+          });
+        }, 2000);
       }
     } else {
-      alert("Please complete the fields");
+      SetVisibility((prevdata) => {
+        return {
+          ...prevdata,
+          message: "Please complete the fields",
+          loading: false,
+        };
+      });
     }
   };
   return (
@@ -168,11 +211,18 @@ const ConfirmPassword = () => {
             </div>
             <div>
               <button onClick={resetAll}>Reset All</button>
-              <button onClick={handleSubmit}>Update</button>
+              <button onClick={handleSubmit} className="submit-btn">
+                {!visibility.loading && <p>Update</p>}
+                {visibility.loading && (
+                  <div class="loading-container" id="loadingContainer">
+                    <div class="loading"></div>
+                  </div>
+                )}
+              </button>
             </div>
           </form>
           <div className="message">
-            <p>{}</p>
+            <p>{visibility.message}</p>
           </div>
         </div>
       </section>

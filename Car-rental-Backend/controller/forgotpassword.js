@@ -66,13 +66,19 @@ exports.getForgotRequest = async (req, res) => {
   try {
     secret = privateKey + doc.password;
     const verify = jwt.verify(token, secret, { algorithm: "RS256" });
+    console.log(verify);
     res.redirect(`http://localhost:3000/confirmpassword/${doc.email}`);
   } catch (err) {
-    res.status(401).send("<h1>User Not Verified</h1>");
+    res.status(401).send("<h1 >User Not Verified</h1>");
   }
 };
 exports.updatePassword = async (req, res) => {
   const { newPassword, userEmail } = req.body;
+  const doc = await User.findOne({ email: userEmail });
+  if (!doc) {
+    res.status(401).send("User does not exists");
+    return;
+  }
   try {
     const hash = bcrypt.hashSync(newPassword, 10);
     const doc = await User.findOneAndUpdate(

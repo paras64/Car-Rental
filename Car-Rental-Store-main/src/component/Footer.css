@@ -99,6 +99,10 @@ footer {
 .footer-btn:hover {
   box-shadow: 0 10px 15px 0 rgba(99, 21, 5, 0.35);
 }
+.footer-btn p {
+  font-family: rubik;
+  letter-spacing: 1px;
+}
 .error-submit {
   margin-top: 10px;
   color: red;
@@ -284,15 +288,44 @@ footer {
   border-radius: 10px;
 }
 .alert-message {
- color: #3a2916;
+  color: #3a2916;
 }
 .alert-message span {
   font-weight: bold;
   padding: 0 5px;
 }
-.alert-cross{
+.alert-cross {
   border: none !important;
   background-color: transparent;
   cursor: pointer;
   color: #3a2916;
+}
+
+/* LOADING ANIMATION  */
+.submit-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.loading-container {
+  display: block;
+  text-align: center;
+}
+
+.loading {
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-top: 4px solid #3498db;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }

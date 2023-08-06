@@ -70,35 +70,58 @@ export default function Footer() {
     response: "",
     message: "",
     code: null,
+    loading: false,
   });
 
   const handleClick = (e) => {
     e.preventDefault();
-
-    const doc = axios.post("http://localhost:8000/subscribe", data);
-    doc
-      .then((response) => {
-        SetData({
-          fullname: "",
-          email: "",
+    if (data.email && data.fullname) {
+      const doc = axios.post("http://localhost:8000/subscribe", data);
+      doc
+        .then((response) => {
+          SetError("");
+          SetData({
+            fullname: "",
+            email: "",
+          });
+          SetAlert({
+            active: false,
+            response: "",
+            message: "",
+            code: null,
+            loading: true,
+          });
+          setTimeout(() => {
+            SetAlert({
+              active: true,
+              response: "Success",
+              message: "Thanks for your subscription",
+              code: 201,
+              loading: false,
+            });
+          }, 2000);
+        })
+        .catch((err) => {
+          SetAlert({
+            active: false,
+            response: "",
+            message: "",
+            code: null,
+            loading: true,
+          });
+          setTimeout(() => {
+            SetAlert({
+              active: true,
+              response: "Thanksyou",
+              message: "You are already subscribed",
+              code: 401,
+              loading: false,
+            });
+          }, 2000);
         });
-        SetAlert({
-          active: true,
-          response: "Success",
-          message: "Thanks for your subscription",
-          code: 201,
-        });
-        SetError("");
-      })
-      .catch((err) => {
-        SetError("fullname and email address are required");
-        SetAlert({
-          active: true,
-          response: "Failed",
-          message: "Please check the details and try again",
-          code: 401,
-        });
-      });
+    } else {
+      SetError("fullname and email address are required");
+    }
   };
   const handleChange = (e) => {
     SetData((prev) => {
@@ -114,7 +137,6 @@ export default function Footer() {
       <GlobalStyle />
       <footer>
         {alert.active && <AlertBox alert={alert} SetAlert={SetAlert} />}
-
         <div className="footer-container">
           <div className="footer-container-first">
             <div className="first-footer-block">
@@ -153,8 +175,13 @@ export default function Footer() {
                       />
                     </div>
                   </div>
-                  <button className="footer-btn" type="submit" disabled={!data.email}>
-                    SUBSCRIBE
+                  <button className="footer-btn submit-btn" type="submit">
+                    {!alert.loading && <p>SUBSCRIBE</p>}
+                    {alert.loading && (
+                      <div class="loading-container" id="loadingContainer">
+                        <div class="loading"></div>
+                      </div>
+                    )}
                   </button>
                   <p className="error-submit">{error}</p>
                 </form>
@@ -259,8 +286,11 @@ export default function Footer() {
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink to="/" className="Footer-NavLinks">
-                      New Offers
+                    <NavLink
+                      to="/testimonial"
+                      className="Footer-NavLinks"
+                    >
+                      Feedback
                     </NavLink>
                   </li>
                   <li>

@@ -43,7 +43,11 @@ const ForgotPassword = () => {
         })
         .catch((error) => {
           setUserData((prevData) => {
-            return { ...prevData, message: error.response.data.message, loading:false };
+            return {
+              ...prevData,
+              message: error.response.data.message,
+              loading: false,
+            };
           });
         });
     } catch (error) {

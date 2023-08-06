@@ -9,7 +9,14 @@ const privateKey = fs.readFileSync(
   "utf-8"
 );
 
-exports.register = (req, res) => {
+exports.register = async (req, res) => {
+  const doc = await User.findOne({ email: req.body.email });
+  if (doc) {
+    // User not found
+    res.status(401).json({ message: "User already exists, Please login" });
+    return;
+  }
+
   const user = new User(req.body);
   const token = jwt.sign(req.body, privateKey, { algorithm: "RS256" });
   const hash = bcrypt.hashSync(req.body.password, 10);
@@ -21,7 +28,7 @@ exports.register = (req, res) => {
       res.status(200).json(data);
     })
     .catch((err) => {
-      res.status(400).json(err);
+      res.status(400).json({ message: "Email already exists", err });
     });
 };
 
@@ -40,14 +47,14 @@ exports.login = async (req, res) => {
       doc
         .save()
         .then((data) => {
-          res.status(200).json({ message: "Login successful", data: data });
+          res.status(200).json({ message: "Checking details...", data: data });
         })
         .catch((err) => {
           res.status(400).json({ message: "Invalid Password", err: err });
         });
     } else {
-      res.status(401).json({
-        message: "Error while saving the token while login",
+      res.status(500).json({
+        message: "Internal Error, Please try again with correct details",
         err: err,
       });
     }

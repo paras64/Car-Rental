@@ -205,6 +205,7 @@ function VehicalCollection({ productList, limit }) {
                   {productList.map((VehicalDetails, index) => {
                     return (
                       <button
+                      key={index}
                         className={`vehical-names ${
                           activeButton === index ? "active" : ""
                         } `}

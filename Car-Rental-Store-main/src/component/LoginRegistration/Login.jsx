@@ -15,8 +15,11 @@ const Login = () => {
     email: "",
     password: "",
   });
-
   const [visibility, SetVisibility] = useState(false);
+  const [loginAction, setloginAction] = useState({
+    message: "",
+    loading: false,
+  });
 
   const resetAll = (e) => {
     e.preventDefault();
@@ -39,13 +42,28 @@ const Login = () => {
             email: "",
             password: "",
           });
-          navigate("/");
+          setloginAction({
+            message: response.data.message,
+            loading: true,
+          });
+          setTimeout(() => {
+            navigate("/");
+          }, 2000);
         })
         .catch((err) => {
-          alert("login failed, please try again");
+          setloginAction({
+            message: "",
+            loading: true,
+          });
+          setTimeout(() => {
+            setloginAction({
+              message: "Login failed, Please enter correct email and password",
+              loading: false,
+            });
+          }, 2000);
         });
     } else {
-      alert("Please enter the details to continue");
+      alert("Please complete the details to continue");
     }
   };
   const handleChange = (e) => {
@@ -130,7 +148,14 @@ const Login = () => {
 
               <div>
                 <button onClick={resetAll}>Reset All</button>
-                <button onClick={handleSubmit}>Sign In</button>
+                <button onClick={handleSubmit} className="submit-btn">
+                  {!loginAction.loading && <p>Sign In</p>}
+                  {loginAction.loading && (
+                    <div class="loading-container" id="loadingContainer">
+                      <div class="loading"></div>
+                    </div>
+                  )}
+                </button>
               </div>
               <button
                 className="forgot-password"
@@ -139,6 +164,9 @@ const Login = () => {
                 Forgot Password ?
               </button>
             </form>
+            <div className="message">
+              <p>{loginAction.message}</p>
+            </div>
           </div>
           <aside className="login-image"></aside>
         </div>

@@ -77,7 +77,7 @@
   word-spacing: 5px;
 }
 .login-link {
-  margin: 15px 0;
+  margin: 10px 0;
   font-size: 16px;
 }
 .login-link a {
@@ -239,6 +239,8 @@
   font-size: 15px;
   padding: 0px 10px;
   cursor: pointer;
+  font-weight: bold;
+  font-family: rubik;
 }
 .forgot-password-container {
   background: url("https://images.pexels.com/photos/804130/pexels-photo-804130.jpeg?auto=compress&cs=tinysrgb&w=600");

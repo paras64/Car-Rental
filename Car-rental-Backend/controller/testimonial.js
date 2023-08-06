@@ -9,7 +9,9 @@ exports.getTestimonialData = (req, res) => {
         res.status(200).json(data);
       })
       .catch((err) => {
-        res.status(200).json(err);
+        res
+          .status(200)
+          .json({ message: "Something went wrong, please again later", err });
       });
   } else {
     const testimonials = Testimonial.find();

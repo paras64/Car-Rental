@@ -2,6 +2,7 @@ import React from "react";
 import { GlobalStyle } from "../styles/GlobalStyle";
 import styled from "styled-components";
 import { ImSearch } from "react-icons/im";
+import BackImg from "../images/Booking/backgroundImage.png";
 export default function Booking(props) {
   const Wrapper = styled.section`
     /* border: 2px solid; */
@@ -15,8 +16,7 @@ export default function Booking(props) {
     }
 
     .booking-container {
-      background: url("../imgs/booking-section/back-img.png") center
-        center/cover no-repeat;
+      background: url(${BackImg}) center center/cover no-repeat;
       height: 24rem;
       /* border: 2px solid; */
       width: 78rem;

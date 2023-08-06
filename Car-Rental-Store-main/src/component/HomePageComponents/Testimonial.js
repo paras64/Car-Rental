@@ -218,7 +218,9 @@ export default function Testimonial() {
                             <img src={user2} alt="" />
                           </div>
                           <div className="author-details">
-                            <h1>{testimonial.fullname},</h1>
+                            <h1>
+                              {testimonial.firstname} {testimonial.lastname}
+                            </h1>
                             <p>Customer</p>
                           </div>
                         </div>

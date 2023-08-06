@@ -4,7 +4,6 @@ import "./Style.css";
 import axios from "axios";
 import { NavLink } from "react-router-dom";
 import { GlobalStyle } from "../styles/GlobalStyle";
-import { capitalize } from "@mui/material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import Navbar from "../Navbar";
@@ -17,9 +16,11 @@ const Registration = () => {
     lastname: "",
     email: "",
     password: "",
+    message: "",
+    loading: false,
   });
+
   const [visibility, SetVisibility] = useState(false);
-  const [goForward, SetGoForward] = useState(false);
   const resetAll = (e) => {
     e.preventDefault();
     SetData({
@@ -27,6 +28,8 @@ const Registration = () => {
       lastname: "",
       email: "",
       password: "",
+      message: "",
+      loading: false,
     });
   };
   const handleChange = (e) => {
@@ -42,13 +45,39 @@ const Registration = () => {
       doc
         .then((data) => {
           SetData({
+            firstname: "",
+            lastname: "",
             email: "",
             password: "",
+            message: "Creating Account...",
+            loading: true,
           });
-          navigate("/login");
+          setTimeout(() => {
+            alert("Account Has been Created");
+            alert("New Users has to login first time before continue");
+            navigate("/login");
+          }, 2000);
         })
         .catch((err) => {
-          alert("login failed, please try again");
+          SetData({
+            firstname: "",
+            lastname: "",
+            email: "",
+            password: "",
+            message: "Waiting...",
+            loading: true,
+          });
+          setTimeout(() => {
+            SetData({
+              firstname: "",
+              lastname: "",
+              email: "",
+              password: "",
+              message: err.response.data.message,
+              loading: false,
+            });
+          }, 2000);
+          
         });
     } else {
       alert("please complete the fields to go forward");
@@ -159,9 +188,19 @@ const Registration = () => {
                 </div>
                 <div className="form-box-hero">
                   <button onClick={resetAll}>Reset All</button>
-                  <button onClick={handleSubmit}>Create account</button>
+                  <button onClick={handleSubmit} className="submit-btn">
+                    {!data.loading && <p>Create Account</p>}
+                    {data.loading && (
+                      <div class="loading-container" id="loadingContainer">
+                        <div class="loading"></div>
+                      </div>
+                    )}
+                  </button>
                 </div>
               </form>
+              <div className="message">
+                <p>{data.message}</p>
+              </div>
             </div>
           </div>
           <div className="svg-art">

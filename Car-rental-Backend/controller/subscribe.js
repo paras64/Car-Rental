@@ -9,8 +9,6 @@ exports.getSubscribe = async (req, res) => {
       res.status(201).send(data);
     })
     .catch((err) => {
-      res
-        .status(501)
-        .json(err);
+      res.status(401).json(err);
     });
 };

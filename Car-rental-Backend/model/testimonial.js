@@ -1,19 +1,19 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
 const TestimonialSchema = new Schema({
-  fullname: {
+  firstname: {
     type: String,
     required: true,
-    match: [
-      /^[a-zA-Z]+ [a-zA-Z]+(?: [a-zA-Z'-]+)*$/,
-      "Please enter a valid full name",
-    ],
+  },
+  lastname: {
+    type: String,
+    required: true,
   },
   email: {
     type: String,
     required: true,
-    unique: true,
     lowercase: true,
+    unique: false,
     validate: {
       validator: (value) => {
         return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(value);
