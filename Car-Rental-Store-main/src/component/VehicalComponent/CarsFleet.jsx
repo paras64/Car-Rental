@@ -45,6 +45,7 @@ const CarsFleet = ({productList}) => {
       width: 100%;
       display: grid;
       grid-template-columns: 24rem auto;
+      gap: 4rem;
     }
     .settings {
       /* border: 2px solid; */
@@ -98,7 +99,7 @@ const CarsFleet = ({productList}) => {
       display: grid;
       grid-template-columns: 24rem 24rem;
       grid-template-rows: 21rem 21rem;
-      gap: 1rem 6rem;
+      gap: 3rem 10rem;
       justify-items: center;
     }
   `;

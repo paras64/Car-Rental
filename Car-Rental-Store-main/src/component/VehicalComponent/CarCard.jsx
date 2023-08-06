@@ -25,6 +25,8 @@ const CarCard = (props) => {
       background-color: var(--page-background-color);
     }
     .car-models-collection-header {
+      /* border: 2px solid; */
+      position: relative;
       margin: 13px 13px 0 13px;
       display: flex;
       flex-direction: row;
@@ -69,6 +71,7 @@ const CarCard = (props) => {
       font-family: "Rubik";
     }
     .car-models-collection-body {
+      /* border: 2px solid; */
       background: url(${carBgImg});
       user-select: none;
       background-repeat: no-repeat;
@@ -79,6 +82,8 @@ const CarCard = (props) => {
       /* margin: 0 14px; */
       display: flex;
       justify-content: center;
+      flex-direction: column;
+      align-items: center;
     }
     .car-models-collection-body img {
       /* padding: 24px; */
@@ -89,13 +94,14 @@ const CarCard = (props) => {
     }
     .car-models-collection-footer {
       background-color: #f5e7e7;
-      height: 5rem;
+      height: 10rem;
       width: 100%;
       display: flex;
       flex-direction: row;
       padding: 0 20px;
       justify-content: space-between;
       align-items: center;
+      /* border: 2px solid; */
     }
     .hero-car-details-first {
       display: flex;
@@ -129,6 +135,22 @@ const CarCard = (props) => {
       font-weight: 100;
       font-size: 18px;
     }
+    .booknow-btn {
+      position: relative;
+      top: 40%;
+      /* left: 35%; */
+      width: 8rem;
+      font-size: 17px;
+      height: 10rem;
+      font-family: Rubik;
+      border: 2px solid;
+      outline: none;
+      cursor: pointer;
+      background-color: #969696;
+      color: #ffffff;
+      border-radius: 11px;
+      display: none;
+    }
   `;
   return (
     <>
@@ -144,9 +166,11 @@ const CarCard = (props) => {
             </figure>
             <div className="car-models-collection-header-units">
               <p>{props.carsData.stocks} units available</p>
+              {/* <p>Rent Now</p> */}
             </div>
           </div>
           <div className="car-models-collection-body">
+            <button className="booknow-btn">Book now</button>
             <img src={props.carsData.images[0]} alt="car-image" />
           </div>
           <div className="car-models-collection-footer">
@@ -167,7 +191,7 @@ const CarCard = (props) => {
             <div className="hero-car-money">
               <CurrencyRupeeOutlinedIcon style={{ fontWeight: "bold" }} />
               <h1>
-              {props.carsData.price}/ <span>day</span>
+                {props.carsData.price}/ <span>day</span>
               </h1>
             </div>
           </div>

@@ -29,9 +29,11 @@ exports.createTestimonial = (req, res) => {
   testimonial
     .save()
     .then((data) => {
-      res.status(201).json(data);
+      res
+        .status(201)
+        .json({ message: "Feedback has been recieved, Thankyou!!" });
     })
     .catch((err) => {
-      res.status(400).json(err);
+      res.status(400).json({ message: "Something went wrong" });
     });
 };

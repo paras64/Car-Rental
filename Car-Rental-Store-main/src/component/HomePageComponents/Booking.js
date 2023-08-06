@@ -1,9 +1,10 @@
 import React from "react";
 import { GlobalStyle } from "../styles/GlobalStyle";
 import styled from "styled-components";
-import { ImSearch } from "react-icons/im";
+import SearchIcon from "@mui/icons-material/Search";
 import BackImg from "../images/Booking/backgroundImage.png";
-export default function Booking(props) {
+import ProductsData from "../HOC- higherOrderComponent/ProductsData";
+function Booking(props) {
   const Wrapper = styled.section`
     /* border: 2px solid; */
     display: flex;
@@ -74,6 +75,7 @@ export default function Booking(props) {
       border: 2px solid #dcd3d3;
       position: relative;
       top: 1rem;
+      outline: none;
     }
 
     .booking-icon {
@@ -82,6 +84,9 @@ export default function Booking(props) {
     }
 
     #booking-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
       font-size: 16px;
       position: relative;
       top: 27px;
@@ -131,17 +136,13 @@ export default function Booking(props) {
                       <option value="Selected" disabled>
                         Select car
                       </option>
-                      <option value="option1">Mustang GT</option>
-                      <option value="option2">Toyota Supra</option>
-                      <option value="option3">Mahindra Thar</option>
-                      <option value="option4">Audi A3</option>
-                      <option value="option5">Audi RS5</option>
-                      <option value="option6">Corvette</option>
-                      <option value="option7">Mahindra Scorpio</option>
-                      <option value="option8">Lamborghini Huracan</option>
-                      <option value="option9">Bugatti Chiron</option>
-                      <option value="option10">Jeep Wrangler Rubicon</option>
-                      <option value="option11">Mercedes Benz</option>
+                      {props.productList.map((carsData, Index) => {
+                        return (
+                          <option value={`option${Index}`}>
+                            {carsData.model}
+                          </option>
+                        );
+                      })}
                     </select>
                   </article>
                   <article>
@@ -200,7 +201,7 @@ export default function Booking(props) {
                   </article>
                   <article>
                     <button id="booking-btn">
-                      Search <ImSearch />
+                      Search <SearchIcon style={{ margigTop: "2px" }} />
                     </button>
                   </article>
                 </div>
@@ -212,3 +213,4 @@ export default function Booking(props) {
     </>
   );
 }
+export default ProductsData(Booking);

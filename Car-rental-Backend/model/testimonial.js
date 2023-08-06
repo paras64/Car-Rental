@@ -13,7 +13,6 @@ const TestimonialSchema = new Schema({
     type: String,
     required: true,
     lowercase: true,
-    unique: false,
     validate: {
       validator: (value) => {
         return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(value);

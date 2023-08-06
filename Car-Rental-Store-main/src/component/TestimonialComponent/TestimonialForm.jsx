@@ -1,17 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect  } from "react";
 import "./Style.css";
 import { GlobalStyle } from "../styles/GlobalStyle";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 const TestimonialForm = () => {
+  const navigate = useNavigate();
+  const data = JSON.parse(localStorage.getItem("UserDetails"));
   const [feedbackData, SetFeedbackData] = useState({
     firstname: "",
     lastname: "",
     email: "",
     message: "",
+    response: "",
+    loading: false,
   });
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(feedbackData);
+   
     if (
       feedbackData.firstname &&
       feedbackData.lastname &&
@@ -22,9 +27,32 @@ const TestimonialForm = () => {
         feedbackData.message.split("").length < 220 ||
         feedbackData.message.split("").length > 320
       ) {
-        alert(
-          "Message should be at least 220 characters and at most 320 characters"
-        );
+        SetFeedbackData((prevData) => {
+          return {
+            ...prevData,
+            response:
+              "Message should be minimum 220 character and maximum 320 character long",
+          };
+        });
+        return;
+      }
+      SetFeedbackData((prevData) => {
+        return {
+          ...prevData,
+          loading: true,
+        };
+      });
+      if (localStorage.length < 1) {
+        setTimeout(() => {
+          SetFeedbackData((prevData) => {
+            return {
+              ...prevData,
+              loading: false,
+            };
+          });
+          alert("Please login before giving the feedback");
+          navigate("/login");
+        }, 2000);
         return;
       }
       const doc = axios.post(
@@ -32,11 +60,28 @@ const TestimonialForm = () => {
         feedbackData
       );
       doc
-        .then((data) => {
-          console.log(data);
+        .then((response) => {
+          setTimeout(() => {
+            SetFeedbackData({
+              firstname: "",
+              lastname: "",
+              email: "",
+              message: "",
+              loading: false,
+              response: response.data.message,
+            });
+          }, 2000);
         })
         .catch((err) => {
-          console.log(err);
+          setTimeout(() => {
+            SetFeedbackData((prevData) => {
+              return {
+                ...prevData,
+                loading: false,
+                response: "Something went wrong",
+              };
+            });
+          }, 2000);
         });
     } else {
       alert("Please complete the fields");
@@ -52,7 +97,19 @@ const TestimonialForm = () => {
       message: "",
     });
   };
-
+  useEffect(() => {
+    // Set initial state from localStorage or other sources
+    if (data) {
+      SetFeedbackData({
+        firstname: data.firstname,
+        lastname: data.lastname,
+        email: data.email,
+        message: "",
+        response: "",
+        loading: false,
+      });
+    }
+  }, []);
   const handleChange = (e) => {
     SetFeedbackData((prevData) => ({
       ...prevData,
@@ -125,9 +182,17 @@ const TestimonialForm = () => {
                 </div>
                 <div className="testimonial-feedback-hero">
                   <button onClick={resetAll}>Reset All</button>
-                  <button onClick={handleSubmit}>Submit</button>
+                  <button onClick={handleSubmit} className="submit-btn">
+                    {!feedbackData.loading && <p>Submit</p>}
+                    {feedbackData.loading && (
+                      <div class="loading-container" id="loadingContainer">
+                        <div class="loading"></div>
+                      </div>
+                    )}
+                  </button>
                 </div>
               </form>
+              <p className="response">{feedbackData.response}</p>
             </div>
           </div>
           <div className="testimonial-slideshow"></div>
