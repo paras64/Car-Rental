@@ -4,6 +4,8 @@ import styled from "styled-components";
 import SearchIcon from "@mui/icons-material/Search";
 import BackImg from "../images/Booking/backgroundImage.png";
 import ProductsData from "../HOC- higherOrderComponent/ProductsData";
+import BookingDetailsForm from "../VehicalComponent/BookingDetailsForm";
+
 function Booking(props) {
   const Wrapper = styled.section`
     /* border: 2px solid; */
@@ -111,17 +113,21 @@ function Booking(props) {
 
     } */
   `;
+  const handleClick = (e) => {
+    e.preventDefault();
+    return <BookingDetailsForm />;
+  };
 
   return (
     <>
       <GlobalStyle />
-
+      {/* <BookingDetailsForm /> */}
       <Wrapper className={`booking-section ${props.vaild ? "booking" : " "}`}>
         <div className="booking-header">
           <div className="booking-container">
             <h1 className="booking-heading">Book a car</h1>
             <div className="booking-details">
-              <form action="/booking" method="post" id="booking-section-form">
+              <form id="booking-section-form">
                 <div className="first-row-booking">
                   <article>
                     <label htmlFor="CarSelect">
@@ -200,8 +206,8 @@ function Booking(props) {
                     <input type="date" name="DropOffDate" id="DropOffDate" />
                   </article>
                   <article>
-                    <button id="booking-btn">
-                      Search <SearchIcon style={{ margigTop: "2px" }} />
+                    <button id="booking-btn" onClick={handleClick}>
+                      Book now <SearchIcon style={{ margigTop: "2px" }} />
                     </button>
                   </article>
                 </div>

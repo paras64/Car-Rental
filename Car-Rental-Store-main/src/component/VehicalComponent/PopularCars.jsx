@@ -88,7 +88,7 @@ const PopularCars = ({ productList }) => {
                   CarImg={CarImg}
                   carsData={carsData}
                   imgWidth={"21rem"}
-                  cardWidth={"25rem"}
+                  cardWidth={"28rem"}
                 />
               );
             })

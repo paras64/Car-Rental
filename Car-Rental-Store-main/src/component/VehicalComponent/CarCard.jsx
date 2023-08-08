@@ -7,6 +7,7 @@ import PersonIcon from "@mui/icons-material/Person";
 import MinorCrashOutlinedIcon from "@mui/icons-material/MinorCrashOutlined";
 import LocalGasStationOutlinedIcon from "@mui/icons-material/LocalGasStationOutlined";
 import CurrencyRupeeOutlinedIcon from "@mui/icons-material/CurrencyRupeeOutlined";
+import BookingDetailsForm from "./BookingDetailsForm";
 const CarCard = (props) => {
   if (!props.carsData) {
     // If props.carsData is undefined, return null or a loading message
@@ -137,21 +138,34 @@ const CarCard = (props) => {
     }
     .booknow-btn {
       position: relative;
-      top: 40%;
-      /* left: 35%; */
+      top: 45%;
       width: 8rem;
       font-size: 17px;
       height: 10rem;
       font-family: Rubik;
       border: 2px solid;
       outline: none;
+      padding: 10px 0px;
       cursor: pointer;
       background-color: #969696;
       color: #ffffff;
       border-radius: 11px;
-      display: none;
+      display: block;
+      opacity: 0;
+      transform: translateY(60px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .car-models-collection-body:hover {
+      .booknow-btn {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
   `;
+
+  const handleClick = () => {
+    console.log("clicked");
+  };
   return (
     <>
       <CardCardSection>
@@ -170,7 +184,9 @@ const CarCard = (props) => {
             </div>
           </div>
           <div className="car-models-collection-body">
-            <button className="booknow-btn">Book now</button>
+            <button className="booknow-btn" onClick={handleClick}>
+              Book now
+            </button>
             <img src={props.carsData.images[0]} alt="car-image" />
           </div>
           <div className="car-models-collection-footer">
@@ -202,7 +218,7 @@ const CarCard = (props) => {
 };
 
 CarCard.defaultProps = {
-  cardWidth: "28rem",
+  cardWidth: "29rem",
   imgWidth: "23rem",
 };
 export default CarCard;

@@ -1,8 +1,23 @@
-
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@800&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Rubik:wght@400&display=swap");
 
+body{
+  /* overflow: hidden; */
+}
 
-.active{
-    color: #ff4d30;
+
+html::-webkit-scrollbar {
+  width: 10px;
+}
+
+html::-webkit-scrollbar-track {
+  background-color: rgb(255, 255, 255);
+}
+
+html::-webkit-scrollbar-thumb {
+  background: #ff4d30;
+  border-radius: 25px;
+}
+.active {
+  color: #ff4d30;
 }

@@ -9,6 +9,7 @@ import Login from "./component/LoginRegistration/Login";
 import Registration from "./component/LoginRegistration/Registration";
 import ForgotPassword from "./component/LoginRegistration/ForgotPassword";
 import ConfirmPassword from "./component/LoginRegistration/ConfirmPassword";
+import BookingDetailsForm from "./component/VehicalComponent/BookingDetailsForm";
 import NotFound from "./NotFound";
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route exact path="/about" element={<About />} />
           {/* <Route exact path="/about" element={<About />} /> */}
           <Route exact path="/testimonial" element={<TestimonialComponent />} />
+          <Route exact path="/bookingform" element={<BookingDetailsForm />} />
           <Route exact path="/vehicalsmodels" element={<VehicalModels />} />
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/register" element={<Registration />} />
