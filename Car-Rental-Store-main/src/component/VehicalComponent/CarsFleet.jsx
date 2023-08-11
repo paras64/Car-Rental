@@ -6,13 +6,13 @@ import RestartAltIcon from "@mui/icons-material/RestartAlt";
 import CarImg from "../images/VehicalCollection/car-collection/car-1.png";
 import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
 import ProductsData from "../HOC- higherOrderComponent/ProductsData";
-const CarsFleet = ({productList}) => {
+const CarsFleet = ({ productList }) => {
   const CarsFleetSection = styled.section`
     /* border: 2px solid black; */
     /* height: 100%; */
     width: 100%;
     padding: 0 2rem;
-    margin-bottom:10rem;
+    margin-bottom: 10rem;
 
     .car-collection-container-heading {
       /* border: 2px solid; */
@@ -35,7 +35,7 @@ const CarsFleet = ({productList}) => {
       display: flex;
       align-items: center;
       font-size: 18px;
-      font-family: Rubik ;
+      font-family: Rubik;
       font-weight: bold;
       color: blue;
     }
@@ -69,7 +69,7 @@ const CarsFleet = ({productList}) => {
       align-items: center;
       /* border: 2px solid; */
       height: 4rem;
-      color:rgb(0 25 255);;
+      color: rgb(0 25 255);
       font-family: Rubik, sans-serif;
       border-bottom: 1px solid #d1b0b0;
     }
@@ -93,14 +93,15 @@ const CarsFleet = ({productList}) => {
       cursor: pointer;
     }
     .car-fleet-container {
-      /* border: 2px solid; */
-      /* height: 106rem; */
       width: 100%;
-      display: grid;
-      grid-template-columns: 24rem 24rem;
-      grid-template-rows: 21rem 21rem;
-      gap: 3rem 10rem;
+      display: flex;
+      /* grid-template-columns: 24rem 24rem; */
+      /* grid-template-rows: 21rem 21rem; */
+      /* gap: 3rem 10rem; */
+      gap: 24px;
       justify-items: center;
+      flex-direction: row;
+      flex-wrap: wrap;
     }
   `;
   return (
@@ -133,13 +134,9 @@ const CarsFleet = ({productList}) => {
             </div>
           </div>
           <div className="car-fleet-container">
-          {
-            productList.map((carsData, index)=>{
-              return ( 
-                <CarCard carsData={carsData} CarImg={CarImg} />
-              )
-            })
-          }
+            {productList.map((carsData, index) => {
+              return <CarCard carsData={carsData} CarImg={CarImg} />
+            })}
 
             {/* <CarCard CarImg={CarImg} />
             <CarCard CarImg={CarImg} />

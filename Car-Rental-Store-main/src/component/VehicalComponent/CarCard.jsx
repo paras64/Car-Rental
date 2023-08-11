@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import carBgImg from "../images/banner/bg-1.png";
 import styled from "styled-components";
 import CarImageDemo from "../images/VehicalCollection/PngItem_135037.png";
@@ -9,6 +9,16 @@ import LocalGasStationOutlinedIcon from "@mui/icons-material/LocalGasStationOutl
 import CurrencyRupeeOutlinedIcon from "@mui/icons-material/CurrencyRupeeOutlined";
 import BookingDetailsForm from "./BookingDetailsForm";
 const CarCard = (props) => {
+  const [setModel, showSetModel] = useState(false);
+
+  const closeModel = () => {
+    if (setModel) {
+      showSetModel(false);
+      return;
+    }
+    showSetModel(true);
+  };
+
   if (!props.carsData) {
     // If props.carsData is undefined, return null or a loading message
     return <p>Loading...</p>;
@@ -163,9 +173,6 @@ const CarCard = (props) => {
     }
   `;
 
-  const handleClick = () => {
-    console.log("clicked");
-  };
   return (
     <>
       <CardCardSection>
@@ -184,7 +191,7 @@ const CarCard = (props) => {
             </div>
           </div>
           <div className="car-models-collection-body">
-            <button className="booknow-btn" onClick={handleClick}>
+            <button className="booknow-btn" onClick={closeModel}>
               Book now
             </button>
             <img src={props.carsData.images[0]} alt="car-image" />
@@ -213,6 +220,7 @@ const CarCard = (props) => {
           </div>
         </div>
       </CardCardSection>
+      {setModel && <BookingDetailsForm closeModel={closeModel} />}
     </>
   );
 };

@@ -27,7 +27,38 @@ const UserSchema = new Schema({
       message: "please enter a valid password",
     },
   },
-  cart: [{ type: Schema.Types.ObjectId, ref: "product" }],
+  cart: [
+    {
+      productdetail: {
+        type: Schema.Types.ObjectId,
+        ref: "product",
+      },
+      pickuptime: {
+        type: String,
+        required: true,
+      },
+      dropofftime: {
+        type: String,
+        required: true,
+      },
+      pickupdate: {
+        type: String,
+        required: true,
+      },
+      dropoffdate: {
+        type: String,
+        required: true,
+      },
+      address: {
+        type: String,
+        required: true,
+      },
+      age: {
+        type: Number,
+        required: true,
+      },
+    },
+  ],
   token: String,
 });
 const User = new mongoose.model("user", UserSchema);

@@ -1,12 +1,110 @@
-import React from "react";
+import React, { useState } from "react";
 import { GlobalStyle } from "../styles/GlobalStyle";
 import styled from "styled-components";
 import SearchIcon from "@mui/icons-material/Search";
 import BackImg from "../images/Booking/backgroundImage.png";
 import ProductsData from "../HOC- higherOrderComponent/ProductsData";
 import BookingDetailsForm from "../VehicalComponent/BookingDetailsForm";
+import ClearIcon from "@mui/icons-material/Clear";
+import { useNavigate } from "react-router-dom";
+const AlertBox = ({ alert, setAlert }) => {
+  const Alert = styled.div`
+    /* border: 2px solid; */
+    padding: 0px;
+
+    .alert-message {
+      font-family: Rubik;
+      color: #721c24;
+    }
+    .alert-booking-container {
+      background-color: #f8d7da;
+      border: 2px solid;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+      padding: 0 30px;
+      border-radius: 10px;
+    }
+  `;
+  const modifyAlert = () => {
+    if (alert) {
+      setAlert(false);
+    } else {
+      setAlert(true);
+    }
+  };
+  return (
+    <>
+      <Alert className="alert">
+        <div className="alert-booking-container">
+          <p className="alert-message">Please Complete the required fields</p>
+          <button className="alert-cross" onClick={() => modifyAlert()}>
+            <ClearIcon />
+          </button>
+        </div>
+      </Alert>
+    </>
+  );
+};
 
 function Booking(props) {
+  const navigate = useNavigate();
+
+  const [setModel, showSetModel] = useState(false);
+  const [alert, setAlert] = useState(false);
+  const [bookingData, SetbookingData] = useState({
+    seletedcar: "",
+    pickuplocation: "",
+    dropofflocation: "",
+    pickupdate: "",
+    dropoffdate: "",
+  });
+  const closeModel = () => {
+    if (setModel) {
+      showSetModel(false);
+      return;
+    }
+    showSetModel(true);
+  };
+
+  const handleClick = () => {
+    if (
+      bookingData.seletedcar &&
+      bookingData.seletedcar &&
+      bookingData.dropofflocation &&
+      bookingData.pickupdate &&
+      bookingData.dropoffdate
+    ) {
+      if (localStorage.length < 1) {
+        window.alert("Please login before booking");
+        navigate("/login");
+        return;
+      }
+      closeModel();
+    } else {
+      if (localStorage.length < 1) {
+        window.alert("Please login before booking");
+        navigate("/login");
+        return;
+      }
+      setAlert(true);
+      setTimeout(() => {
+        setAlert(false);
+      }, 4000);
+    }
+  };
+
+  const handleChange = (e) => {
+    SetbookingData((prevData) => {
+      return {
+        ...prevData,
+        [e.target.name]: e.target.value,
+      };
+    });
+  };
+
   const Wrapper = styled.section`
     /* border: 2px solid; */
     display: flex;
@@ -20,10 +118,10 @@ function Booking(props) {
 
     .booking-container {
       background: url(${BackImg}) center center/cover no-repeat;
-      height: 24rem;
+      height: auto;
       /* border: 2px solid; */
       width: 78rem;
-      padding: 0 3.5rem;
+      padding: 0 3.5rem 3.5rem;
       display: flex;
       background-color: var(--white-color);
       flex-direction: column;
@@ -113,10 +211,6 @@ function Booking(props) {
 
     } */
   `;
-  const handleClick = (e) => {
-    e.preventDefault();
-    return <BookingDetailsForm />;
-  };
 
   return (
     <>
@@ -126,6 +220,7 @@ function Booking(props) {
         <div className="booking-header">
           <div className="booking-container">
             <h1 className="booking-heading">Book a car</h1>
+            {alert && <AlertBox alert={alert} setAlert={setAlert} />}
             <div className="booking-details">
               <form id="booking-section-form">
                 <div className="first-row-booking">
@@ -135,16 +230,18 @@ function Booking(props) {
                       car*
                     </label>
                     <select
-                      name="CarSelect"
+                      name="seletedcar"
                       defaultValue="Selected"
                       id="CarSelect"
+                      value={bookingData.seletedcar}
+                      onChange={handleChange}
                     >
-                      <option value="Selected" disabled>
+                      <option value="" disabled>
                         Select car
                       </option>
                       {props.productList.map((carsData, Index) => {
                         return (
-                          <option value={`option${Index}`}>
+                          <option key={`option${Index}`} value={carsData.model}>
                             {carsData.model}
                           </option>
                         );
@@ -157,11 +254,13 @@ function Booking(props) {
                       Pick up location*
                     </label>
                     <select
-                      name="PickUpLocation"
+                      name="pickuplocation"
                       defaultValue="selected"
                       id="PickUpLocation"
+                      value={bookingData.pickuplocation}
+                      onChange={handleChange}
                     >
-                      <option value="selected" disabled>
+                      <option value="" disabled>
                         Select location
                       </option>
                       <option value="Mumbai">Mumbai</option>
@@ -177,11 +276,15 @@ function Booking(props) {
                       Drop Off location*
                     </label>
                     <select
-                      name="DropOffLocation"
+                      name="dropofflocation"
                       defaultValue="Selected"
                       id="DropOffLocation"
+                      value={bookingData.dropofflocation}
+                      onChange={handleChange}
                     >
-                      <option value="Selected">Select location</option>
+                      <option value="" disabled>
+                        Select location
+                      </option>
                       <option value="Mumbai">Mumbai</option>
                       <option value="Indore">Indore</option>
                       <option value="Chandigarh">Chandigarh</option>
@@ -196,18 +299,30 @@ function Booking(props) {
                       <i className="fa-solid fa-calendar-days booking-icon"></i>{" "}
                       Pick up date*
                     </label>
-                    <input type="date" name="PickUpDate" id="PickUpDate" />
+                    <input
+                      type="date"
+                      name="pickupdate"
+                      id="PickUpDate"
+                      value={bookingData.pickupdate}
+                      onChange={handleChange}
+                    />
                   </article>
                   <article>
                     <label htmlFor="DropOffDate">
                       <i className="fa-solid fa-calendar-days booking-icon"></i>{" "}
                       Drop off date*
                     </label>
-                    <input type="date" name="DropOffDate" id="DropOffDate" />
+                    <input
+                      type="date"
+                      name="dropoffdate"
+                      id="DropOffDate"
+                      value={bookingData.dropoffdate}
+                      onChange={handleChange}
+                    />
                   </article>
                   <article>
                     <button id="booking-btn" onClick={handleClick}>
-                      Book now <SearchIcon style={{ margigTop: "2px" }} />
+                      Book now <SearchIcon style={{ marginTop: "2px" }} />
                     </button>
                   </article>
                 </div>
@@ -216,6 +331,12 @@ function Booking(props) {
           </div>
         </div>
       </Wrapper>
+      {setModel && (
+        <BookingDetailsForm
+          bookingData={bookingData}
+          closeModel={handleClick}
+        />
+      )}
     </>
   );
 }
