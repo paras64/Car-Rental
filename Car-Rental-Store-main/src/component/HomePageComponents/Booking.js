@@ -51,7 +51,6 @@ const AlertBox = ({ alert, setAlert }) => {
 
 function Booking(props) {
   const navigate = useNavigate();
-
   const [setModel, showSetModel] = useState(false);
   const [alert, setAlert] = useState(false);
   const [bookingData, SetbookingData] = useState({
@@ -69,7 +68,9 @@ function Booking(props) {
     showSetModel(true);
   };
 
-  const handleClick = () => {
+  const handleClick = (e) => {
+    e.preventDefault();
+
     if (
       bookingData.seletedcar &&
       bookingData.seletedcar &&
@@ -231,7 +232,6 @@ function Booking(props) {
                     </label>
                     <select
                       name="seletedcar"
-                      defaultValue="Selected"
                       id="CarSelect"
                       value={bookingData.seletedcar}
                       onChange={handleChange}
@@ -255,7 +255,6 @@ function Booking(props) {
                     </label>
                     <select
                       name="pickuplocation"
-                      defaultValue="selected"
                       id="PickUpLocation"
                       value={bookingData.pickuplocation}
                       onChange={handleChange}
@@ -277,7 +276,6 @@ function Booking(props) {
                     </label>
                     <select
                       name="dropofflocation"
-                      defaultValue="Selected"
                       id="DropOffLocation"
                       value={bookingData.dropofflocation}
                       onChange={handleChange}

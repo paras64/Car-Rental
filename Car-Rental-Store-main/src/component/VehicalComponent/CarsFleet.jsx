@@ -135,7 +135,9 @@ const CarsFleet = ({ productList }) => {
           </div>
           <div className="car-fleet-container">
             {productList.map((carsData, index) => {
-              return <CarCard carsData={carsData} CarImg={CarImg} />
+              return (
+                <CarCard key={index} carsData={carsData} CarImg={CarImg} />
+              );
             })}
 
             {/* <CarCard CarImg={CarImg} />

@@ -79,9 +79,6 @@ const PopularCars = ({ productList }) => {
         <div className="popular-cars">
           {popularCars.length > 0? (
             popularCars.map((carsData, index) => {
-
-
-             
               return (
                 <CarCard
                   key={index}

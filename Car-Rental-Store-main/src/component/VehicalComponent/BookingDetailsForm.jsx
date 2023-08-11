@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from "react";
 import "./Style.css";
+import axios from "axios";
 import ProductsData from "../HOC- higherOrderComponent/ProductsData";
 import CloseIcon from "@mui/icons-material/Close";
 import InfoIcon from "@mui/icons-material/Info";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import { GlobalStyle } from "../styles/GlobalStyle";
+import { useNavigate } from "react-router-dom";
 const BookingDetailsForm = ({ closeModel, bookingData, productList }) => {
+  const navigate = useNavigate();
+
   const [productDetails, SetProductDetails] = useState(null);
   const [UserDetails, SetUserDetails] = useState(undefined);
   const [orderDetails, SetOrderDetails] = useState({
@@ -34,12 +38,84 @@ const BookingDetailsForm = ({ closeModel, bookingData, productList }) => {
         })
       );
     }
+
+    if (bookingData) {
+      SetOrderDetails((prevData) => {
+        return {
+          ...prevData,
+          pickupdate: bookingData.pickupdate,
+          dropoffdate: bookingData.dropoffdate,
+          pickuplocation: bookingData.dropofflocation,
+          dropofflocation: bookingData.dropofflocation,
+        };
+      });
+    }
+    if (productDetails) {
+      SetOrderDetails((prevData) => {
+        return {
+          ...prevData,
+          product: productDetails._id,
+        };
+      });
+    }
     return () => {
       document.body.style.overflowY = "scroll";
     };
-  }, []);
-  console.log(productList);
-  console.log(bookingData);
+  }, [productList, bookingData]);
+
+  const handleChange = (e) => {
+    SetOrderDetails((prevData) => {
+      return { ...prevData, [e.target.name]: e.target.value };
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (
+      orderDetails.product &&
+      orderDetails.pickuptime &&
+      orderDetails.dropofftime &&
+      orderDetails.pickupdate &&
+      orderDetails.dropoffdate &&
+      orderDetails.pickuplocation &&
+      orderDetails.dropofflocation &&
+      orderDetails.contact &&
+      orderDetails.age &&
+      orderDetails.address
+    ) {
+      const doc = axios.post("http://localhost:8000/user/order", {
+        orderDetails,
+        UserDetails,
+      });
+      doc
+        .then((response) => {
+          alert(response.data.message);
+          navigate("/vehicalsmodels");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      alert("Please complete the required fields");
+    }
+  };
+  const resetAll = () => {
+    SetOrderDetails({
+      product: "",
+      pickuptime: "",
+      dropofftime: "",
+      pickupdate: "",
+      dropoffdate: "",
+      pickuplocation: "",
+      dropofflocation: "",
+      contact: "",
+      age: undefined,
+      address: "",
+    });
+  };
+
+  console.log(productDetails);
+  console.log(orderDetails);
   return (
     <>
       <GlobalStyle />
@@ -73,8 +149,18 @@ const BookingDetailsForm = ({ closeModel, bookingData, productList }) => {
                       Pick-Up Date & Time
                     </h1>
                     <div>
-                      <input type="time" />
-                      <input type="date" />
+                      <input
+                        type="time"
+                        name="pickuptime"
+                        onChange={handleChange}
+                        value={orderDetails.pickuptime}
+                      />
+                      <input
+                        type="date"
+                        name="pickupdate"
+                        onChange={handleChange}
+                        value={orderDetails.pickupdate}
+                      />
                     </div>
                   </div>
                   <div className="hero__three__details_present">
@@ -82,8 +168,18 @@ const BookingDetailsForm = ({ closeModel, bookingData, productList }) => {
                       <AccessTimeIcon /> Drop-Off Date & Time
                     </h1>
                     <div>
-                      <input type="time" />
-                      <input type="date" />
+                      <input
+                        type="time"
+                        name="dropofftime"
+                        onChange={handleChange}
+                        value={orderDetails.dropofftime}
+                      />
+                      <input
+                        type="date"
+                        name="dropoffdate"
+                        onChange={handleChange}
+                        value={orderDetails.pickupdate}
+                      />
                     </div>
                   </div>
                   <div className="hero__three__details_present">
@@ -91,9 +187,10 @@ const BookingDetailsForm = ({ closeModel, bookingData, productList }) => {
                       <LocationOnIcon /> Pick-Up Location
                     </h1>
                     <select
-                      name="PickUpLocation"
-                      defaultValue="selected"
+                      name="pickuplocation"
                       id="PickUpLocation_form"
+                      value={orderDetails.pickuplocation}
+                      onChange={handleChange}
                     >
                       <option value="selected" disabled>
                         Select location
@@ -110,9 +207,10 @@ const BookingDetailsForm = ({ closeModel, bookingData, productList }) => {
                       <LocationOnIcon /> Drop-Off Location
                     </h1>
                     <select
-                      name="PickUpLocation"
-                      defaultValue="selected"
+                      name="dropofflocation"
                       id="DropOffLocation_form"
+                      value={orderDetails.dropofflocation}
+                      onChange={handleChange}
                     >
                       <option value="selected" disabled>
                         Select location
@@ -179,9 +277,11 @@ const BookingDetailsForm = ({ closeModel, bookingData, productList }) => {
                       <input
                         type="tel"
                         id="phone"
-                        name="phone"
+                        name="contact"
                         placeholder="Enter your phone number"
                         required
+                        value={orderDetails.contact}
+                        onChange={handleChange}
                       />
                       <p>This field is required</p>
                     </div>
@@ -196,6 +296,8 @@ const BookingDetailsForm = ({ closeModel, bookingData, productList }) => {
                         min={18}
                         placeholder="Enter your Age"
                         required
+                        value={orderDetails.age}
+                        onChange={handleChange}
                       />
                       <p>This field is required</p>
                     </div>
@@ -228,6 +330,8 @@ const BookingDetailsForm = ({ closeModel, bookingData, productList }) => {
                         name="address"
                         placeholder="Enter your Address"
                         required
+                        value={orderDetails.address}
+                        onChange={handleChange}
                       />
                       <p>This field is required</p>
                     </div>
@@ -237,8 +341,8 @@ const BookingDetailsForm = ({ closeModel, bookingData, productList }) => {
                     <p>Please send me latest news and updates</p>
                   </div>
                   <div className="hero__forth_personal_details_form__sub button_hero">
-                    <button>Reset All</button>
-                    <button onClick={closeModel}>Reserve Now</button>
+                    <button onClick={resetAll}>Reset All</button>
+                    <button onClick={handleSubmit}>Reserve Now</button>
                   </div>
                 </form>
               </div>

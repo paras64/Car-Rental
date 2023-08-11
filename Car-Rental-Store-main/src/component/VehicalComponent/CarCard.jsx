@@ -10,7 +10,6 @@ import CurrencyRupeeOutlinedIcon from "@mui/icons-material/CurrencyRupeeOutlined
 import BookingDetailsForm from "./BookingDetailsForm";
 const CarCard = (props) => {
   const [setModel, showSetModel] = useState(false);
-
   const closeModel = () => {
     if (setModel) {
       showSetModel(false);
@@ -191,7 +190,7 @@ const CarCard = (props) => {
             </div>
           </div>
           <div className="car-models-collection-body">
-            <button className="booknow-btn" onClick={closeModel}>
+            <button className="booknow-btn" closeModel={closeModel}>
               Book now
             </button>
             <img src={props.carsData.images[0]} alt="car-image" />

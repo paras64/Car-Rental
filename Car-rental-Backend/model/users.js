@@ -27,11 +27,12 @@ const UserSchema = new Schema({
       message: "please enter a valid password",
     },
   },
-  cart: [
+  orderdetails: [
     {
-      productdetail: {
+      product: {
         type: Schema.Types.ObjectId,
         ref: "product",
+ 
       },
       pickuptime: {
         type: String,
@@ -55,6 +56,7 @@ const UserSchema = new Schema({
       },
       age: {
         type: Number,
+        min: [18, "Age should be above 18"],
         required: true,
       },
     },
