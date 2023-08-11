@@ -8,9 +8,13 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import { GlobalStyle } from "../styles/GlobalStyle";
 import { useNavigate } from "react-router-dom";
-const BookingDetailsForm = ({ closeModel, bookingData, productList }) => {
+const BookingDetailsForm = ({
+  closeModel,
+  bookingData,
+  productList,
+  vehicalDetails,
+}) => {
   const navigate = useNavigate();
-
   const [productDetails, SetProductDetails] = useState(null);
   const [UserDetails, SetUserDetails] = useState(undefined);
   const [orderDetails, SetOrderDetails] = useState({
@@ -22,7 +26,7 @@ const BookingDetailsForm = ({ closeModel, bookingData, productList }) => {
     pickuplocation: "",
     dropofflocation: "",
     contact: "",
-    age: undefined,
+    age: 18,
     address: "",
   });
   useEffect(() => {
@@ -31,12 +35,16 @@ const BookingDetailsForm = ({ closeModel, bookingData, productList }) => {
     if (data) {
       SetUserDetails(data);
     }
-    if (productList.length) {
+
+    if (productList.length && bookingData) {
       SetProductDetails(
         productList.find((docs) => {
           return docs.model == bookingData.seletedcar;
         })
       );
+    }
+    if (vehicalDetails) {
+      SetProductDetails(vehicalDetails);
     }
 
     if (bookingData) {
@@ -89,19 +97,21 @@ const BookingDetailsForm = ({ closeModel, bookingData, productList }) => {
       });
       doc
         .then((response) => {
+          console.log("Response:", response.data);
           alert(response.data.message);
-          navigate("/vehicalsmodels");
+          closeModel();
         })
         .catch((err) => {
-          console.log(err);
+          console.log("Error:", err);
+          alert(err.response.data.message);
         });
     } else {
+      console.log(orderDetails);
       alert("Please complete the required fields");
     }
   };
   const resetAll = () => {
     SetOrderDetails({
-      product: "",
       pickuptime: "",
       dropofftime: "",
       pickupdate: "",
@@ -109,13 +119,15 @@ const BookingDetailsForm = ({ closeModel, bookingData, productList }) => {
       pickuplocation: "",
       dropofflocation: "",
       contact: "",
-      age: undefined,
+      age: 18,
       address: "",
     });
   };
 
-  console.log(productDetails);
+  // console.log(productDetails);
   console.log(orderDetails);
+  // console.log(vehicalDetails);
+
   return (
     <>
       <GlobalStyle />
@@ -192,7 +204,7 @@ const BookingDetailsForm = ({ closeModel, bookingData, productList }) => {
                       value={orderDetails.pickuplocation}
                       onChange={handleChange}
                     >
-                      <option value="selected" disabled>
+                      <option value="" disabled>
                         Select location
                       </option>
                       <option value="Mumbai">Mumbai</option>
@@ -212,7 +224,7 @@ const BookingDetailsForm = ({ closeModel, bookingData, productList }) => {
                       value={orderDetails.dropofflocation}
                       onChange={handleChange}
                     >
-                      <option value="selected" disabled>
+                      <option value="" disabled>
                         Select location
                       </option>
                       <option value="Mumbai">Mumbai</option>
@@ -226,9 +238,7 @@ const BookingDetailsForm = ({ closeModel, bookingData, productList }) => {
                 <div className="hero__three__car-details">
                   <h1>
                     <span>Car :-</span>{" "}
-                    {productDetails
-                      ? productDetails.model
-                      : bookingData.seletedcar}
+                    {productDetails ? productDetails.model : ""}
                   </h1>
                   <img
                     src={productDetails ? productDetails.thumbnail : ""}
@@ -250,6 +260,7 @@ const BookingDetailsForm = ({ closeModel, bookingData, productList }) => {
                         name="firstname"
                         placeholder="Enter your first name"
                         value={UserDetails ? UserDetails.firstname : ""}
+                        readOnly
                         required
                       />
                       <p>This field is required</p>
@@ -264,6 +275,7 @@ const BookingDetailsForm = ({ closeModel, bookingData, productList }) => {
                         name="lastname"
                         placeholder="Enter your last name"
                         value={UserDetails ? UserDetails.lastname : ""}
+                        readOnly
                         required
                       />
                       <p>This field is required</p>
@@ -314,6 +326,7 @@ const BookingDetailsForm = ({ closeModel, bookingData, productList }) => {
                         min={18}
                         placeholder="Enter your Email"
                         value={UserDetails ? UserDetails.email : ""}
+                        readOnly
                         required
                       />
                       <p>This field is required</p>

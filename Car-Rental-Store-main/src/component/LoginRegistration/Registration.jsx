@@ -191,8 +191,8 @@ const Registration = () => {
                   <button onClick={handleSubmit} className="submit-btn">
                     {!data.loading && <p>Create Account</p>}
                     {data.loading && (
-                      <div class="loading-container" id="loadingContainer">
-                        <div class="loading"></div>
+                      <div className="loading-container" id="loadingContainer">
+                        <div className="loading"></div>
                       </div>
                     )}
                   </button>

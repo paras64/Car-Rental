@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import carBgImg from "../images/banner/bg-1.png";
 import styled from "styled-components";
 import CarImageDemo from "../images/VehicalCollection/PngItem_135037.png";
@@ -8,14 +8,31 @@ import MinorCrashOutlinedIcon from "@mui/icons-material/MinorCrashOutlined";
 import LocalGasStationOutlinedIcon from "@mui/icons-material/LocalGasStationOutlined";
 import CurrencyRupeeOutlinedIcon from "@mui/icons-material/CurrencyRupeeOutlined";
 import BookingDetailsForm from "./BookingDetailsForm";
+import { useNavigate } from "react-router-dom";
 const CarCard = (props) => {
+  const navigate = useNavigate();
+
   const [setModel, showSetModel] = useState(false);
+
+  const [vehicalDetails, setvehicalDetails] = useState(null);
   const closeModel = () => {
     if (setModel) {
       showSetModel(false);
       return;
     }
     showSetModel(true);
+  };
+  useEffect(() => {
+    setvehicalDetails(props.carsData);
+  }, [props.carsData]);
+  const handleClick = () => {
+    if (localStorage.length < 1) {
+      window.alert("Please login before booking");
+      navigate("/login");
+      return;
+    } else {
+      closeModel();
+    }
   };
 
   if (!props.carsData) {
@@ -190,7 +207,7 @@ const CarCard = (props) => {
             </div>
           </div>
           <div className="car-models-collection-body">
-            <button className="booknow-btn" closeModel={closeModel}>
+            <button className="booknow-btn" onClick={handleClick}>
               Book now
             </button>
             <img src={props.carsData.images[0]} alt="car-image" />
@@ -219,7 +236,12 @@ const CarCard = (props) => {
           </div>
         </div>
       </CardCardSection>
-      {setModel && <BookingDetailsForm closeModel={closeModel} />}
+      {setModel && (
+        <BookingDetailsForm
+          closeModel={handleClick}
+          vehicalDetails={vehicalDetails}
+        />
+      )}
     </>
   );
 };

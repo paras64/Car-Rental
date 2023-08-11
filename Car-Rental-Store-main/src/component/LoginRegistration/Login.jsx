@@ -151,8 +151,8 @@ const Login = () => {
                 <button onClick={handleSubmit} className="submit-btn">
                   {!loginAction.loading && <p>Sign In</p>}
                   {loginAction.loading && (
-                    <div class="loading-container" id="loadingContainer">
-                      <div class="loading"></div>
+                    <div className="loading-container" id="loadingContainer">
+                      <div className="loading"></div>
                     </div>
                   )}
                 </button>

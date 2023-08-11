@@ -178,8 +178,8 @@ export default function Footer() {
                   <button className="footer-btn submit-btn" type="submit">
                     {!alert.loading && <p>SUBSCRIBE</p>}
                     {alert.loading && (
-                      <div class="loading-container" id="loadingContainer">
-                        <div class="loading"></div>
+                      <div className="loading-container" id="loadingContainer">
+                        <div className="loading"></div>
                       </div>
                     )}
                   </button>

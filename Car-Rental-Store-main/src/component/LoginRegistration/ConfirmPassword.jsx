@@ -214,8 +214,8 @@ const ConfirmPassword = () => {
               <button onClick={handleSubmit} className="submit-btn">
                 {!visibility.loading && <p>Update</p>}
                 {visibility.loading && (
-                  <div class="loading-container" id="loadingContainer">
-                    <div class="loading"></div>
+                  <div className="loading-container" id="loadingContainer">
+                    <div className="loading"></div>
                   </div>
                 )}
               </button>

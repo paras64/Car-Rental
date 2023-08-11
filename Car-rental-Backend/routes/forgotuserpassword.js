@@ -8,4 +8,3 @@ router
   .post("/update", ForgotPasswordController.updatePassword);
 
 exports.router = router;
-
