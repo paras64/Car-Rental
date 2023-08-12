@@ -21,7 +21,7 @@ export default function Testimonial() {
 
   useEffect(() => {
     getTestimonialData();
-  });
+  }, []);
   const MainSection = styled.section`
     /* border: 2px solid; */
     height: 73rem;
@@ -179,7 +179,10 @@ export default function Testimonial() {
               <div className="testimonial-content-box">
                 {testimonialData.map((testimonial, index) => {
                   return (
-                    <div key={index} className="testimonial-content-box-container">
+                    <div
+                      key={index}
+                      className="testimonial-content-box-container"
+                    >
                       <div className="testimonial-content-box-top-part">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"

@@ -103,7 +103,8 @@ const BookingDetailsForm = ({
         })
         .catch((err) => {
           console.log("Error:", err);
-          alert(err.response.data.message);
+          alert("Something went wrong");
+          closeModel();
         });
     } else {
       console.log(orderDetails);

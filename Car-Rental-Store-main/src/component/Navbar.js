@@ -99,13 +99,28 @@ export default function Navbar() {
       background-color: transparent;
       border: none;
       cursor: pointer;
+      padding-top: 16px;
       display: flex;
-      justify-content: center;
       align-items: center;
+      /* border: 2px solid; */
+      height: 5.5rem;
+      gap: 25px;
+      flex-direction: column;
+      width: 6rem;
     }
-
-    .navbar-links li a:hover,
+    .user-btn_second {
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
     #left-btn:hover {
+      .user-btn_second {
+        opacity: 1;
+      }
+    }
+    .navbar-links li a:hover,
+    .sign_in:hover,
+    .user-btn_first:hover,
+    .user-btn_second:hover {
       color: var(--btn-background-color);
     }
 
@@ -154,7 +169,7 @@ export default function Navbar() {
                   className="btn"
                   id="left-btn"
                 >
-                  Sign In
+                  <p className="sign_in">Sign In</p>
                 </button>
                 <button
                   onClick={() => gotoRegister()}
@@ -166,18 +181,22 @@ export default function Navbar() {
               </>
             ) : (
               <>
-                <p className="btn" id="left-btn">
-                  Hello, {UserDetails.firstname}
-                </p>
-                <Button
-                  className="btn"
-                  id="right-btn"
-                  onClick={() => {
-                    localStorage.clear();
-                    navigate("/login");
-                  }}
-                >
-                  Log Out
+                <div className="btn user" id="left-btn">
+                  <p className="user-btn_first">
+                    Hello, {UserDetails.firstname}
+                  </p>
+                  <p
+                    className="user-btn_second"
+                    onClick={() => {
+                      localStorage.clear();
+                      navigate("/login");
+                    }}
+                  >
+                    Log Out
+                  </p>
+                </div>
+                <Button className="btn" id="right-btn">
+                  Orders
                 </Button>
               </>
             )}
