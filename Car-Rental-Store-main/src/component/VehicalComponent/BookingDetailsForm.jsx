@@ -97,36 +97,36 @@ const BookingDetailsForm = ({
       });
       doc
         .then((response) => {
-          console.log("Response:", response.data);
+          // console.log("Response:", response.data);
           alert(response.data.message);
           closeModel();
         })
         .catch((err) => {
-          console.log("Error:", err);
+          // console.log("Error:", err);
           alert("Something went wrong");
           closeModel();
         });
     } else {
-      console.log(orderDetails);
+      // console.log(orderDetails);
       alert("Please complete the required fields");
     }
   };
-  const resetAll = () => {
-    SetOrderDetails({
-      pickuptime: "",
-      dropofftime: "",
-      pickupdate: "",
-      dropoffdate: "",
-      pickuplocation: "",
-      dropofflocation: "",
-      contact: "",
-      age: 18,
-      address: "",
-    });
-  };
+  // const resetAll = () => {
+  //   SetOrderDetails({
+  //     pickuptime: "",
+  //     dropofftime: "",
+  //     pickupdate: "",
+  //     dropoffdate: "",
+  //     pickuplocation: "",
+  //     dropofflocation: "",
+  //     contact: "",
+  //     age: 18,
+  //     address: "",
+  //   });
+  // };
 
   // console.log(productDetails);
-  console.log(orderDetails);
+  // console.log(orderDetails);
   // console.log(vehicalDetails);
 
   return (
@@ -191,7 +191,7 @@ const BookingDetailsForm = ({
                         type="date"
                         name="dropoffdate"
                         onChange={handleChange}
-                        value={orderDetails.pickupdate}
+                        value={orderDetails.dropoffdate}
                       />
                     </div>
                   </div>
@@ -355,8 +355,10 @@ const BookingDetailsForm = ({
                     <p>Please send me latest news and updates</p>
                   </div>
                   <div className="hero__forth_personal_details_form__sub button_hero">
-                    <button onClick={resetAll}>Reset All</button>
-                    <button onClick={handleSubmit}>Reserve Now</button>
+                    {/* <button onClick={resetAll}>Reset All</button> */}
+                    <button onClick={(e) => handleSubmit(e)}>
+                      Reserve Now
+                    </button>
                   </div>
                 </form>
               </div>

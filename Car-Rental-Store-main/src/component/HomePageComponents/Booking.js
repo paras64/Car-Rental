@@ -69,8 +69,9 @@ function Booking(props) {
   };
 
   const handleClick = (e) => {
-    e.preventDefault();
-
+    if (e) {
+      e.preventDefault();
+    }
     if (
       bookingData.seletedcar &&
       bookingData.seletedcar &&

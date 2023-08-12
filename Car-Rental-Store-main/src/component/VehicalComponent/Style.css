@@ -261,6 +261,7 @@
   height: 17rem;
   display: flex;
   align-items: center;
+  justify-content: flex-end;
   /* border: 2px solid; */
 }
 .hero__forth_personal_details_form__sub:nth-child(6) button {

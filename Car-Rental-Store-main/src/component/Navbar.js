@@ -196,7 +196,7 @@ export default function Navbar() {
                   </p>
                 </div>
                 <Button className="btn" id="right-btn">
-                  Orders
+                  Bookings
                 </Button>
               </>
             )}
