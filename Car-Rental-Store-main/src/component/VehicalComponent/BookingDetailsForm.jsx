@@ -91,7 +91,7 @@ const BookingDetailsForm = ({
       orderDetails.age &&
       orderDetails.address
     ) {
-      const doc = axios.post("http://localhost:8000/user/order", {
+      const doc = axios.post("http://localhost:8000/user/bookorder", {
         orderDetails,
         UserDetails,
       });

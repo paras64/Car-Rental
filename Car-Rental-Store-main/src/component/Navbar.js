@@ -21,6 +21,9 @@ export default function Navbar() {
   const gotoRegister = () => {
     navigate("/register");
   };
+  const gotoOrders = () => {
+    navigate("/orders");
+  };
   const HeaderTop = styled.header`
     #navbar {
       display: flex;
@@ -195,8 +198,8 @@ export default function Navbar() {
                     Log Out
                   </p>
                 </div>
-                <Button className="btn" id="right-btn">
-                  Bookings
+                <Button className="btn" id="right-btn"  onClick={()=>gotoOrders()}> 
+                  Orders
                 </Button>
               </>
             )}

@@ -32,7 +32,6 @@ const UserSchema = new Schema({
       product: {
         type: Schema.Types.ObjectId,
         ref: "product",
- 
       },
       pickuptime: {
         type: String,

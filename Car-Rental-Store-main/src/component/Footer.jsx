@@ -95,7 +95,8 @@ export default function Footer() {
             SetAlert({
               active: true,
               response: "Success",
-              message: "Thanks for your subscription",
+              message:
+                "Thanks for your subscription!! You will recieve notifications new updates and offers",
               code: 201,
               loading: false,
             });
@@ -113,7 +114,8 @@ export default function Footer() {
             SetAlert({
               active: true,
               response: "Thanksyou",
-              message: "You are already subscribed",
+              message:
+                "You are already subscribed!! You will recieve notifications new updates and offers",
               code: 401,
               loading: false,
             });
@@ -286,10 +288,7 @@ export default function Footer() {
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink
-                      to="/testimonial"
-                      className="Footer-NavLinks"
-                    >
+                    <NavLink to="/testimonial" className="Footer-NavLinks">
                       Feedback
                     </NavLink>
                   </li>

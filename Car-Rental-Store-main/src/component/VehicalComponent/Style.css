@@ -172,9 +172,9 @@
 }
 .hero__three__car-details img {
   /* border: 2px solid; */
-  margin: 10px auto;
+  margin: 3rem auto;
   width: 22.8rem;
-  height: 20.2rem;
+  height: 18.2rem;
   display: flex;
   align-items: center;
   justify-content: center;

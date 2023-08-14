@@ -1,6 +1,25 @@
 const model = require("../model/users.js");
 const User = model.User;
 
+exports.getOrders = async (req, res) => {
+  const { email } = req.query;
+
+  try {
+    const doc = await User.findOne({ email: email }).populate(
+      "orderdetails.product"
+    );
+    doc
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((err) => {
+        res.status(200).json({ message: "No orders found" });
+      });
+  } catch {
+    res.status(500).json({ message: "Something went wrong" });
+  }
+};
+
 exports.Order = async (req, res) => {
   try {
     const { orderDetails, UserDetails } = req.body;
