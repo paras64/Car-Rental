@@ -3,18 +3,14 @@ const User = model.User;
 
 exports.getOrders = async (req, res) => {
   const { email } = req.query;
-
   try {
     const doc = await User.findOne({ email: email }).populate(
       "orderdetails.product"
     );
-    doc
-      .then((data) => {
-        console.log(data);
-      })
-      .catch((err) => {
-        res.status(200).json({ message: "No orders found" });
-      });
+    if (!doc) {
+      res.status(200).json({ message: "No orders found" });
+    }
+    res.status(200).json(doc.orderdetails);
   } catch {
     res.status(500).json({ message: "Something went wrong" });
   }
