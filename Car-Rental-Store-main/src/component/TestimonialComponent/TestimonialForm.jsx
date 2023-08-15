@@ -120,7 +120,7 @@ const TestimonialForm = () => {
   return (
     <>
       <GlobalStyle />
-      <section className="feedback-component">
+      <section className="feedback-component" id="feedback">
         <div className="testimonial-form-container">
           <div className="content">
             <div className="content-container">
@@ -140,6 +140,7 @@ const TestimonialForm = () => {
                       name="firstname"
                       id="firstname"
                       onChange={handleChange}
+                     
                     />
                   </div>
 
@@ -151,6 +152,7 @@ const TestimonialForm = () => {
                       name="lastname"
                       id="lastname"
                       onChange={handleChange}
+                  
                     />
                   </div>
                 </div>
@@ -162,6 +164,7 @@ const TestimonialForm = () => {
                     name="email"
                     id="feedback"
                     onChange={handleChange}
+                
                   />
                 </div>
                 <div className="testimonial-feedback-hero">

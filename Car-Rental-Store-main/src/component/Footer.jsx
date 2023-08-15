@@ -255,12 +255,12 @@ export default function Footer() {
                       </NavLink>
                     </li>
                     <li>
-                      <NavLink to="/" className="Footer-NavLinks">
+                      <NavLink to="#left-btn" className="Footer-NavLinks">
                         My Account
                       </NavLink>
                     </li>
                     <li>
-                      <NavLink to="/" className="Footer-NavLinks">
+                      <NavLink to="#maps" className="Footer-NavLinks">
                         Store Locator
                       </NavLink>
                     </li>
@@ -294,7 +294,7 @@ export default function Footer() {
                   </li>
                   <li>
                     <NavLink to="/" className="Footer-NavLinks">
-                      New Rewards
+                      Home
                     </NavLink>
                   </li>
                 </ul>
@@ -303,14 +303,14 @@ export default function Footer() {
           </div>
           <div className="footer-container-second">
             <div className="footer-container-second-first-item">
-              <a href="#">SITE MAP</a>
-              <a href="#">PRIVACY</a>
+              <a href="#maps">SITE MAP</a>
+              <a href="#download">DOWNLOAD APP</a>
               <a href="#">TERMS</a>
               <a href="#">USER CONTENT PERMISSION TERMS</a>
               <a href="#">CARRENTAL.COM</a>
             </div>
             <div className="footer-container-second-second-item">
-              <a href="#">©2023carrental.com</a>
+              <a href="#">Designed by - Kartik Gothwal</a>
               <a
                 className="footer-container-second-second-item-btn"
                 href="#navbar"
@@ -327,8 +327,8 @@ export default function Footer() {
             <p className="terms-condition-para">
               This is intended for customer. By signing up, you understand and
               agree to our terms that your data will be collected and used
-              subject to our <span>Privacy Policy</span> and
-              <span> Terms & Condition</span>
+              subject to our <span>Designed by - </span>
+              <span>Kartik Gothwal</span>
             </p>
           </div>
         </div>

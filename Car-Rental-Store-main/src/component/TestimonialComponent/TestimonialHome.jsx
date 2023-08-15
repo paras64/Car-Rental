@@ -1,7 +1,10 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const TestimonialHome = () => {
+  const navigate = useNavigate();
+
   const TestimonialHomeSection = styled.section`
     /* border: 2px solid; */
     height: 35rem;
@@ -78,6 +81,7 @@ const TestimonialHome = () => {
       overflow: hidden;
     }
     .video {
+      cursor: pointer;
       width: 720px;
       height: 405px;
     }
@@ -87,17 +91,16 @@ const TestimonialHome = () => {
     <>
       <TestimonialHomeSection>
         <h1 className="testimonial-home-heading">
-          Lorem ipsum dolor sit amet.
+        Everyday Excellence in Customer Service.
         </h1>
         <div className="testimonial-home-container">
           <div className="first">
-            <h1>lorem lorem</h1>
-            <h2>Lorem, ipsum dolor.</h2>
+            <h1>A word from CEO</h1>
+            <h2>Our Moto</h2>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit
-              molestias ducimus placeat quidem distinctio harum enim{" "}
+            Driving Dreams, One Rental at a Time. Your Journey Begins with Us. Choose Your Adventure Today!
             </p>
-            <button>Lorem, ipsum.</button>
+            <button onClick={()=> navigate('/about')}>Explore our journey</button>
           </div>
           <div className="second">
             <video

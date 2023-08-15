@@ -169,7 +169,7 @@ export default function Banner() {
             />
           </div>
         </div>
-        <section className="download">
+        <section className="download" id="download">
           <div className="download-container">
             <div className="download-img">
               <img src={download} alt="download-our-app" />
@@ -177,12 +177,12 @@ export default function Banner() {
             <div className="download-content">
               <h1>Download our app to get most out of it!!</h1>
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Exercitationem fugit in accusantium, cumque, inventore adipisci
-                quis, quasi libero ad corporis minima beatae amet modi tempora
-                quibusdam! Nam officiis, similique ipsam, obcaecati modi
-                nesciunt, provident vitae assumenda blanditiis repudiandae
-                laudantium eaque.
+                Download Our App and unlock a world of convenience at your
+                fingertips. Whether you're on the go or relaxing at home, our
+                app offers a seamless way to access our services and stay
+                connected. Don't miss out on the ease and efficiency – Download
+                Our App now and enjoy the ultimate convenience of modern
+                technology."
               </p>
 
               <div className="download-links">
@@ -196,7 +196,7 @@ export default function Banner() {
             </div>
           </div>
         </section>
-        <section className="google-maps-images">
+        <section className="google-maps-images" id="maps">
           <iframe
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d117756.85248567844!2d75.65771979726566!3d22.731897000000007!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3962fdc859bc94ab%3A0xdb2d9bb53213f853!2sCar%20Rental!5e0!3m2!1sen!2sin!4v1685815339461!5m2!1sen!2sin"
             width="100%"
