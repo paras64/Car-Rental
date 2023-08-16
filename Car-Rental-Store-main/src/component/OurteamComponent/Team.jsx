@@ -1,14 +1,14 @@
 import React from "react";
 import styled from "styled-components";
-import  InstagramIcon  from "@mui/icons-material/Instagram";
-import  TwitterIcon  from "@mui/icons-material/Twitter";
+import InstagramIcon from "@mui/icons-material/Instagram";
+import TwitterIcon from "@mui/icons-material/Twitter";
 const Team = () => {
   const IconStyle = {
     borderRadius: "7px",
-    cursor:"pointer",
+    cursor: "pointer",
     color: "var(--btn-background-color)",
-    boxShadow:"rgba(23, 23, 23, 0.24) 0px 1px 3px"
-  }
+    boxShadow: "rgba(23, 23, 23, 0.24) 0px 1px 3px",
+  };
   const TeamSection = styled.section`
     /* border: 2px solid; */
     width: 100%;
@@ -124,8 +124,8 @@ const Team = () => {
               <aside className="person__name">
                 <h1>Alexa Kocher</h1>
                 <div className="icons">
-                  < InstagramIcon style={IconStyle} />
-                  < TwitterIcon style={IconStyle} />
+                  <InstagramIcon style={IconStyle} />
+                  <TwitterIcon style={IconStyle} />
                 </div>
               </aside>
               <p className="person__role">Executive Manager & CEO</p>
@@ -138,8 +138,8 @@ const Team = () => {
               <aside className="person__name">
                 <h1>Luke Miller</h1>
                 <div className="icons">
-                  < InstagramIcon style={IconStyle} />
-                  < TwitterIcon style={IconStyle} />
+                  <InstagramIcon style={IconStyle} />
+                  <TwitterIcon style={IconStyle} />
                 </div>
               </aside>
               <p>Car Detailist</p>
@@ -152,8 +152,8 @@ const Team = () => {
               <aside className="person__name">
                 <h1>Michael Horan</h1>
                 <div className="icons">
-                  < InstagramIcon style={IconStyle} />
-                  < TwitterIcon style={IconStyle} />
+                  <InstagramIcon style={IconStyle} />
+                  <TwitterIcon style={IconStyle} />
                 </div>
               </aside>
               <p>Logistics Coordinator</p>
@@ -166,8 +166,8 @@ const Team = () => {
               <aside className="person__name">
                 <h1>Migel Auran</h1>
                 <div className="icons">
-                  < InstagramIcon style={IconStyle} />
-                  < TwitterIcon style={IconStyle} />
+                  <InstagramIcon style={IconStyle} />
+                  <TwitterIcon style={IconStyle} />
                 </div>
               </aside>
               <p>Data Analyst</p>
@@ -180,8 +180,8 @@ const Team = () => {
               <aside className="person__name">
                 <h1>Allen James</h1>
                 <div className="icons">
-                  < InstagramIcon style={IconStyle} />
-                  < TwitterIcon style={IconStyle} />
+                  <InstagramIcon style={IconStyle} />
+                  <TwitterIcon style={IconStyle} />
                 </div>
               </aside>
               <p>Safety Officer</p>
@@ -194,8 +194,8 @@ const Team = () => {
               <aside className="person__name">
                 <h1>Robert Aston</h1>
                 <div className="icons">
-                  < InstagramIcon style={IconStyle} />
-                  < TwitterIcon style={IconStyle} />
+                  <InstagramIcon style={IconStyle} />
+                  <TwitterIcon style={IconStyle} />
                 </div>
               </aside>
               <p>Salesman</p>
@@ -208,8 +208,8 @@ const Team = () => {
               <aside className="person__name">
                 <h1>Yasser Arafat</h1>
                 <div className="icons">
-                  < InstagramIcon style={IconStyle} />
-                  < TwitterIcon style={IconStyle} />
+                  <InstagramIcon style={IconStyle} />
+                  <TwitterIcon style={IconStyle} />
                 </div>
               </aside>
               <p>Media Manager</p>
@@ -222,8 +222,8 @@ const Team = () => {
               <aside className="person__name">
                 <h1>Stefan Topalovic</h1>
                 <div className="icons">
-                  < InstagramIcon style={IconStyle} />
-                  < TwitterIcon style={IconStyle} />
+                  <InstagramIcon style={IconStyle} />
+                  <TwitterIcon style={IconStyle} />
                 </div>
               </aside>
               <p>Customer Support</p>
