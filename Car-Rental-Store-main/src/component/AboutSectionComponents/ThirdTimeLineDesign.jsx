@@ -76,20 +76,13 @@ const ThirdTimeLineDesign = () => {
         <div className="third-timeline-container-first">
           <div className="third-timeline-container-first-content-first">
             <h2>The Little Steps</h2>
-            <h1>Lorem ipsum dolor sit amet consectetur adipisicing.</h1>
+            <h1>The Mid Journey</h1>
             <p>
-              Lorem lorum. Deserunt modi quibusdam, rerum quae incidunt,
-              excepturi ducimus, assumenda quidem consectetur voluptate
-              provident.
-              Lorem lorum. Deserunt modi quibusdam, rerum quae incidunt,
-              excepturi ducimus, assumenda quidem consectetur voluptate
-              provident.
-              Lorem lorum. Deserunt modi quibusdam, rerum quae incidunt,
-              excepturi ducimus, assumenda quidem consectetur voluptate
-              provident.
-              Lorem lorum. Deserunt modi quibusdam, rerum quae incidunt,
-              excepturi ducimus, assumenda quidem consectetur voluptate
-              provident.
+            Recognizing the importance of catering to a diverse range of customer needs, WheelsAway has significantly expanded its fleet options. 
+
+            Embracing the digital era, WheelsAway has invested heavily in technology to enhance the customer experience. A revamped mobile app allows users to seamlessly browse, book, and manage their rentals from the convenience of their smartphones. T
+            Understanding that each customer's journey is unique, WheelsAway has introduced personalized services to create memorable experiences. 
+            
             </p>
           </div>
           <div className="third-timeline-container-first-content-third">

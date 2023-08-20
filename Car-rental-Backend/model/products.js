@@ -6,8 +6,8 @@ const ProductSchema = new Schema({
   year: { type: Number, required: true },
   price: { type: Number, min: [0, "Invaild Price"], required: true },
   category: { type: String, default: "Regular cars" },
-  model: { type: String, required: true, unique: true},
-  capacity: { type: Number, required: true},
+  model: { type: String, required: true, unique: true },
+  capacity: { type: Number, required: true },
   discountPercentage: {
     type: Number,
     min: [0, "Wrong min discountPercentage"],
@@ -32,7 +32,7 @@ const ProductSchema = new Schema({
     type: Number,
     min: [0, "Wrong min stocks"],
   },
-  images:[String],
+  images: [String],
 });
 
 const Product = new mongoose.model("product", ProductSchema);

@@ -43,8 +43,6 @@ const SecondTimeLineDesign = () => {
       max-width: 17rem !important;
     }
     .second-timeline-container h1 {
-     
-       
     }
     .second-timeline-first-container-sub {
       height: 50%;
@@ -72,20 +70,19 @@ const SecondTimeLineDesign = () => {
         <div className="second-timeline-container  ">
           <img src={hero1} alt="" />
           <div className="second-timeline-first-container-sub extra-bg">
-            <h1>Lorem, ipsum.</h1>
+            <h1>Facility Setup.</h1>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi,
-              necessitatibus accusamus officiis provident eaque sunt alias illum
-              vel iu
+              Design the layout of your dealership, including showroom, customer
+              lounge, sales offices, service bays, and administrative areas.
             </p>
           </div>
         </div>
         <div className="second-timeline-container ">
           <div className="second-timeline-first-container-sub">
-            <h1>Lorem, ipsum.</h1>
+            <h1>Inventory Setup</h1>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi,
-              necessitatibus accusamus officiis provident eaque sunt alias illum
+              Establish relationships with car manufacturers, distributors,
+              wholesalers, and private sellers to source your inventory
             </p>
           </div>
           <img src={hero2} alt="" />
@@ -93,21 +90,20 @@ const SecondTimeLineDesign = () => {
         <div className="second-timeline-container ">
           <img src={hero3} alt="" />
           <div className="second-timeline-first-container-sub extra-bg">
-            <h1>Lorem, ipsum.</h1>
+            <h1>Customer Bonds</h1>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi,
-              necessitatibus accusamus officiis provident eaque sunt alias illum
-             
+              Plan a grand opening event to introduce your dealership to the
+              community and potential customers.
             </p>
           </div>
         </div>
         <div className="second-timeline-container  ">
           <div className="second-timeline-first-container-sub">
-            <h1>Lorem, ipsum.</h1>
+            <h1>Deploying Cars</h1>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi,
-              necessitatibus accusamus officiis provident eaque sunt alias illum
-              ve
+              Deploying cars to customers is a crucial phase of the car
+              dealership process, marking the culmination of your efforts to
+              provide a seamless.
             </p>
           </div>
           <img src={hero4} alt="" />
