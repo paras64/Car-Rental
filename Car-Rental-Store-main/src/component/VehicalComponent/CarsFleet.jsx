@@ -8,7 +8,6 @@ import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
 import ProductsData from "../HOC- higherOrderComponent/ProductsData";
 import { GlobalStyle } from "../styles/GlobalStyle";
 import StarIcon from "@mui/icons-material/Star";
-import { DataArray } from "@mui/icons-material";
 
 let initialState = {
   cars: [],
@@ -26,9 +25,11 @@ let initialState = {
   },
 };
 const reducer = (state, action) => {
+  let Statefilters = undefined;
   const FiltersChecks = (DataArray, filters) => {
     let ResultArray = DataArray;
     if (filters.pricehightolow) {
+      console.log(filters);
       ResultArray = PriceHighToLow(ResultArray);
     }
     if (filters.pricelowtohigh) {
@@ -129,159 +130,124 @@ const reducer = (state, action) => {
         filters: initialState.filters,
       };
     case "hightolow":
-      state = {
-        ...state.cars,
-        filters: {
-          ...state.filters,
-          pricehightolow: true,
-          pricelowtohigh: null,
-        },
+      Statefilters = {
+        ...state.filters,
+        pricehightolow: true,
+        pricelowtohigh: false,
       };
       return {
-        cars: FiltersChecks(action.payload, state.filters),
-        filters: {
-          ...state.filters,
-        },
+        cars: FiltersChecks(action.payload, Statefilters),
+        filters: Statefilters,
       };
 
     case "lowtohigh":
-      state = {
-        ...state.cars,
-        filters: {
-          ...state.filters,
-          pricehightolow: null,
-          pricelowtohigh: true,
-        },
+      Statefilters = {
+        ...state.filters,
+        pricehightolow: false,
+        pricelowtohigh: true,
       };
       return {
-        cars: FiltersChecks(action.payload, state.filters),
-        filters: state.filters,
+        cars: FiltersChecks(action.payload, Statefilters),
+        filters: Statefilters,
       };
 
     case "capacity2persons":
-      state = {
-        ...state.cars,
-        filters: {
-          ...state.filters,
-          capacity2persons: true,
-          capacitymorethan2persons: null,
-        },
+      Statefilters = {
+        ...state.filters,
+        capacity2persons: true,
+        capacitymorethan2persons: false,
       };
       return {
-        cars: FiltersChecks(action.payload, state.filters),
-        filters: state.filters,
+        cars: FiltersChecks(action.payload, Statefilters),
+        filters: Statefilters,
       };
     case "capacitymorethan2persons":
-      state = {
-        ...state.cars,
-        filters: {
-          ...state.filters,
-          capacity2persons: null,
-          capacitymorethan2persons: true,
-        },
+      Statefilters = {
+        ...state.filters,
+        capacity2persons: false,
+        capacitymorethan2persons: true,
       };
       return {
-        cars: FiltersChecks(action.payload, state.filters),
-        filters: state.filters,
+        cars: FiltersChecks(action.payload, Statefilters),
+        filters: Statefilters,
       };
     case "manual":
-      state = {
-        ...state.cars,
-        filters: {
-          ...state.filters,
-          drivemanual: true,
-          driveautomatic: null,
-        },
+      Statefilters = {
+        ...state.filters,
+        drivemanual: true,
+        driveautomatic: false,
       };
       return {
-        cars: FiltersChecks(action.payload, state.filters),
-        filters: state.filters,
+        cars: FiltersChecks(action.payload, Statefilters),
+        filters: Statefilters,
       };
     case "automatic":
-      state = {
-        ...state.cars,
-        filters: {
-          ...state.filters,
-          drivemanual: null,
-          driveautomatic: true,
-        },
+      Statefilters = {
+        ...state.filters,
+        drivemanual: false,
+        driveautomatic: true,
       };
       return {
-        cars: FiltersChecks(action.payload, state.filters),
-        filters: state.filters,
+        cars: FiltersChecks(action.payload, Statefilters),
+        filters: Statefilters,
       };
     case "automatic":
-      state = {
-        ...state.cars,
-        filters: {
-          ...state.filters,
-          drivemanual: null,
-          driveautomatic: true,
-        },
+      Statefilters = {
+        ...state.filters,
+        drivemanual: false,
+        driveautomatic: true,
       };
       return {
-        cars: FiltersChecks(action.payload, state.filters),
-        filters: state.filters,
+        cars: FiltersChecks(action.payload, Statefilters),
+        filters: Statefilters,
       };
     case "ratingmorethan4":
-      state = {
-        ...state.cars,
-        filters: {
-          ...state.filters,
-          ratingMoreThanOne: null,
-          ratingMoreThanTwo: null,
-          ratingMoreThanThree: null,
-          ratingMoreThanFour: true,
-        },
+      Statefilters = {
+        ...state.filters,
+        ratingMoreThanOne: false,
+        ratingMoreThanTwo: false,
+        ratingMoreThanThree: false,
+        ratingMoreThanFour: true,
       };
       return {
-        cars: FiltersChecks(action.payload, state.filters),
-        filters: state.filters,
+        cars: FiltersChecks(action.payload, Statefilters),
+        filters: Statefilters,
       };
     case "ratingmorethan3":
-      state = {
-        ...state.cars,
-        filters: {
-          ...state.filters,
-          ratingMoreThanOne: null,
-          ratingMoreThanTwo: null,
-          ratingMoreThanThree: true,
-          ratingMoreThanFour: null,
-        },
+      Statefilters = {
+        ...state.filters,
+        ratingMoreThanOne: false,
+        ratingMoreThanTwo: false,
+        ratingMoreThanThree: true,
+        ratingMoreThanFour: false,
       };
       return {
-        cars: FiltersChecks(action.payload, state.filters),
-        filters: state.filters,
+        cars: FiltersChecks(action.payload, Statefilters),
+        filters: Statefilters,
       };
     case "ratingmorethan2":
-      state = {
-        ...state.cars,
-        filters: {
-          ...state.filters,
-          ratingMoreThanOne: null,
-          ratingMoreThanTwo: true,
-          ratingMoreThanThree: null,
-          ratingMoreThanFour: null,
-        },
+      Statefilters = {
+        ...state.filters,
+        ratingMoreThanOne: false,
+        ratingMoreThanTwo: true,
+        ratingMoreThanThree: false,
+        ratingMoreThanFour: false,
       };
       return {
-        cars: FiltersChecks(action.payload, state.filters),
-        filters: state.filters,
+        cars: FiltersChecks(action.payload, Statefilters),
+        filters: Statefilters,
       };
     case "ratingmorethan1":
-      state = {
-        ...state.cars,
-        filters: {
-          ...state.filters,
-          ratingMoreThanOne: true,
-          ratingMoreThanTwo: null,
-          ratingMoreThanThree: null,
-          ratingMoreThanFour: null,
-        },
+      Statefilters = {
+        ...state.filters,
+        ratingMoreThanOne: true,
+        ratingMoreThanTwo: false,
+        ratingMoreThanThree: false,
+        ratingMoreThanFour: false,
       };
       return {
-        cars: FiltersChecks(action.payload, state.filters),
-        filters: state.filters,
+        cars: FiltersChecks(action.payload, Statefilters),
+        filters: Statefilters,
       };
   }
 };
@@ -540,10 +506,11 @@ const CarsFleet = ({ productList }) => {
                     <input
                       type="radio"
                       name="price__filter"
-                      onClick={() =>
+                      onChange={() =>
                         dispatch({ type: "hightolow", payload: productList })
                       }
                     />{" "}
+                    {console.log(CurrentState)}
                     <p
                       className="filter__details"
                       style={
@@ -559,7 +526,7 @@ const CarsFleet = ({ productList }) => {
                     <input
                       type="radio"
                       name="price__filter"
-                      onClick={() =>
+                      onChange={() =>
                         dispatch({ type: "lowtohigh", payload: productList })
                       }
                     />{" "}
@@ -593,7 +560,7 @@ const CarsFleet = ({ productList }) => {
                     <input
                       type="radio"
                       name="Capacity__filter"
-                      onClick={() =>
+                      onChange={() =>
                         dispatch({
                           type: "capacity2persons",
                           payload: productList,
@@ -615,7 +582,7 @@ const CarsFleet = ({ productList }) => {
                     <input
                       type="radio"
                       name="Capacity__filter"
-                      onClick={() =>
+                      onChange={() =>
                         dispatch({
                           type: "capacitymorethan2persons",
                           payload: productList,
@@ -640,7 +607,7 @@ const CarsFleet = ({ productList }) => {
                     <input
                       type="radio"
                       name="drive__filter"
-                      onClick={() =>
+                      onChange={() =>
                         dispatch({ type: "manual", payload: productList })
                       }
                     />{" "}
@@ -659,7 +626,7 @@ const CarsFleet = ({ productList }) => {
                     <input
                       type="radio"
                       name="drive__filter"
-                      onClick={() =>
+                      onChange={() =>
                         dispatch({ type: "automatic", payload: productList })
                       }
                     />{" "}
@@ -681,7 +648,7 @@ const CarsFleet = ({ productList }) => {
                     <input
                       type="radio"
                       name="rating__filter"
-                      onClick={() =>
+                      onChange={() =>
                         dispatch({
                           type: "ratingmorethan4",
                           payload: productList,
@@ -708,7 +675,7 @@ const CarsFleet = ({ productList }) => {
                     <input
                       type="radio"
                       name="rating__filter"
-                      onClick={() =>
+                      onChange={() =>
                         dispatch({
                           type: "ratingmorethan3",
                           payload: productList,
@@ -735,7 +702,7 @@ const CarsFleet = ({ productList }) => {
                     <input
                       type="radio"
                       name="rating__filter"
-                      onClick={() =>
+                      onChange={() =>
                         dispatch({
                           type: "ratingmorethan2",
                           payload: productList,
@@ -760,7 +727,7 @@ const CarsFleet = ({ productList }) => {
                     <input
                       type="radio"
                       name="rating__filter"
-                      onClick={() =>
+                      onChange={() =>
                         dispatch({
                           type: "ratingmorethan1",
                           payload: productList,
