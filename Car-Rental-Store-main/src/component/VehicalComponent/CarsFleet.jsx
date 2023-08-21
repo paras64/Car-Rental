@@ -19,8 +19,67 @@ let initialState = {
   },
 };
 const reducer = (state, action) => {
-  // console.log(state);
-  // console.log(action.payload);
+  const FiltersChecks = (DataArray, filters) => {
+    let ResultArray = DataArray;
+    if ((filters.price = "hightolow")) {
+      ResultArray = PriceHighToLow(ResultArray);
+    }
+    if ((filters.price = "lowtohigh")) {
+      ResultArray = PriceLowToHigh(ResultArray);
+    }
+    if ((filters.capacity = "capacity2persons")) {
+      ResultArray = CapacityTwoPerson(ResultArray);
+    }
+    if ((filters.capacity = "capacitymorethan2persons")) {
+      ResultArray = CapacityTwoPerson(ResultArray);
+    }
+    if ((filters.drive = "manual")) {
+      ResultArray = DriveManual(ResultArray);
+    }
+    if ((filters.drive = "manual")) {
+      ResultArray = DriveManual(ResultArray);
+    }
+    if ((filters.drive = "automatic")) {
+      ResultArray = DriveAutomatic(ResultArray);
+    }
+    return ResultArray;
+  };
+
+  const PriceHighToLow = (DataArray) => {
+    return DataArray.sort((a, b) => {
+      return b.price - a.price;
+    });
+  };
+  const PriceLowToHigh = (DataArray) => {
+    return DataArray.sort((a, b) => {
+      return a.price - b.price;
+    });
+  };
+
+  const CapacityTwoPerson = (DataArray) => {
+    return DataArray.filter((docs) => {
+      return docs.capacity == 2;
+    });
+  };
+
+  const CapacityMoreThanTwo = (DataArray) => {
+    return DataArray.filter((docs) => {
+      return docs.capacity > 2;
+    });
+  };
+
+  const DriveManual = (DataArray) => {
+    return DataArray.filter((docs) => {
+      return docs.drive == "Manual";
+    });
+  };
+
+  const DriveAutomatic = (DataArray) => {
+    return DataArray.filter((docs) => {
+      return docs.drive == "Automatic";
+    });
+  };
+
   switch (action.type) {
     case "SET_DATA":
       return {
@@ -29,53 +88,43 @@ const reducer = (state, action) => {
       };
 
     case "RESET_DATA":
-      console.log(action.payload);
       return {
         cars: action.payload,
         filters: initialState.filters,
       };
     case "hightolow":
       return {
-        cars: state.cars.sort((a, b) => {
-          return b.price - a.price;
-        }),
-        filters: state.filters,
+        cars: PriceHighToLow(state.cars),
+        filters: {
+          ...state.filters,
+          price: true,
+        },
       };
 
     case "lowtohigh":
       return {
-        cars: state.cars.sort((a, b) => {
-          return a.price - b.price;
-        }),
+        cars: PriceLowToHigh(state.cars),
         filters: state.filters,
       };
 
     case "capacity2persons":
       return {
-        cars: state.cars.filter((docs) => {
-          return docs.capacity == 2;
-        }),
+        cars: CapacityTwoPerson(state.cars),
         filters: state.filters,
       };
     case "capacitymorethan2persons":
       return {
-        cars: state.cars.filter((docs) => {
-          return docs.capacity > 2;
-        }),
+        cars: CapacityMoreThanTwo(state.cars),
         filters: state.filters,
       };
     case "manual":
       return {
-        cars: state.cars.filter((docs) => {
-          return docs.drive == "Manual";
-        }),
+        cars: DriveManual(state.cars),
         filters: state.filters,
       };
     case "automatic":
       return {
-        cars: state.cars.filter((docs) => {
-          return docs.drive == "Automatic";
-        }),
+        cars: DriveAutomatic(state.cars),
         filters: state.filters,
       };
   }
@@ -366,7 +415,7 @@ const CarsFleet = ({ productList }) => {
                     <input
                       type="radio"
                       name="Capacity__filter"
-                      onClick={() => dispatch({ type: "capacity2persons"})}
+                      onClick={() => dispatch({ type: "capacity2persons" })}
                     />{" "}
                     <p className="filter__details">2 persons</p>
                   </aside>
