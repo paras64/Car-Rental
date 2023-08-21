@@ -72,6 +72,7 @@ const Team = () => {
       border-radius: 10px;
       height: 30rem;
       width: auto;
+      overflow: hidden;
     }
     .members__box img {
       height: 24rem;

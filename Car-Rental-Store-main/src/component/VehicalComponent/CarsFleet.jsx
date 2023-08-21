@@ -9,19 +9,127 @@ import ProductsData from "../HOC- higherOrderComponent/ProductsData";
 import { GlobalStyle } from "../styles/GlobalStyle";
 import StarIcon from "@mui/icons-material/Star";
 
+let initialState = {
+  cars: [],
+  filters: {
+    price: null,
+    capacity: null,
+    drive: null,
+    rating: null,
+  },
+};
 const reducer = (state, action) => {
-  console.log(state);
-  console.log(action);
+  // console.log(state);
+  // console.log(action.payload);
+  switch (action.type) {
+    case "SET_DATA":
+      return {
+        cars: action.payload,
+        filters: initialState.filters,
+      };
+
+    case "RESET_DATA":
+      console.log(action.payload);
+      return {
+        cars: action.payload,
+        filters: initialState.filters,
+      };
+    case "hightolow":
+      return {
+        cars: state.cars.sort((a, b) => {
+          return b.price - a.price;
+        }),
+        filters: state.filters,
+      };
+
+    case "lowtohigh":
+      return {
+        cars: state.cars.sort((a, b) => {
+          return a.price - b.price;
+        }),
+        filters: state.filters,
+      };
+
+    case "capacity2persons":
+      return {
+        cars: state.cars.filter((docs) => {
+          return docs.capacity == 2;
+        }),
+        filters: state.filters,
+      };
+    case "capacitymorethan2persons":
+      return {
+        cars: state.cars.filter((docs) => {
+          return docs.capacity > 2;
+        }),
+        filters: state.filters,
+      };
+    case "manual":
+      return {
+        cars: state.cars.filter((docs) => {
+          return docs.drive == "Manual";
+        }),
+        filters: state.filters,
+      };
+    case "automatic":
+      return {
+        cars: state.cars.filter((docs) => {
+          return docs.drive == "Automatic";
+        }),
+        filters: state.filters,
+      };
+  }
+};
+
+const N0MatchFound = ({ dispatch, productList }) => {
+  const NotfoundSection = styled.section`
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+
+    h1 {
+      font-size: 3rem;
+      color: var(--text-color);
+    }
+    button {
+      cursor: pointer;
+      border: none;
+      height: 3.5rem;
+      width: 11rem;
+      font-size: 23px;
+      font-weight: bold;
+      background-color: var(--btn-background-color);
+      box-shadow: rgba(255, 83, 48, 0.35) 0px 10px 15px 0px;
+      cursor: pointer;
+      color: var(--white-color);
+      border-radius: 10px;
+    }
+  `;
+  return (
+    <>
+      <NotfoundSection>
+        <h1>No product found</h1>
+        <button
+          onClick={() => {
+            dispatch({ type: "SET_DATA", payload: productList });
+          }}
+        >
+          Reset filters
+        </button>
+      </NotfoundSection>
+    </>
+  );
 };
 
 const CarsFleet = ({ productList }) => {
-  let initialState;
-  const [CarProducts, setCarProducts] = useState([]);
-  const [CurrentState, dispatch] = useReducer(reducer, initialState );
+  const [CurrentState, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
-    setCarProducts(productList);
-    initialState = productList;
+    dispatch({ type: "SET_DATA", payload: productList });
   }, [productList]);
 
   const CarsFleetSection = styled.section`
@@ -177,6 +285,13 @@ const CarsFleet = ({ productList }) => {
     .filter__by__rating {
       gap: 3px;
     }
+    input {
+      cursor: pointer;
+    }
+    .reset__btn {
+      display: flex;
+      align-items: center;
+    }
   `;
   return (
     <>
@@ -202,8 +317,15 @@ const CarsFleet = ({ productList }) => {
               <div className="first-setting">
                 <h1>Filter by</h1>
                 <div>
-                  <RestartAltIcon />
-                  <button>Reset All</button>
+                  <button
+                    className="reset__btn"
+                    onClick={() =>
+                      dispatch({ type: "SET_DATA", payload: productList })
+                    }
+                  >
+                    <RestartAltIcon />
+                    Reset All
+                  </button>
                 </div>
               </div>
               <div className="setting__body">
@@ -213,7 +335,7 @@ const CarsFleet = ({ productList }) => {
                     <input
                       type="radio"
                       name="price__filter"
-                      onClick={() => dispatch({ action: "hightolow" })}
+                      onClick={() => dispatch({ type: "hightolow" })}
                     />{" "}
                     <p className="filter__details">high to low</p>
                   </aside>
@@ -221,14 +343,14 @@ const CarsFleet = ({ productList }) => {
                     <input
                       type="radio"
                       name="price__filter"
-                      onClick={() => dispatch({ action: "lowtohigh" })}
+                      onClick={() => dispatch({ type: "lowtohigh" })}
                     />{" "}
                     <p className="filter__details">low to high</p>
                   </aside>
                   <aside>
                     <input
                       type="range"
-                      name="high_to_low"
+                      name="price_range_filter"
                       min={2999}
                       max={7999}
                     />
@@ -241,29 +363,51 @@ const CarsFleet = ({ productList }) => {
                 <div className="filter__by__capacity">
                   <h1 className="filters__heading">Capacity</h1>
                   <aside>
-                    <input type="radio" name="Capacity__filter" />{" "}
+                    <input
+                      type="radio"
+                      name="Capacity__filter"
+                      onClick={() => dispatch({ type: "capacity2persons"})}
+                    />{" "}
                     <p className="filter__details">2 persons</p>
                   </aside>
                   <aside>
-                    <input type="radio" name="Capacity__filter" />{" "}
+                    <input
+                      type="radio"
+                      name="Capacity__filter"
+                      onClick={() =>
+                        dispatch({ type: "capacitymorethan2persons" })
+                      }
+                    />{" "}
                     <p className="filter__details">more than 2 persons</p>
                   </aside>
                 </div>
                 <div className="filter__by__drive">
                   <h1 className="filters__heading">Drive</h1>
                   <aside>
-                    <input type="radio" name="drive__filter" />{" "}
+                    <input
+                      type="radio"
+                      name="drive__filter"
+                      onClick={() => dispatch({ type: "manual" })}
+                    />{" "}
                     <p className="filter__details">Manual</p>
                   </aside>
                   <aside>
-                    <input type="radio" name="drive__filter" />{" "}
+                    <input
+                      type="radio"
+                      name="drive__filter"
+                      onClick={() => dispatch({ type: "automatic" })}
+                    />{" "}
                     <p className="filter__details">Automatic</p>
                   </aside>
                 </div>
                 <div className="filter__by__rating">
                   <h1 className="filters__heading">Ratings</h1>
                   <aside>
-                    <input type="radio" name="rating__filter" />{" "}
+                    <input
+                      type="radio"
+                      name="rating__filter"
+                      onClick={() => dispatch({ type: "ratingmorethan4" })}
+                    />{" "}
                     <p className="filter__details">
                       <StarIcon style={{ color: "orange" }} />
                       <StarIcon style={{ color: "orange" }} />
@@ -273,7 +417,11 @@ const CarsFleet = ({ productList }) => {
                     </p>
                   </aside>
                   <aside>
-                    <input type="radio" name="rating__filter" />{" "}
+                    <input
+                      type="radio"
+                      name="rating__filter"
+                      onClick={() => dispatch({ type: "ratingmorethan3" })}
+                    />{" "}
                     <p className="filter__details">
                       {" "}
                       <StarIcon style={{ color: "orange" }} />
@@ -283,7 +431,11 @@ const CarsFleet = ({ productList }) => {
                     </p>
                   </aside>
                   <aside>
-                    <input type="radio" name="rating__filter" />{" "}
+                    <input
+                      type="radio"
+                      name="rating__filter"
+                      onClick={() => dispatch({ type: "ratingmorethan2" })}
+                    />{" "}
                     <p className="filter__details">
                       <StarIcon style={{ color: "orange" }} />
                       <StarIcon style={{ color: "orange" }} />
@@ -291,7 +443,11 @@ const CarsFleet = ({ productList }) => {
                     </p>
                   </aside>
                   <aside>
-                    <input type="radio" name="rating__filter" />{" "}
+                    <input
+                      type="radio"
+                      name="rating__filter"
+                      onClick={() => dispatch({ type: "ratingmorethan1" })}
+                    />{" "}
                     <p className="filter__details">
                       <StarIcon style={{ color: "orange" }} />
                       <span>& Up</span>
@@ -302,11 +458,15 @@ const CarsFleet = ({ productList }) => {
             </div>
           </div>
           <div className="car-fleet-container">
-            {CarProducts.map((carsData, index) => {
-              return (
-                <CarCard key={index} carsData={carsData} CarImg={CarImg} />
-              );
-            })}
+            {CurrentState.cars.length ? (
+              CurrentState.cars.map((carsData, index) => {
+                return (
+                  <CarCard key={index} carsData={carsData} CarImg={CarImg} />
+                );
+              })
+            ) : (
+              <N0MatchFound dispatch={dispatch} productList={productList} />
+            )}
           </div>
         </div>
       </CarsFleetSection>
