@@ -8,39 +8,55 @@ import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
 import ProductsData from "../HOC- higherOrderComponent/ProductsData";
 import { GlobalStyle } from "../styles/GlobalStyle";
 import StarIcon from "@mui/icons-material/Star";
+import { DataArray } from "@mui/icons-material";
 
 let initialState = {
   cars: [],
   filters: {
-    price: null,
-    capacity: null,
-    drive: null,
-    rating: null,
+    pricehightolow: null,
+    pricelowtohigh: null,
+    capacity2persons: null,
+    capacitymorethan2persons: null,
+    drivemanual: null,
+    driveautomatic: null,
+    ratingMoreThanOne: null,
+    ratingMoreThanTwo: null,
+    ratingMoreThanThree: null,
+    ratingMoreThanFour: null,
   },
 };
 const reducer = (state, action) => {
   const FiltersChecks = (DataArray, filters) => {
     let ResultArray = DataArray;
-    if ((filters.price = "hightolow")) {
+    if (filters.pricehightolow) {
       ResultArray = PriceHighToLow(ResultArray);
     }
-    if ((filters.price = "lowtohigh")) {
+    if (filters.pricelowtohigh) {
       ResultArray = PriceLowToHigh(ResultArray);
     }
-    if ((filters.capacity = "capacity2persons")) {
+    if (filters.capacity2persons) {
       ResultArray = CapacityTwoPerson(ResultArray);
     }
-    if ((filters.capacity = "capacitymorethan2persons")) {
-      ResultArray = CapacityTwoPerson(ResultArray);
+    if (filters.capacitymorethan2persons) {
+      ResultArray = CapacityMoreThanTwo(ResultArray);
     }
-    if ((filters.drive = "manual")) {
+    if (filters.drivemanual) {
       ResultArray = DriveManual(ResultArray);
     }
-    if ((filters.drive = "manual")) {
-      ResultArray = DriveManual(ResultArray);
-    }
-    if ((filters.drive = "automatic")) {
+    if (filters.driveautomatic) {
       ResultArray = DriveAutomatic(ResultArray);
+    }
+    if (filters.ratingMoreThanOne) {
+      ResultArray = RatingMoreThanOne(ResultArray);
+    }
+    if (filters.ratingMoreThanTwo) {
+      ResultArray = RatingMoreThanTwo(ResultArray);
+    }
+    if (filters.ratingMoreThanThree) {
+      ResultArray = RatingMoreThanThree(ResultArray);
+    }
+    if (filters.ratingMoreThanFour) {
+      ResultArray = RatingMoreThanFour(ResultArray);
     }
     return ResultArray;
   };
@@ -79,6 +95,26 @@ const reducer = (state, action) => {
       return docs.drive == "Automatic";
     });
   };
+  const RatingMoreThanOne = (DataArray) => {
+    return DataArray.filter((docs) => {
+      return docs.rating > 1;
+    });
+  };
+  const RatingMoreThanTwo = (DataArray) => {
+    return DataArray.filter((docs) => {
+      return docs.rating > 2;
+    });
+  };
+  const RatingMoreThanThree = (DataArray) => {
+    return DataArray.filter((docs) => {
+      return docs.rating > 3;
+    });
+  };
+  const RatingMoreThanFour = (DataArray) => {
+    return DataArray.filter((docs) => {
+      return docs.rating > 4;
+    });
+  };
 
   switch (action.type) {
     case "SET_DATA":
@@ -93,38 +129,158 @@ const reducer = (state, action) => {
         filters: initialState.filters,
       };
     case "hightolow":
-      return {
-        cars: PriceHighToLow(state.cars),
+      state = {
+        ...state.cars,
         filters: {
           ...state.filters,
-          price: true,
+          pricehightolow: true,
+          pricelowtohigh: null,
+        },
+      };
+      return {
+        cars: FiltersChecks(action.payload, state.filters),
+        filters: {
+          ...state.filters,
         },
       };
 
     case "lowtohigh":
+      state = {
+        ...state.cars,
+        filters: {
+          ...state.filters,
+          pricehightolow: null,
+          pricelowtohigh: true,
+        },
+      };
       return {
-        cars: PriceLowToHigh(state.cars),
+        cars: FiltersChecks(action.payload, state.filters),
         filters: state.filters,
       };
 
     case "capacity2persons":
+      state = {
+        ...state.cars,
+        filters: {
+          ...state.filters,
+          capacity2persons: true,
+          capacitymorethan2persons: null,
+        },
+      };
       return {
-        cars: CapacityTwoPerson(state.cars),
+        cars: FiltersChecks(action.payload, state.filters),
         filters: state.filters,
       };
     case "capacitymorethan2persons":
+      state = {
+        ...state.cars,
+        filters: {
+          ...state.filters,
+          capacity2persons: null,
+          capacitymorethan2persons: true,
+        },
+      };
       return {
-        cars: CapacityMoreThanTwo(state.cars),
+        cars: FiltersChecks(action.payload, state.filters),
         filters: state.filters,
       };
     case "manual":
+      state = {
+        ...state.cars,
+        filters: {
+          ...state.filters,
+          drivemanual: true,
+          driveautomatic: null,
+        },
+      };
       return {
-        cars: DriveManual(state.cars),
+        cars: FiltersChecks(action.payload, state.filters),
         filters: state.filters,
       };
     case "automatic":
+      state = {
+        ...state.cars,
+        filters: {
+          ...state.filters,
+          drivemanual: null,
+          driveautomatic: true,
+        },
+      };
       return {
-        cars: DriveAutomatic(state.cars),
+        cars: FiltersChecks(action.payload, state.filters),
+        filters: state.filters,
+      };
+    case "automatic":
+      state = {
+        ...state.cars,
+        filters: {
+          ...state.filters,
+          drivemanual: null,
+          driveautomatic: true,
+        },
+      };
+      return {
+        cars: FiltersChecks(action.payload, state.filters),
+        filters: state.filters,
+      };
+    case "ratingmorethan4":
+      state = {
+        ...state.cars,
+        filters: {
+          ...state.filters,
+          ratingMoreThanOne: null,
+          ratingMoreThanTwo: null,
+          ratingMoreThanThree: null,
+          ratingMoreThanFour: true,
+        },
+      };
+      return {
+        cars: FiltersChecks(action.payload, state.filters),
+        filters: state.filters,
+      };
+    case "ratingmorethan3":
+      state = {
+        ...state.cars,
+        filters: {
+          ...state.filters,
+          ratingMoreThanOne: null,
+          ratingMoreThanTwo: null,
+          ratingMoreThanThree: true,
+          ratingMoreThanFour: null,
+        },
+      };
+      return {
+        cars: FiltersChecks(action.payload, state.filters),
+        filters: state.filters,
+      };
+    case "ratingmorethan2":
+      state = {
+        ...state.cars,
+        filters: {
+          ...state.filters,
+          ratingMoreThanOne: null,
+          ratingMoreThanTwo: true,
+          ratingMoreThanThree: null,
+          ratingMoreThanFour: null,
+        },
+      };
+      return {
+        cars: FiltersChecks(action.payload, state.filters),
+        filters: state.filters,
+      };
+    case "ratingmorethan1":
+      state = {
+        ...state.cars,
+        filters: {
+          ...state.filters,
+          ratingMoreThanOne: true,
+          ratingMoreThanTwo: null,
+          ratingMoreThanThree: null,
+          ratingMoreThanFour: null,
+        },
+      };
+      return {
+        cars: FiltersChecks(action.payload, state.filters),
         filters: state.filters,
       };
   }
@@ -384,17 +540,39 @@ const CarsFleet = ({ productList }) => {
                     <input
                       type="radio"
                       name="price__filter"
-                      onClick={() => dispatch({ type: "hightolow" })}
+                      onClick={() =>
+                        dispatch({ type: "hightolow", payload: productList })
+                      }
                     />{" "}
-                    <p className="filter__details">high to low</p>
+                    <p
+                      className="filter__details"
+                      style={
+                        CurrentState.filters.pricehightolow
+                          ? { color: "black", fontWeight: "bold" }
+                          : { color: "var(--text-color)", fontWeight: "200" }
+                      }
+                    >
+                      high to low
+                    </p>
                   </aside>
                   <aside>
                     <input
                       type="radio"
                       name="price__filter"
-                      onClick={() => dispatch({ type: "lowtohigh" })}
+                      onClick={() =>
+                        dispatch({ type: "lowtohigh", payload: productList })
+                      }
                     />{" "}
-                    <p className="filter__details">low to high</p>
+                    <p
+                      className="filter__details"
+                      style={
+                        CurrentState.filters.pricelowtohigh
+                          ? { color: "black", fontWeight: "bold" }
+                          : { color: "var(--text-color)", fontWeight: "200" }
+                      }
+                    >
+                      low to high
+                    </p>
                   </aside>
                   <aside>
                     <input
@@ -415,19 +593,45 @@ const CarsFleet = ({ productList }) => {
                     <input
                       type="radio"
                       name="Capacity__filter"
-                      onClick={() => dispatch({ type: "capacity2persons" })}
+                      onClick={() =>
+                        dispatch({
+                          type: "capacity2persons",
+                          payload: productList,
+                        })
+                      }
                     />{" "}
-                    <p className="filter__details">2 persons</p>
+                    <p
+                      className="filter__details"
+                      style={
+                        CurrentState.filters.capacity2persons
+                          ? { color: "black", fontWeight: "bold" }
+                          : { color: "var(--text-color)", fontWeight: "200" }
+                      }
+                    >
+                      2 persons
+                    </p>
                   </aside>
                   <aside>
                     <input
                       type="radio"
                       name="Capacity__filter"
                       onClick={() =>
-                        dispatch({ type: "capacitymorethan2persons" })
+                        dispatch({
+                          type: "capacitymorethan2persons",
+                          payload: productList,
+                        })
                       }
                     />{" "}
-                    <p className="filter__details">more than 2 persons</p>
+                    <p
+                      className="filter__details"
+                      style={
+                        CurrentState.filters.capacitymorethan2persons
+                          ? { color: "black", fontWeight: "bold" }
+                          : { color: "var(--text-color)", fontWeight: "200" }
+                      }
+                    >
+                      more than 2 persons
+                    </p>
                   </aside>
                 </div>
                 <div className="filter__by__drive">
@@ -436,17 +640,39 @@ const CarsFleet = ({ productList }) => {
                     <input
                       type="radio"
                       name="drive__filter"
-                      onClick={() => dispatch({ type: "manual" })}
+                      onClick={() =>
+                        dispatch({ type: "manual", payload: productList })
+                      }
                     />{" "}
-                    <p className="filter__details">Manual</p>
+                    <p
+                      className="filter__details"
+                      style={
+                        CurrentState.filters.drivemanual
+                          ? { color: "black", fontWeight: "bold" }
+                          : { color: "var(--text-color)", fontWeight: "200" }
+                      }
+                    >
+                      Manual
+                    </p>
                   </aside>
                   <aside>
                     <input
                       type="radio"
                       name="drive__filter"
-                      onClick={() => dispatch({ type: "automatic" })}
+                      onClick={() =>
+                        dispatch({ type: "automatic", payload: productList })
+                      }
                     />{" "}
-                    <p className="filter__details">Automatic</p>
+                    <p
+                      className="filter__details"
+                      style={
+                        CurrentState.filters.driveautomatic
+                          ? { color: "black", fontWeight: "bold" }
+                          : { color: "var(--text-color)", fontWeight: "200" }
+                      }
+                    >
+                      Automatic
+                    </p>
                   </aside>
                 </div>
                 <div className="filter__by__rating">
@@ -455,51 +681,103 @@ const CarsFleet = ({ productList }) => {
                     <input
                       type="radio"
                       name="rating__filter"
-                      onClick={() => dispatch({ type: "ratingmorethan4" })}
+                      onClick={() =>
+                        dispatch({
+                          type: "ratingmorethan4",
+                          payload: productList,
+                        })
+                      }
                     />{" "}
                     <p className="filter__details">
                       <StarIcon style={{ color: "orange" }} />
                       <StarIcon style={{ color: "orange" }} />
                       <StarIcon style={{ color: "orange" }} />
                       <StarIcon style={{ color: "orange" }} />
-                      <span>& Up</span>
+                      <span
+                        style={
+                          CurrentState.filters.ratingMoreThanFour
+                            ? { color: "black", fontWeight: "bold" }
+                            : { color: "var(--text-color)", fontWeight: "200" }
+                        }
+                      >
+                        & Up
+                      </span>
                     </p>
                   </aside>
                   <aside>
                     <input
                       type="radio"
                       name="rating__filter"
-                      onClick={() => dispatch({ type: "ratingmorethan3" })}
+                      onClick={() =>
+                        dispatch({
+                          type: "ratingmorethan3",
+                          payload: productList,
+                        })
+                      }
                     />{" "}
                     <p className="filter__details">
                       {" "}
                       <StarIcon style={{ color: "orange" }} />
                       <StarIcon style={{ color: "orange" }} />
                       <StarIcon style={{ color: "orange" }} />
-                      <span>& Up</span>
+                      <span
+                        style={
+                          CurrentState.filters.ratingMoreThanThree
+                            ? { color: "black", fontWeight: "bold" }
+                            : { color: "var(--text-color)", fontWeight: "200" }
+                        }
+                      >
+                        & Up
+                      </span>
                     </p>
                   </aside>
                   <aside>
                     <input
                       type="radio"
                       name="rating__filter"
-                      onClick={() => dispatch({ type: "ratingmorethan2" })}
+                      onClick={() =>
+                        dispatch({
+                          type: "ratingmorethan2",
+                          payload: productList,
+                        })
+                      }
                     />{" "}
                     <p className="filter__details">
                       <StarIcon style={{ color: "orange" }} />
                       <StarIcon style={{ color: "orange" }} />
-                      <span>& Up</span>
+                      <span
+                        style={
+                          CurrentState.filters.ratingMoreThanTwo
+                            ? { color: "black", fontWeight: "bold" }
+                            : { color: "var(--text-color)", fontWeight: "200" }
+                        }
+                      >
+                        & Up
+                      </span>
                     </p>
                   </aside>
                   <aside>
                     <input
                       type="radio"
                       name="rating__filter"
-                      onClick={() => dispatch({ type: "ratingmorethan1" })}
+                      onClick={() =>
+                        dispatch({
+                          type: "ratingmorethan1",
+                          payload: productList,
+                        })
+                      }
                     />{" "}
                     <p className="filter__details">
                       <StarIcon style={{ color: "orange" }} />
-                      <span>& Up</span>
+                      <span
+                        style={
+                          CurrentState.filters.ratingMoreThanOne
+                            ? { color: "black", fontWeight: "bold" }
+                            : { color: "var(--text-color)", fontWeight: "200" }
+                        }
+                      >
+                        & Up
+                      </span>
                     </p>
                   </aside>
                 </div>

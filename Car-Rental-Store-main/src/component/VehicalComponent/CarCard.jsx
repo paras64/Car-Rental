@@ -135,7 +135,7 @@ const CarCard = (props) => {
       flex-direction: row;
       justify-content: space-between;
       align-items: center;
-      width: 13rem;
+      width: 14rem;
       font-size: 14px;
       color: var(--text-color);
     }
