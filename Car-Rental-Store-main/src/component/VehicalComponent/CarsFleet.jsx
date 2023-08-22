@@ -8,12 +8,17 @@ import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
 import ProductsData from "../HOC- higherOrderComponent/ProductsData";
 import { GlobalStyle } from "../styles/GlobalStyle";
 import StarIcon from "@mui/icons-material/Star";
+import { DataArray } from "@mui/icons-material";
 
 let initialState = {
   cars: [],
   filters: {
     pricehightolow: null,
     pricelowtohigh: null,
+    priceRange: {
+      min: 2999,
+      max: 7999,
+    },
     capacity2persons: null,
     capacitymorethan2persons: null,
     drivemanual: null,
@@ -29,11 +34,13 @@ const reducer = (state, action) => {
   const FiltersChecks = (DataArray, filters) => {
     let ResultArray = DataArray;
     if (filters.pricehightolow) {
-      console.log(filters);
       ResultArray = PriceHighToLow(ResultArray);
     }
     if (filters.pricelowtohigh) {
       ResultArray = PriceLowToHigh(ResultArray);
+    }
+    if (filters.priceRange) {
+      ResultArray = PriceRange(ResultArray, filters.priceRange.max);
     }
     if (filters.capacity2persons) {
       ResultArray = CapacityTwoPerson(ResultArray);
@@ -116,6 +123,11 @@ const reducer = (state, action) => {
       return docs.rating > 4;
     });
   };
+  const PriceRange = (DataArray, range) => {
+    return DataArray.filter((docs) => {
+      return docs.price < range;
+    });
+  };
 
   switch (action.type) {
     case "SET_DATA":
@@ -145,6 +157,16 @@ const reducer = (state, action) => {
         ...state.filters,
         pricehightolow: false,
         pricelowtohigh: true,
+      };
+      return {
+        cars: FiltersChecks(action.payload, Statefilters),
+        filters: Statefilters,
+      };
+
+    case "pricerange":
+     
+      Statefilters = {
+        ...state.filters,
       };
       return {
         cars: FiltersChecks(action.payload, Statefilters),
@@ -491,7 +513,7 @@ const CarsFleet = ({ productList }) => {
                   <button
                     className="reset__btn"
                     onClick={() =>
-                      dispatch({ type: "SET_DATA", payload: productList })
+                      dispatch({ type: "RESET_DATA", payload: productList })
                     }
                   >
                     <RestartAltIcon />
@@ -506,11 +528,10 @@ const CarsFleet = ({ productList }) => {
                     <input
                       type="radio"
                       name="price__filter"
-                      onChange={() =>
+                      onClick={() =>
                         dispatch({ type: "hightolow", payload: productList })
                       }
                     />{" "}
-                    {console.log(CurrentState)}
                     <p
                       className="filter__details"
                       style={
@@ -526,7 +547,7 @@ const CarsFleet = ({ productList }) => {
                     <input
                       type="radio"
                       name="price__filter"
-                      onChange={() =>
+                      onClick={() =>
                         dispatch({ type: "lowtohigh", payload: productList })
                       }
                     />{" "}
@@ -547,10 +568,19 @@ const CarsFleet = ({ productList }) => {
                       name="price_range_filter"
                       min={2999}
                       max={7999}
+                      value={CurrentState.filters.priceRange.max}
+                      onChange={(e) => {
+                        CurrentState.filters.priceRange.max = +e.target.value;
+                        dispatch({ type: "pricerange", payload: productList });
+                      }}
                     />
                     <div className="price__range">
-                      <p className="filter__details">2999</p>
-                      <p className="filter__details">6999</p>
+                      <p className="filter__details">
+                        ₹{CurrentState.filters.priceRange.min}
+                      </p>
+                      <p className="filter__details">
+                        ₹{CurrentState.filters.priceRange.max}
+                      </p>
                     </div>
                   </aside>
                 </div>
@@ -560,7 +590,7 @@ const CarsFleet = ({ productList }) => {
                     <input
                       type="radio"
                       name="Capacity__filter"
-                      onChange={() =>
+                      onClick={() =>
                         dispatch({
                           type: "capacity2persons",
                           payload: productList,
@@ -582,7 +612,7 @@ const CarsFleet = ({ productList }) => {
                     <input
                       type="radio"
                       name="Capacity__filter"
-                      onChange={() =>
+                      onClick={() =>
                         dispatch({
                           type: "capacitymorethan2persons",
                           payload: productList,
@@ -607,7 +637,7 @@ const CarsFleet = ({ productList }) => {
                     <input
                       type="radio"
                       name="drive__filter"
-                      onChange={() =>
+                      onClick={() =>
                         dispatch({ type: "manual", payload: productList })
                       }
                     />{" "}
@@ -626,7 +656,7 @@ const CarsFleet = ({ productList }) => {
                     <input
                       type="radio"
                       name="drive__filter"
-                      onChange={() =>
+                      onClick={() =>
                         dispatch({ type: "automatic", payload: productList })
                       }
                     />{" "}
@@ -648,7 +678,7 @@ const CarsFleet = ({ productList }) => {
                     <input
                       type="radio"
                       name="rating__filter"
-                      onChange={() =>
+                      onClick={() =>
                         dispatch({
                           type: "ratingmorethan4",
                           payload: productList,
@@ -675,7 +705,7 @@ const CarsFleet = ({ productList }) => {
                     <input
                       type="radio"
                       name="rating__filter"
-                      onChange={() =>
+                      onClick={() =>
                         dispatch({
                           type: "ratingmorethan3",
                           payload: productList,
@@ -702,7 +732,7 @@ const CarsFleet = ({ productList }) => {
                     <input
                       type="radio"
                       name="rating__filter"
-                      onChange={() =>
+                      onClick={() =>
                         dispatch({
                           type: "ratingmorethan2",
                           payload: productList,
@@ -727,7 +757,7 @@ const CarsFleet = ({ productList }) => {
                     <input
                       type="radio"
                       name="rating__filter"
-                      onChange={() =>
+                      onClick={() =>
                         dispatch({
                           type: "ratingmorethan1",
                           payload: productList,
