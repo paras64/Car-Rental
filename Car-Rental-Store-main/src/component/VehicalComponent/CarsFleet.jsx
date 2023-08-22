@@ -16,7 +16,7 @@ let initialState = {
     pricehightolow: null,
     pricelowtohigh: null,
     priceRange: {
-      min: 2999,
+      min: 2799,
       max: 7999,
     },
     capacity2persons: null,
@@ -125,7 +125,7 @@ const reducer = (state, action) => {
   };
   const PriceRange = (DataArray, range) => {
     return DataArray.filter((docs) => {
-      return docs.price < range;
+      return range >= docs.price;
     });
   };
 
@@ -137,9 +137,16 @@ const reducer = (state, action) => {
       };
 
     case "RESET_DATA":
+      Statefilters = {
+        ...initialState.filters,
+        priceRange: {
+          min: 2799,
+          max: 7999,
+        },
+      };
       return {
         cars: action.payload,
-        filters: initialState.filters,
+        filters: Statefilters,
       };
     case "hightolow":
       Statefilters = {
@@ -164,7 +171,6 @@ const reducer = (state, action) => {
       };
 
     case "pricerange":
-     
       Statefilters = {
         ...state.filters,
       };
@@ -308,7 +314,7 @@ const N0MatchFound = ({ dispatch, productList }) => {
         <h1>No product found</h1>
         <button
           onClick={() => {
-            dispatch({ type: "SET_DATA", payload: productList });
+            dispatch({ type: "RESET_DATA", payload: productList });
           }}
         >
           Reset filters
@@ -317,7 +323,6 @@ const N0MatchFound = ({ dispatch, productList }) => {
     </>
   );
 };
-
 const CarsFleet = ({ productList }) => {
   const [CurrentState, dispatch] = useReducer(reducer, initialState);
 
@@ -528,7 +533,7 @@ const CarsFleet = ({ productList }) => {
                     <input
                       type="radio"
                       name="price__filter"
-                      onClick={() =>
+                      onChange={() =>
                         dispatch({ type: "hightolow", payload: productList })
                       }
                     />{" "}
@@ -566,7 +571,7 @@ const CarsFleet = ({ productList }) => {
                     <input
                       type="range"
                       name="price_range_filter"
-                      min={2999}
+                      min={2799}
                       max={7999}
                       value={CurrentState.filters.priceRange.max}
                       onChange={(e) => {
