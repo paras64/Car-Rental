@@ -15,6 +15,7 @@ import Contact from "./component/Contact";
 import NotFound from "./NotFound";
 import Ourteam from "./component/Ourteam";
 import AdminLogin from "./component/Admin/AdminLogin";
+import AdminDashboard from "./component/Admin/AdminDashboard";
 function App() {
   return (
     <>
@@ -31,6 +32,7 @@ function App() {
           <Route exact path="/forgotpassword" element={<ForgotPassword />} />
           <Route exact path="/orders" element={<Orders />} />
           <Route exact path="/admin/login" element={<AdminLogin />} />
+          <Route exact path="/admin/dashboard" element={<AdminDashboard />} />
 
           <Route
             exact

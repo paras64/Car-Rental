@@ -11,7 +11,6 @@ const privateKey = fs.readFileSync(
 );
 
 exports.AdminLogin = async (req, res) => {
-  console.log(req.body);
   try {
     const doc = await AdminModel.findOne({ email: req.body.email });
     if (!doc) {

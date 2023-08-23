@@ -2,13 +2,17 @@ import React, { useState } from "react";
 import "./LoginStyle.css";
 import { GlobalStyle } from "../styles/GlobalStyle";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
 const AdminLogin = () => {
-  let message;
-  const [adminData, SetAdminData] = useState({
+  const navigate = useNavigate();
+  const initialAdminData = {
     email: "",
     password: "",
+    token: "",
     message: "",
-  });
+  };
+  const [adminData, SetAdminData] = useState(initialAdminData);
   const handleChange = (e) => {
     SetAdminData((prevData) => {
       return {
@@ -17,22 +21,23 @@ const AdminLogin = () => {
       };
     });
   };
+
   const handleClick = (e) => {
     e.preventDefault();
     if (adminData.email && adminData.password) {
       const doc = axios.post("http://localhost:8000/admin/login", adminData);
       doc
         .then((response) => {
-          console.log(response);
+          alert("Login Successful");
+          SetAdminData(response.data.data);
+          navigate("/admin/dashboard");
         })
         .catch((err) => {
           SetAdminData({
-            email: "",
-            password: "",
+            ...initialAdminData,
             message: err.response.data.message,
           });
         });
-      console.log(adminData);
     } else {
       SetAdminData((prevData) => {
         return {
@@ -42,8 +47,10 @@ const AdminLogin = () => {
       });
     }
   };
+  console.log(adminData);
   return (
     <>
+    
       <GlobalStyle />
       <section className="admin_login_section">
         <div className="admin_login__hero"></div>
