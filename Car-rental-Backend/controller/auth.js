@@ -8,6 +8,10 @@ const privateKey = fs.readFileSync(
   path.join(__dirname, "../myprivate.pem"),
   "utf-8"
 );
+const publicKey = fs.readFileSync(
+  path.join(__dirname, "../mypublic.pem"),
+  "utf-8"
+);
 
 exports.register = async (req, res) => {
   const doc = await User.findOne({ email: req.body.email });
@@ -54,7 +58,7 @@ exports.login = async (req, res) => {
         });
     } else {
       res.status(500).json({
-        message: "Internal Error, Please try again with correct details",
+        message: "Incorrect Password, Please try again with correct details",
         err: err,
       });
     }

@@ -13,8 +13,24 @@ async function main() {
     `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.ejahxrh.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`
   );
 }
+
 //MIDDLEWARE AUTHENTIFICATION
-// const authenticate = (req, res) => {};
+// const Authentification = (req, res, next) => {
+//   try {
+//     const decode = jwt.verify(req.body.token, publicKey, {
+//       algorithm: "RS256",
+//     });
+//     if (decode) {
+//       next();
+//     } else {
+//       res
+//         .status(400)
+//         .json({ message: "Token has been reject, please login again" });
+//     }
+//   } catch (err) {
+//     res.status(400).json({ message: "Bad Request" });
+//   }
+// };
 
 //ROUTERS
 const ProductRouter = require("./routes/products.js");
@@ -23,6 +39,7 @@ const UserRouter = require("./routes/auth.js");
 const TestimonialRouter = require("./routes/testimonial.js");
 const ForgotPasswordRouter = require("./routes/forgotuserpassword.js");
 const UserOrdersRouter = require("./routes/users.js");
+const AdminRouter = require("./routes/admin.js");
 
 //MIDDLEWARES
 app.use(cors());
@@ -33,6 +50,7 @@ app.use("/testimonials", TestimonialRouter.router);
 app.use("/auth", UserRouter.router);
 app.use("/forgotpassword", ForgotPasswordRouter.router);
 app.use("/user", UserOrdersRouter.router);
+app.use("/admin", AdminRouter.router);
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });

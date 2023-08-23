@@ -43,7 +43,7 @@ const Registration = () => {
     if (data.firstname && data.lastname && data.email && data.password) {
       const doc = axios.post("http://localhost:8000/auth/register", data);
       doc
-        .then((data) => {
+        .then((response) => {
           SetData({
             firstname: "",
             lastname: "",
@@ -77,7 +77,6 @@ const Registration = () => {
               loading: false,
             });
           }, 2000);
-          
         });
     } else {
       alert("please complete the fields to go forward");
