@@ -48,7 +48,7 @@ const AdminLogin = () => {
       });
     }
   };
-  console.log(adminData);
+  // console.log(adminData);
   return (
     <>
       <GlobalStyle />

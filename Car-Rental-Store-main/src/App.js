@@ -33,14 +33,22 @@ function App() {
           <Route exact path="/forgotpassword" element={<ForgotPassword />} />
           <Route exact path="/orders" element={<Orders />} />
 
-          <Route exact path="/admin/login" element={<AdminLogin />} />
+          <Route
+            exact
+            path="/admin/login"
+            element={
+              <AdminProvider>
+                <AdminLogin />
+              </AdminProvider>
+            }
+          />
           <Route
             exact
             path="/admin/dashboard"
             element={
-              <AdminDashboard>
+              <AdminProvider>
                 <AdminDashboard />
-              </AdminDashboard>
+              </AdminProvider>
             }
           />
 
