@@ -3,8 +3,9 @@ import "./LoginStyle.css";
 import { GlobalStyle } from "../styles/GlobalStyle";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
+import { useAdminDataContext } from "./AdminProvider";
 const AdminLogin = () => {
+  const { updateAdminData } = useAdminDataContext();
   const navigate = useNavigate();
   const initialAdminData = {
     email: "",
@@ -29,7 +30,7 @@ const AdminLogin = () => {
       doc
         .then((response) => {
           alert("Login Successful");
-          SetAdminData(response.data.data);
+          updateAdminData(response.data.data);
           navigate("/admin/dashboard");
         })
         .catch((err) => {
@@ -50,7 +51,6 @@ const AdminLogin = () => {
   console.log(adminData);
   return (
     <>
-    
       <GlobalStyle />
       <section className="admin_login_section">
         <div className="admin_login__hero"></div>

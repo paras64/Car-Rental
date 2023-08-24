@@ -16,6 +16,7 @@ import NotFound from "./NotFound";
 import Ourteam from "./component/Ourteam";
 import AdminLogin from "./component/Admin/AdminLogin";
 import AdminDashboard from "./component/Admin/AdminDashboard";
+import AdminProvider from "./component/Admin/AdminProvider";
 function App() {
   return (
     <>
@@ -31,8 +32,17 @@ function App() {
           <Route exact path="/register" element={<Registration />} />
           <Route exact path="/forgotpassword" element={<ForgotPassword />} />
           <Route exact path="/orders" element={<Orders />} />
+
           <Route exact path="/admin/login" element={<AdminLogin />} />
-          <Route exact path="/admin/dashboard" element={<AdminDashboard />} />
+          <Route
+            exact
+            path="/admin/dashboard"
+            element={
+              <AdminDashboard>
+                <AdminDashboard />
+              </AdminDashboard>
+            }
+          />
 
           <Route
             exact
