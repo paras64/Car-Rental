@@ -7,6 +7,7 @@ import ProductsData from "../HOC- higherOrderComponent/ProductsData";
 import BookingDetailsForm from "../VehicalComponent/BookingDetailsForm";
 import ClearIcon from "@mui/icons-material/Clear";
 import { useNavigate } from "react-router-dom";
+import { useUserDataContext } from "../LoginRegistration/UserProvider";
 const AlertBox = ({ alert, setAlert }) => {
   const Alert = styled.div`
     /* border: 2px solid; */
@@ -51,6 +52,8 @@ const AlertBox = ({ alert, setAlert }) => {
 
 function Booking(props) {
   const navigate = useNavigate();
+  const { userData } = useUserDataContext();
+
   const [setModel, showSetModel] = useState(false);
   const [alert, setAlert] = useState(false);
   const [bookingData, SetbookingData] = useState({
@@ -79,14 +82,14 @@ function Booking(props) {
       bookingData.pickupdate &&
       bookingData.dropoffdate
     ) {
-      if (localStorage.length < 1) {
+      if (userData.token == "") {
         window.alert("Please login before booking");
         navigate("/login");
         return;
       }
       closeModel();
     } else {
-      if (localStorage.length < 1) {
+      if (userData.token == "") {
         window.alert("Please login before booking");
         navigate("/login");
         return;

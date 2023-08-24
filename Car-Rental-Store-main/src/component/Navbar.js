@@ -5,15 +5,22 @@ import logo from "./images/Logo.png";
 import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@mui/material";
+import { useUserDataContext } from "./LoginRegistration/UserProvider";
 export default function Navbar() {
-  const [UserDetails, SetUserDetails] = useState(undefined);
-
+  const initialUserData = {
+    firstname: "",
+    lastname: "",
+    password: "",
+    token: "",
+    orderdetails: [],
+  };
+  const { userData, updateUserData } = useUserDataContext();
+  const [UserDetails, SetUserDetails] = useState(initialUserData);
   useEffect(() => {
-    const data = JSON.parse(localStorage.getItem("UserDetails"));
-    if (data) {
-      SetUserDetails(data);
-    }
-  }, []);
+    SetUserDetails(userData);
+    // localStorage.clear()
+  }, [userData]);
+  // console.log(userData);
   const navigate = useNavigate();
   const gotoLogin = () => {
     navigate("/login");
@@ -165,7 +172,7 @@ export default function Navbar() {
             </ul>
           </div>
           <div className="right-section">
-            {!UserDetails ? (
+            {!UserDetails.token ? (
               <>
                 <button
                   onClick={() => gotoLogin()}
@@ -191,14 +198,18 @@ export default function Navbar() {
                   <p
                     className="user-btn_second"
                     onClick={() => {
-                      localStorage.clear();
+                      updateUserData(initialUserData);
                       navigate("/login");
                     }}
                   >
                     Log Out
                   </p>
                 </div>
-                <Button className="btn" id="right-btn"  onClick={()=>gotoOrders()}> 
+                <Button
+                  className="btn"
+                  id="right-btn"
+                  onClick={() => gotoOrders()}
+                >
                   Orders
                 </Button>
               </>

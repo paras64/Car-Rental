@@ -24,7 +24,7 @@ export default function VehicalModels() {
   `;
   return (
     <>
-    <Navbar />
+    {/* <Navbar /> */}
       <AboutHome
         img={HomeImg}
         headingText={"Drive Your"}

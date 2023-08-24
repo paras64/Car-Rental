@@ -1,11 +1,13 @@
-import React, { useState, useEffect  } from "react";
+import React, { useState, useEffect } from "react";
 import "./Style.css";
 import { GlobalStyle } from "../styles/GlobalStyle";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useUserDataContext } from "../LoginRegistration/UserProvider";
 const TestimonialForm = () => {
+  const { userData } = useUserDataContext();
   const navigate = useNavigate();
-  const data = JSON.parse(localStorage.getItem("UserDetails"));
+  const data = userData;
   const [feedbackData, SetFeedbackData] = useState({
     firstname: "",
     lastname: "",
@@ -16,7 +18,7 @@ const TestimonialForm = () => {
   });
   const handleSubmit = (e) => {
     e.preventDefault();
-   
+
     if (
       feedbackData.firstname &&
       feedbackData.lastname &&
@@ -42,7 +44,7 @@ const TestimonialForm = () => {
           loading: true,
         };
       });
-      if (localStorage.length < 1) {
+      if (userData.token == "") {
         setTimeout(() => {
           SetFeedbackData((prevData) => {
             return {
@@ -62,13 +64,14 @@ const TestimonialForm = () => {
       doc
         .then((response) => {
           setTimeout(() => {
-            SetFeedbackData({
-              firstname: "",
-              lastname: "",
-              email: "",
-              message: "",
-              loading: false,
-              response: response.data.message,
+            alert(response.data.message);
+            SetFeedbackData((prevData) => {
+              return {
+                ...prevData,
+                message: "",
+                loading: false,
+                response: response.data.message,
+              };
             });
           }, 2000);
         })
@@ -140,7 +143,6 @@ const TestimonialForm = () => {
                       name="firstname"
                       id="firstname"
                       onChange={handleChange}
-                     
                     />
                   </div>
 
@@ -152,7 +154,6 @@ const TestimonialForm = () => {
                       name="lastname"
                       id="lastname"
                       onChange={handleChange}
-                  
                     />
                   </div>
                 </div>
@@ -164,7 +165,6 @@ const TestimonialForm = () => {
                     name="email"
                     id="feedback"
                     onChange={handleChange}
-                
                   />
                 </div>
                 <div className="testimonial-feedback-hero">

@@ -61,7 +61,7 @@ const ForgotPassword = () => {
   return (
     <>
       <GlobalStyle />
-      <Navbar />
+      {/* <Navbar /> */}
       <section id="forgot-password">
         <div className="forgot-password-container">
           <div className="forgot-password-content">

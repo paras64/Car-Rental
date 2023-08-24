@@ -17,48 +17,57 @@ import Ourteam from "./component/Ourteam";
 import AdminLogin from "./component/Admin/AdminLogin";
 import AdminDashboard from "./component/Admin/AdminDashboard";
 import AdminProvider from "./component/Admin/AdminProvider";
+import UserProvider from "./component/LoginRegistration/UserProvider";
 function App() {
+  // localStorage.clear()
   return (
     <>
       <Router>
-        <Routes>
-          <Route exact path="/" element={<Home />} />
-          <Route exact path="/about" element={<About />} />
-          <Route exact path="/testimonial" element={<TestimonialComponent />} />
-          <Route exact path="/vehicalsmodels" element={<VehicalModels />} />
-          <Route exact path="/ourteam" element={<Ourteam />} />
-          <Route exact path="/support" element={<Contact />} />
-          <Route exact path="/login" element={<Login />} />
-          <Route exact path="/register" element={<Registration />} />
-          <Route exact path="/forgotpassword" element={<ForgotPassword />} />
-          <Route exact path="/orders" element={<Orders />} />
+        <UserProvider>
+        <Navbar />
+          <Routes>
+            <Route exact path="/" element={<Home />} />
+            <Route exact path="/about" element={<About />} />
+            <Route
+              exact
+              path="/testimonial"
+              element={<TestimonialComponent />}
+            />
+            <Route exact path="/vehicalsmodels" element={<VehicalModels />} />
+            <Route exact path="/ourteam" element={<Ourteam />} />
+            <Route exact path="/support" element={<Contact />} />
+            <Route exact path="/login" element={<Login />} />
+            <Route exact path="/register" element={<Registration />} />
+            <Route exact path="/forgotpassword" element={<ForgotPassword />} />
+            <Route exact path="/orders" element={<Orders />} />
 
-          <Route
-            exact
-            path="/admin/login"
-            element={
-              <AdminProvider>
-                <AdminLogin />
-              </AdminProvider>
-            }
-          />
-          <Route
-            exact
-            path="/admin/dashboard"
-            element={
-              <AdminProvider>
-                <AdminDashboard />
-              </AdminProvider>
-            }
-          />
+            <Route
+              exact
+              path="/admin/login"
+              element={
+                <AdminProvider>
+                  <AdminLogin />
+                </AdminProvider>
+              }
+            />
+            <Route
+              exact
+              path="/admin/dashboard"
+              element={
+                <AdminProvider>
+                  <AdminDashboard />
+                </AdminProvider>
+              }
+            />
 
-          <Route
-            exact
-            path="/confirmpassword/:userEmail"
-            element={<ConfirmPassword />}
-          />
-          <Route exact path="*" element={<NotFound />} />
-        </Routes>
+            <Route
+              exact
+              path="/confirmpassword/:userEmail"
+              element={<ConfirmPassword />}
+            />
+            <Route exact path="*" element={<NotFound />} />
+          </Routes>
+        </UserProvider>
       </Router>
     </>
   );

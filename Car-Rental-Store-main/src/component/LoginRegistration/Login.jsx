@@ -7,8 +7,10 @@ import { GlobalStyle } from "../styles/GlobalStyle";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import Navbar from "../Navbar";
+import { useUserDataContext } from "./UserProvider";
 
 const Login = () => {
+  const { updateUserData } = useUserDataContext();
   const navigate = useNavigate();
   const passwordData = useRef("");
   const [data, SetData] = useState({
@@ -34,10 +36,11 @@ const Login = () => {
       const doc = axios.post("http://localhost:8000/auth/login", data);
       doc
         .then((response) => {
-          localStorage.setItem(
-            "UserDetails",
-            JSON.stringify(response.data.data)
-          );
+          updateUserData(response.data.data);
+          // localStorage.setItem(
+          //   "UserDetails",
+          //   JSON.stringify(response.data.data)
+          // );
           SetData({
             email: "",
             password: "",
@@ -89,7 +92,7 @@ const Login = () => {
   return (
     <>
       <GlobalStyle />
-      <Navbar />
+      {/* <Navbar /> */}
       <section className="login">
         <div className="login-container">
           <div className="login-content">

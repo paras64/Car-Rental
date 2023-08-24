@@ -8,7 +8,7 @@ import TestimonialForm from './TestimonialComponent/TestimonialForm'
 const Contact = () => {
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
       <AboutHome
         headingText={"Have Doubts?, "}
         spanText={"Reach."}

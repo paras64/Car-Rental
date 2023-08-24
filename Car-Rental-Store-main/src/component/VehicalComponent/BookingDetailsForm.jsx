@@ -8,6 +8,7 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import { GlobalStyle } from "../styles/GlobalStyle";
 import { useNavigate } from "react-router-dom";
+import { useUserDataContext } from "../LoginRegistration/UserProvider";
 const BookingDetailsForm = ({
   closeModel,
   bookingData,
@@ -15,6 +16,7 @@ const BookingDetailsForm = ({
   vehicalDetails,
 }) => {
   const navigate = useNavigate();
+  const { userData } = useUserDataContext();
   const [productDetails, SetProductDetails] = useState(null);
   const [UserDetails, SetUserDetails] = useState(undefined);
   const [orderDetails, SetOrderDetails] = useState({
@@ -31,9 +33,9 @@ const BookingDetailsForm = ({
   });
   useEffect(() => {
     document.body.style.overflowY = "hidden";
-    const data = JSON.parse(localStorage.getItem("UserDetails"));
-    if (data) {
-      SetUserDetails(data);
+    // const data = JSON.parse(localStorage.getItem("UserDetails"));
+    if (userData.token != "") {
+      SetUserDetails(userData);
     }
 
     if (productList.length && bookingData) {
@@ -97,37 +99,17 @@ const BookingDetailsForm = ({
       });
       doc
         .then((response) => {
-          // console.log("Response:", response.data);
           alert(response.data.message);
           closeModel();
         })
         .catch((err) => {
-          // console.log("Error:", err);
           alert("Something went wrong");
           closeModel();
         });
     } else {
-      // console.log(orderDetails);
       alert("Please complete the required fields");
     }
   };
-  // const resetAll = () => {
-  //   SetOrderDetails({
-  //     pickuptime: "",
-  //     dropofftime: "",
-  //     pickupdate: "",
-  //     dropoffdate: "",
-  //     pickuplocation: "",
-  //     dropofflocation: "",
-  //     contact: "",
-  //     age: 18,
-  //     address: "",
-  //   });
-  // };
-
-  // console.log(productDetails);
-  // console.log(orderDetails);
-  // console.log(vehicalDetails);
 
   return (
     <>

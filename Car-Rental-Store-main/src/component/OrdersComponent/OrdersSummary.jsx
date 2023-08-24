@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
+import { useUserDataContext } from "../LoginRegistration/UserProvider";
 const OrdersAccordian = ({ orders }) => {
   const OrdersAccordian = styled.div`
     border: 2px solid;
@@ -93,7 +93,7 @@ const NoOrders = () => {
   const navigate = useNavigate();
 
   const NoOrders = styled.div`
-  /* font-family:Poppins; */
+    /* font-family:Poppins; */
     height: auto;
     width: 100%;
     display: flex;
@@ -102,9 +102,9 @@ const NoOrders = () => {
     align-items: center;
     gap: 2rem;
     margin: 2rem 0rem;
-    .orders_status_heading{
+    .orders_status_heading {
       font-size: 2.5rem;
-    color: var(--text-color);
+      color: var(--text-color);
     }
     .no_order_btn {
       border: none;
@@ -124,19 +124,24 @@ const NoOrders = () => {
     <>
       <NoOrders className="no__orders">
         <h1 className="orders_status_heading">No Order has been done</h1>
-        <button className="no_order_btn" onClick={()=> {
-          navigate('/vehicalsmodels')
-        }}>Explore</button>
+        <button
+          className="no_order_btn"
+          onClick={() => {
+            navigate("/vehicalsmodels");
+          }}
+        >
+          Explore
+        </button>
       </NoOrders>
     </>
   );
 };
 
 const OrdersSummary = () => {
+  const { userData } = useUserDataContext();
   const [OrdersData, SetOrdersData] = useState([]);
   const fetchOrdersData = (UserData) => {
     const { email } = UserData;
-
     const doc = axios.get(
       `http://localhost:8000/user/getorders?email=${email}`
     );
@@ -148,12 +153,14 @@ const OrdersSummary = () => {
         alert(err.response.data.message);
       });
   };
-  console.log(OrdersData);
 
   useEffect(() => {
-    if (localStorage.length) {
-      let UserData = JSON.parse(localStorage.getItem("UserDetails"));
-      fetchOrdersData(UserData);
+    // if (localStorage.length) {
+    //   let UserData = JSON.parse(localStorage.getItem("UserDetails"));
+    //   fetchOrdersData(UserData);
+    // }
+    if (userData.orderdetails) {
+      fetchOrdersData(userData);
     }
   }, []);
 

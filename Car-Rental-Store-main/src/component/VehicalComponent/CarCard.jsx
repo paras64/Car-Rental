@@ -9,9 +9,10 @@ import LocalGasStationOutlinedIcon from "@mui/icons-material/LocalGasStationOutl
 import CurrencyRupeeOutlinedIcon from "@mui/icons-material/CurrencyRupeeOutlined";
 import BookingDetailsForm from "./BookingDetailsForm";
 import { useNavigate } from "react-router-dom";
+import { useUserDataContext } from "../LoginRegistration/UserProvider";
 const CarCard = (props) => {
   const navigate = useNavigate();
-
+  const { userData } = useUserDataContext();
   const [setModel, showSetModel] = useState(false);
 
   const [vehicalDetails, setvehicalDetails] = useState(null);
@@ -26,7 +27,8 @@ const CarCard = (props) => {
     setvehicalDetails(props.carsData);
   }, [props.carsData]);
   const handleClick = () => {
-    if (localStorage.length < 1) {
+    console.log(userData);
+    if (userData.token=="") {
       window.alert("Please login before booking");
       navigate("/login");
       return;
