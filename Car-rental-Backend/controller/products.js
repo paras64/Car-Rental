@@ -2,24 +2,39 @@ const model = require("../model/products.js");
 const Product = model.Product;
 
 exports.getAllProducts = async (req, res) => {
-  if(req.query){
+  if (req.query) {
     const products = await Product.find().limit(req.query.limit).exec();
     res.json(products);
-    return 
+    return;
   }
   const products = await Product.find();
   res.json(products);
 };
 
 exports.createProduct = async (req, res) => {
-  const products = await new Product(req.body);
+  const { addProductData } = req.body;
+  const duplicateProductCheck = await Product.findOne({
+    model: addProductData.model,
+  });
+  console.log(duplicateProductCheck);
+  if (duplicateProductCheck) {
+    res.status(400).json({
+      message: "Product already exists, please add new Product",
+    });
+    return;
+  }
+  const products = await new Product(addProductData);
   products
     .save()
     .then((data) => {
-      res.status(201).json(data);
+      res
+        .status(201)
+        .json({ message: "New product has been added", data: data });
     })
     .catch((error) => {
-      res.status(400).json(error);
+      res
+        .status(400)
+        .json({ message: "New product adding failed", error: error });
     });
 };
 
@@ -43,16 +58,3 @@ exports.createProduct = async (req, res) => {
 //   "stocks":6,
 //   "images":["https://png.pngitem.com/pimgs/s/627-6274298_2011-lexus-es-350-hd-png-download.png", "https://www.pngkit.com/png/full/353-3536970_lexus-png-red-lexus-on-a-transparent-background.png"]
 //   }
-
-// {
-//   Model: "Range Rover Evoque",
-//   Mileage: "220mph",
-//   Weight: "280lbs",
-//   Color: "White",
-//   Speed: "2.59s",
-//   Charges: "5999",
-//   Available: "Indore",
-//   drive:"Manual",
-//   image: RoverImage,
-//   ModelName: "Land Rover Range Rover Evoque",
-// },

@@ -7,6 +7,7 @@ export const useAdminDataContext = () => {
 
 const AdminProvider = ({ children }) => {
   const [adminData, setAdminData] = useState({
+    firstname: "",
     email: "",
     password: "",
     token: "",

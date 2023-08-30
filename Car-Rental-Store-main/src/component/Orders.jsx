@@ -7,7 +7,7 @@ const Orders = () => {
   return (
     <>
       <GlobalStyle />
-      {/* <Navbar /> */}
+      <Navbar />
       <AboutHome
         headingText={"CLICK, ORDER, "}
         spanText={"CRUISE."}

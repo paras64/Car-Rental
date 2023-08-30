@@ -1,9 +1,14 @@
 import "./App.css";
-import Navbar from "./component/Navbar";
+
 import Home from "./component/Home";
 import About from "./component/About";
 import TestimonialComponent from "./component//TestimonialComponent";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  useLocation,
+} from "react-router-dom";
 import VehicalModels from "./component/VehicalModels";
 import Login from "./component/LoginRegistration/Login";
 import Registration from "./component/LoginRegistration/Registration";
@@ -17,14 +22,14 @@ import Ourteam from "./component/Ourteam";
 import AdminLogin from "./component/Admin/AdminLogin";
 import AdminDashboard from "./component/Admin/AdminDashboard";
 import AdminProvider from "./component/Admin/AdminProvider";
+import AddProducts from "./component/Admin/AddProducts";
 import UserProvider from "./component/LoginRegistration/UserProvider";
+import ModifyProduct from "./component/Admin/ModifyProduct";
 function App() {
-  // localStorage.clear()
   return (
     <>
       <Router>
         <UserProvider>
-        <Navbar />
           <Routes>
             <Route exact path="/" element={<Home />} />
             <Route exact path="/about" element={<About />} />
@@ -56,6 +61,24 @@ function App() {
               element={
                 <AdminProvider>
                   <AdminDashboard />
+                </AdminProvider>
+              }
+            />
+            <Route
+              exact
+              path="/admin/dashboard/addproduct"
+              element={
+                <AdminProvider>
+                  <AddProducts />
+                </AdminProvider>
+              }
+            />
+            <Route
+              exact
+              path="/admin/dashboard/modifyproduct"
+              element={
+                <AdminProvider>
+                  <ModifyProduct />
                 </AdminProvider>
               }
             />

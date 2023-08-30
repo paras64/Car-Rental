@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./LoginStyle.css";
+import "./AdminStyle/LoginStyle.css";
 import { GlobalStyle } from "../styles/GlobalStyle";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -8,6 +8,7 @@ const AdminLogin = () => {
   const { updateAdminData } = useAdminDataContext();
   const navigate = useNavigate();
   const initialAdminData = {
+    firstname: "",
     email: "",
     password: "",
     token: "",
@@ -48,7 +49,7 @@ const AdminLogin = () => {
       });
     }
   };
-  // console.log(adminData);
+
   return (
     <>
       <GlobalStyle />

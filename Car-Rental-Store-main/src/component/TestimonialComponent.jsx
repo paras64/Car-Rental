@@ -15,7 +15,7 @@ const TestimonialComponent = () => {
 
   return (
     <>
-      {/* <Navbar /> */}
+      <Navbar />
       <AboutHome
         img={
           "https://www.fvw.de/news/media/22/Smartphone-Sunny-Cars-212494-detailp.jpeg"

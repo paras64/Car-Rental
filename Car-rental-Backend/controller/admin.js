@@ -32,14 +32,17 @@ exports.AdminLogin = async (req, res) => {
       privateKey,
       {
         algorithm: "RS256",
-        expiresIn: "1800",
+        expiresIn: "1h",
       }
     );
     doc.token = token;
     doc
       .save()
-      .then((data) => {
-        res.status(200).json({ message: "Checking details...", data: data });
+      .then((response) => {
+        res.status(200).json({
+          message: "Checking details...",
+          data: response,
+        });
       })
       .catch((err) => {
         res.status(400).json({ message: "Invalid Password", err: err });
@@ -59,6 +62,8 @@ exports.AdminLogin = async (req, res) => {
 //     return;
 //   }
 //   const admin = new AdminModel({
+//     firstname: req.body.firstname,
+//     lastname: req.body.lastname,
 //     email: req.body.email,
 //     password: req.body.password,
 //   });

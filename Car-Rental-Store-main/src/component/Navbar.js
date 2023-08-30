@@ -7,6 +7,8 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "@mui/material";
 import { useUserDataContext } from "./LoginRegistration/UserProvider";
 export default function Navbar() {
+  const [active, setActive] = useState(false);
+
   const initialUserData = {
     firstname: "",
     lastname: "",
@@ -38,19 +40,6 @@ export default function Navbar() {
       align-items: center;
       justify-content: space-between;
     }
-
-    /* Left section of the navbar */
-    /* .left-section {
-      display: flex;
-      align-items: center;
-      margin: 18px 27px;
-    }
-
-    .logo-img {
-      height: 58px;
-      margin-left: -27px;
-      width: 154px;
-    } */
 
     #logo-heading {
       color: red;
@@ -103,30 +92,22 @@ export default function Navbar() {
     }
 
     #left-btn {
-      /* width: 65px; */
       font-size: 16px;
       font-weight: bold;
       background-color: transparent;
       border: none;
       cursor: pointer;
+      /* border: 2px solid; */
       padding-top: 16px;
       display: flex;
+      -webkit-box-align: center;
       align-items: center;
-      /* border: 2px solid; */
       height: 5.5rem;
       gap: 25px;
       flex-direction: column;
       width: 6rem;
     }
-    .user-btn_second {
-      opacity: 0;
-      transition: opacity 0.2s;
-    }
-    #left-btn:hover {
-      .user-btn_second {
-        opacity: 1;
-      }
-    }
+
     .navbar-links li a:hover,
     .sign_in:hover,
     .user-btn_first:hover,
@@ -191,19 +172,28 @@ export default function Navbar() {
               </>
             ) : (
               <>
-                <div className="btn user" id="left-btn">
-                  <p className="user-btn_first">
+                <div
+                  className="btn user"
+                  id="left-btn"
+                  onMouseLeave={() => setActive(false)}
+                >
+                  <p
+                    className="user-btn_first"
+                    onMouseOver={() => setActive(true)}
+                  >
                     Hello, {UserDetails.firstname}
                   </p>
-                  <p
-                    className="user-btn_second"
-                    onClick={() => {
-                      updateUserData(initialUserData);
-                      navigate("/login");
-                    }}
-                  >
-                    Log Out
-                  </p>
+                  {active && (
+                    <p
+                      className="user-btn_second"
+                      onClick={() => {
+                        updateUserData(initialUserData);
+                        navigate("/login");
+                      }}
+                    >
+                      Log Out
+                    </p>
+                  )}
                 </div>
                 <Button
                   className="btn"

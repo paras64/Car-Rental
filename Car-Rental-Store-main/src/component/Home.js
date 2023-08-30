@@ -16,7 +16,7 @@ import { FaPiggyBank, FaThumbsUp } from "react-icons/fa";
 export default function App() {
   return (
     <>
-      {/* <Navbar/>    */}
+      <Navbar/>   
       
       <HomeSection />
       <Service />

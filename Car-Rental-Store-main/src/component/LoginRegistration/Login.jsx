@@ -92,7 +92,7 @@ const Login = () => {
   return (
     <>
       <GlobalStyle />
-      {/* <Navbar /> */}
+      <Navbar />
       <section className="login">
         <div className="login-container">
           <div className="login-content">

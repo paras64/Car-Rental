@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
 const AdminSchema = new Schema({
+  firstname: { type: String, required: true },
+  lastname: { type: String, required: true },
   email: {
     type: String,
     required: true,
@@ -24,7 +26,7 @@ const AdminSchema = new Schema({
       message: "please enter a valid password",
     },
   },
-  token: { type: String, require: true },
+  token: { type: String, requireD: true },
 });
 const AdminModel = new mongoose.model("admin", AdminSchema);
 exports.AdminModel = AdminModel;

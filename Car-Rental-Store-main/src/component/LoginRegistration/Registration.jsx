@@ -100,7 +100,7 @@ const Registration = () => {
   return (
     <>
       <GlobalStyle />
-      {/* <Navbar /> */}
+      <Navbar />
       <section className="registration">
         <div className="registration-container">
           <div className="registration-content">

@@ -101,6 +101,7 @@ const BookingDetailsForm = ({
         .then((response) => {
           alert(response.data.message);
           closeModel();
+          navigate('/orders')
         })
         .catch((err) => {
           alert("Something went wrong");

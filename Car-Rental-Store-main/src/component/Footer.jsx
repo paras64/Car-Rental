@@ -310,7 +310,9 @@ export default function Footer() {
               <a href="#">CARRENTAL.COM</a>
             </div>
             <div className="footer-container-second-second-item">
-              <a href="#">Designed by - Kartik Gothwal</a>
+              <a href="https://kartik-gothwal.vercel.app/" target="_blank">
+                Designed by - Kartik Gothwal
+              </a>
               <a
                 className="footer-container-second-second-item-btn"
                 href="#navbar"
