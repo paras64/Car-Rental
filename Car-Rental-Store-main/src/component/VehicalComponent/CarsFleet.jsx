@@ -8,7 +8,7 @@ import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
 import ProductsData from "../HOC- higherOrderComponent/ProductsData";
 import { GlobalStyle } from "../styles/GlobalStyle";
 import StarIcon from "@mui/icons-material/Star";
-import { DataArray } from "@mui/icons-material";
+
 
 let initialState = {
   cars: [],

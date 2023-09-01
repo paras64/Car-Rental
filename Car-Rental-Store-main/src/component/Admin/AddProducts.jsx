@@ -62,7 +62,6 @@ const AddProducts = () => {
             alert(response.data.message);
           })
           .catch((err) => {
-            console.log(err);
             alert(err.response.data.message);
           });
       } else {
@@ -104,7 +103,6 @@ const AddProducts = () => {
     if (e.target.name.startsWith("images")) {
       SetAddProductDataSet((prevData) => {
         const updateImages = [...prevData.images];
-        // console.log("updateImages", updateImages);
         const index = e.target.name === "images-0" ? 0 : 1;
         updateImages[index] = e.target.value;
         return {
@@ -121,7 +119,7 @@ const AddProducts = () => {
       });
     }
   };
-  console.log(addProductData);
+  // console.log(addProductData);
   return (
     <>
       <GlobalStyle />
@@ -142,7 +140,7 @@ const AddProducts = () => {
               </div>
               <div className="form__hero">
                 <label className="label__hero" htmlFor="title">
-                  Title <span>*</span>
+                  Title <span className="required__class">*</span>
                 </label>
                 <input
                   type="text"
@@ -158,7 +156,7 @@ const AddProducts = () => {
               </div>
               <div className="form__hero">
                 <label className="label__hero" htmlFor="year">
-                  Year <span>*</span>
+                  Year <span className="required__class">*</span>
                 </label>
                 <input
                   type="number"
@@ -175,7 +173,7 @@ const AddProducts = () => {
               </div>
               <div className="form__hero">
                 <label className="label__hero" htmlFor="price">
-                  Price <span>*</span>
+                  Price <span className="required__class">*</span>
                 </label>
                 <input
                   type="number"
@@ -192,7 +190,7 @@ const AddProducts = () => {
               </div>
               <div className="form__hero">
                 <label className="label__hero" htmlFor="category">
-                  Category <span>*</span>
+                  Category <span className="required__class">*</span>
                 </label>
                 <select
                   name="category"
@@ -215,7 +213,7 @@ const AddProducts = () => {
               </div>
               <div className="form__hero">
                 <label className="label__hero" htmlFor="model">
-                  Model <span>*</span>
+                  Model <span className="required__class">*</span>
                 </label>
                 <input
                   type="text"
@@ -231,7 +229,7 @@ const AddProducts = () => {
               </div>
               <div className="form__hero">
                 <label className="label__hero" htmlFor="capacity">
-                  Capacity <span>*</span>
+                  Capacity <span className="required__class">*</span>
                 </label>
                 <input
                   type="number"
@@ -250,7 +248,7 @@ const AddProducts = () => {
                 <label className="label__hero" htmlFor="discountPercentage">
                   {" "}
                   Discount Percentage
-                  <span>*</span>
+                  <span className="required__class">*</span>
                 </label>
                 <input
                   type="number"
@@ -269,7 +267,7 @@ const AddProducts = () => {
                 <label className="label__hero" htmlFor="rating">
                   {" "}
                   Rating
-                  <span>*</span>
+                  <span className="required__class">*</span>
                 </label>
                 <select
                   name="rating"
@@ -292,7 +290,7 @@ const AddProducts = () => {
                 <label className="label__hero" htmlFor="brand">
                   {" "}
                   Brand
-                  <span>*</span>
+                  <span className="required__class">*</span>
                 </label>
                 <input
                   type="text"
@@ -310,7 +308,7 @@ const AddProducts = () => {
                 <label className="label__hero" htmlFor="thumbnail">
                   {" "}
                   Thumbnail
-                  <span>*</span>
+                  <span className="required__class">*</span>
                 </label>
                 <input
                   type="text"
@@ -328,7 +326,7 @@ const AddProducts = () => {
                 <label className="label__hero" htmlFor="weight">
                   {" "}
                   Weight
-                  <span>*</span>
+                  <span className="required__class">*</span>
                 </label>
                 <input
                   type="text"
@@ -346,7 +344,7 @@ const AddProducts = () => {
                 <label className="label__hero" htmlFor="speed">
                   {" "}
                   Speed
-                  <span>*</span>
+                  <span className="required__class">*</span>
                 </label>
                 <input
                   type="text"
@@ -364,7 +362,7 @@ const AddProducts = () => {
                 <label className="label__hero" htmlFor="color">
                   {" "}
                   Color
-                  <span>*</span>
+                  <span className="required__class">*</span>
                 </label>
                 <input
                   type="text"
@@ -382,7 +380,7 @@ const AddProducts = () => {
                 <label className="label__hero" htmlFor="mileage">
                   {" "}
                   Mileage
-                  <span>*</span>
+                  <span className="required__class">*</span>
                 </label>
                 <input
                   type="text"
@@ -400,7 +398,7 @@ const AddProducts = () => {
                 <label className="label__hero" htmlFor="available">
                   {" "}
                   Available
-                  <span>*</span>
+                  <span className="required__class">*</span>
                 </label>
                 <select
                   name="available"
@@ -421,7 +419,7 @@ const AddProducts = () => {
 
               <div className="form__hero">
                 <label className="label__hero" htmlFor="drive">
-                  Drive <span>*</span>
+                  Drive <span className="required__class">*</span>
                 </label>
                 <select
                   name="drive"
@@ -442,7 +440,7 @@ const AddProducts = () => {
 
               <div className="form__hero">
                 <label className="label__hero" htmlFor="stocks">
-                  Stocks <span>*</span>
+                  Stocks <span className="required__class">*</span>
                 </label>
                 <input
                   type="number"
@@ -460,7 +458,7 @@ const AddProducts = () => {
 
               <div className="form__hero">
                 <label className="label__hero" htmlFor="images-0">
-                  Image 1 <span>*</span>
+                  Image 1 <span className="required__class">*</span>
                 </label>
                 <input
                   type="text"
@@ -477,7 +475,7 @@ const AddProducts = () => {
 
               <div className="form__hero">
                 <label className="label__hero" htmlFor="images-1">
-                  Image 2 <span>*</span>
+                  Image 2 <span className="required__class">*</span>
                 </label>
                 <input
                   type="text"

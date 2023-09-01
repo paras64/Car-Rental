@@ -67,12 +67,15 @@ const AdminHome = () => {
           >
             Modify Products <AutoFixHighIcon />
           </button>
-          
+
           <button className="admin__home__btn">
             Add New User <AddCircleIcon />
           </button>
-          <button className="admin__home__btn">
-            Modify FAQs
+          <button
+            className="admin__home__btn"
+            onClick={() => navigate("/admin/dashboard/modifyfaq")}
+          >
+            Add/Modify FAQs
             <AutoFixHighIcon />
           </button>
           <button className="admin__home__btn">

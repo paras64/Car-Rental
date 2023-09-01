@@ -25,71 +25,89 @@ import AdminProvider from "./component/Admin/AdminProvider";
 import AddProducts from "./component/Admin/AddProducts";
 import UserProvider from "./component/LoginRegistration/UserProvider";
 import ModifyProduct from "./component/Admin/ModifyProduct";
+import ModifyFaq from "./component/Admin/ModifyFaq";
+import FaqProvider from "./component/Admin/FaqProvider";
 function App() {
   return (
     <>
       <Router>
         <UserProvider>
-          <Routes>
-            <Route exact path="/" element={<Home />} />
-            <Route exact path="/about" element={<About />} />
-            <Route
-              exact
-              path="/testimonial"
-              element={<TestimonialComponent />}
-            />
-            <Route exact path="/vehicalsmodels" element={<VehicalModels />} />
-            <Route exact path="/ourteam" element={<Ourteam />} />
-            <Route exact path="/support" element={<Contact />} />
-            <Route exact path="/login" element={<Login />} />
-            <Route exact path="/register" element={<Registration />} />
-            <Route exact path="/forgotpassword" element={<ForgotPassword />} />
-            <Route exact path="/orders" element={<Orders />} />
+          <FaqProvider>
+            <Routes>
+              <Route exact path="/" element={<Home />} />
+              <Route exact path="/about" element={<About />} />
+              <Route
+                exact
+                path="/testimonial"
+                element={<TestimonialComponent />}
+              />
+              <Route exact path="/vehicalsmodels" element={<VehicalModels />} />
+              <Route exact path="/ourteam" element={<Ourteam />} />
+              <Route exact path="/support" element={<Contact />} />
+              <Route exact path="/login" element={<Login />} />
+              <Route exact path="/register" element={<Registration />} />
+              <Route
+                exact
+                path="/forgotpassword"
+                element={<ForgotPassword />}
+              />
+              <Route exact path="/orders" element={<Orders />} />
 
-            <Route
-              exact
-              path="/admin/login"
-              element={
-                <AdminProvider>
-                  <AdminLogin />
-                </AdminProvider>
-              }
-            />
-            <Route
-              exact
-              path="/admin/dashboard"
-              element={
-                <AdminProvider>
-                  <AdminDashboard />
-                </AdminProvider>
-              }
-            />
-            <Route
-              exact
-              path="/admin/dashboard/addproduct"
-              element={
-                <AdminProvider>
-                  <AddProducts />
-                </AdminProvider>
-              }
-            />
-            <Route
-              exact
-              path="/admin/dashboard/modifyproduct"
-              element={
-                <AdminProvider>
-                  <ModifyProduct />
-                </AdminProvider>
-              }
-            />
+              <Route
+                exact
+                path="/admin/login"
+                element={
+                  <AdminProvider>
+                    <AdminLogin />
+                  </AdminProvider>
+                }
+              />
+              <Route
+                exact
+                path="/admin/dashboard"
+                element={
+                  <AdminProvider>
+                    <AdminDashboard />
+                  </AdminProvider>
+                }
+              />
+              <Route
+                exact
+                path="/admin/dashboard/addproduct"
+                element={
+                  <AdminProvider>
+                    <AddProducts />
+                  </AdminProvider>
+                }
+              />
+              <Route
+                exact
+                path="/admin/dashboard/modifyproduct"
+                element={
+                  <AdminProvider>
+                    <ModifyProduct />
+                  </AdminProvider>
+                }
+              />
+              <Route
+                exact
+                path="/admin/dashboard/modifyfaq"
+                element={
+                  <AdminProvider>
+                    <ModifyFaq />
+                  </AdminProvider>
+                }
+              />
 
-            <Route
-              exact
-              path="/confirmpassword/:userEmail"
-              element={<ConfirmPassword />}
-            />
-            <Route exact path="*" element={<NotFound />} />
-          </Routes>
+              <Route
+                exact
+                path="/confirmpassword/:userEmail"
+                element={<ConfirmPassword />}
+              />
+              <Route exact path="*" element={<NotFound />} />
+            </Routes>
+       
+          </FaqProvider>
         </UserProvider>
       </Router>
     </>

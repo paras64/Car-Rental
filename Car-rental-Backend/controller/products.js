@@ -38,6 +38,22 @@ exports.createProduct = async (req, res) => {
     });
 };
 
+exports.modifyProduct = async (req, res) => {
+  try {
+    const { valueModify } = req.body;
+    const { productname, fieldname, value } = valueModify;
+    // console.log(productname, fieldname, value);
+    const doc = await Product.findOneAndUpdate(
+      { model: productname },
+      { $set: { [fieldname]: value } },
+      { new: true }
+    );
+    res.status(201).json({ message: "Product has been updated" });
+  } catch (err) {
+    res.status(400).json({ message: "Updating failed" });
+  }
+};
+
 // {
 //   "title":"Lexus RCF",
 //   "year":2020,

@@ -40,7 +40,7 @@ const TestimonialRouter = require("./routes/testimonial.js");
 const ForgotPasswordRouter = require("./routes/forgotuserpassword.js");
 const UserOrdersRouter = require("./routes/users.js");
 const AdminRouter = require("./routes/admin.js");
-
+const FaqRouter = require("./routes/faq.js");
 //MIDDLEWARES
 app.use(cors());
 app.use(express.json());
@@ -51,6 +51,7 @@ app.use("/auth", UserRouter.router);
 app.use("/forgotpassword", ForgotPasswordRouter.router);
 app.use("/user", UserOrdersRouter.router);
 app.use("/admin", AdminRouter.router);
+app.use("/faq", FaqRouter.router);
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });

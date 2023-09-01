@@ -8,7 +8,8 @@ const publicKey = fs.readFileSync(
   path.join(__dirname, "../mypublic.pem"),
   "utf-8"
 );
-const ProductController = require("../controller/products.js");
+const FaqController = require("../controller/faq");
+
 const auth = (req, res, next) => {
   try {
     const { adminData } = req.body;
@@ -17,7 +18,6 @@ const auth = (req, res, next) => {
       algorithms: "RS256",
     });
     if (decode) {
- 
       next();
     } else {
       console.log("Invalid token");
@@ -28,10 +28,8 @@ const auth = (req, res, next) => {
     res.status(401).json({ message: "Unauthorized" });
   }
 };
-
 router
-  .get("/", ProductController.getAllProducts)
-  .post("/addproduct", auth, ProductController.createProduct)
-  .patch("/modifyproduct", auth, ProductController.modifyProduct);
-
+  .get("/", FaqController.getAllFaq)
+  .post("/createfaq", FaqController.CreateFaq)
+  .patch("/modifyfaq", auth, FaqController.ModifyFaq);
 exports.router = router;

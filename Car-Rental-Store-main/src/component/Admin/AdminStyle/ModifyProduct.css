@@ -3,6 +3,7 @@
   height: 100vh;
   width: 100%;
   overflow: hidden;
+  background-color: var(--field-color);
 }
 
 .modify_product__container {
@@ -16,7 +17,7 @@
 .modify_product__form {
   /* border: 2px solid; */
   width: 35rem;
-  height: 33rem;
+  height: 40rem;
   margin: auto;
   display: flex;
   flex-direction: column;
@@ -24,6 +25,7 @@
   padding: 2rem 3rem;
   box-shadow: 0 1px 3px rgba(23, 23, 23, 0.24);
   border-radius: 15px;
+  background-color: var(--white-color);
 }
 
 .modify_product__hero {
@@ -36,6 +38,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  padding: 0px 2rem;
 }
 
 .modify_product__hero label {
@@ -112,12 +115,15 @@
   cursor: pointer;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out;
 }
-.modify_product_heading{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: Poppins;
-    font-size: 30px;
-    text-decoration: underline;
-    
+.modify_product_heading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Poppins;
+  font-size: 30px;
+  text-decoration: underline;
 }
+.required__class {
+  color: red;
+}
+

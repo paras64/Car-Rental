@@ -3,12 +3,14 @@ import "./AdminStyle/ModifyProduct.css";
 import { GlobalStyle } from "../styles/GlobalStyle";
 import { useAdminDataContext } from "./AdminProvider";
 import { useNavigate } from "react-router-dom";
+import ProductsData from "../HOC- higherOrderComponent/ProductsData";
 import axios from "axios";
-const ModifyProduct = () => {
+const ModifyProduct = ({ productList }) => {
   const navigate = useNavigate();
   const { adminData } = useAdminDataContext();
   const [valueModify, setValueModify] = useState({
-    name: "",
+    productname: "",
+    fieldname: "",
     value: "",
   });
 
@@ -17,29 +19,33 @@ const ModifyProduct = () => {
       e.preventDefault();
     }
     setValueModify({
-      name: "",
+      productname: "",
+      fieldname: "",
       value: "",
     });
   };
   const handleClick = (e) => {
     e.preventDefault();
-    if (valueModify.name && valueModify.value) {
-      if (
-        valueModify.name == "year" ||
-        valueModify.name == "price" ||
-        valueModify.name == "capacity" ||
-        valueModify.name == "discountPercentage" ||
-        valueModify.name == "rating" ||
-        valueModify.name == "stocks"
-      ) {
-        setValueModify((prevData) => {
-          return {
-            ...prevData,
-            value: Number(valueModify.value),
-          };
-        });
+    if (valueModify.productname && valueModify.fieldname && valueModify.value) {
+      if (adminData.token) {
+        const doc = axios.patch(
+          "http://localhost:8000/products/modifyproduct",
+          {
+            adminData,
+            valueModify,
+          }
+        );
+        doc
+          .then((response) => {
+            ResetAll();
+            alert(response.data.message);
+          })
+          .catch((err) => {
+            alert(err.response.data.message);
+          });
+      } else {
+        return alert("Something went wrong");
       }
-      console.log(valueModify);
     } else {
       alert("Please complete the fields");
     }
@@ -63,18 +69,55 @@ const ModifyProduct = () => {
                 </button>
               </div>
               <aside className="modify_product__hero">
+                <label htmlFor="product">
+                  Select the Product <span className="required__class">*</span>{" "}
+                </label>
+                <select
+                  name="product"
+                  id="product"
+                  value={valueModify.productname}
+                  onChange={(e) => {
+                    e.preventDefault();
+                    setValueModify((prevdata) => {
+                      return {
+                        ...prevdata,
+                        productname: e.target.value,
+                      };
+                    });
+                  }}
+                >
+                  <option value="" disabled>
+                    Select an option
+                  </option>
+                  {productList &&
+                    productList.map((items, index) => {
+                      return (
+                        <option key={index} value={items.model}>
+                          {items.model}
+                        </option>
+                      );
+                    })}
+                </select>
+                {!valueModify.productname && (
+                  <p className="required__field">This field is required</p>
+                )}
+              </aside>
+              <aside className="modify_product__hero">
                 <label htmlFor="modify_product">
-                  Select the Product <span className="required__class">*</span>
+                  Select the field to update{" "}
+                  <span className="required__class">*</span>
                 </label>
                 <select
                   name="modify_product"
                   id="modify_product"
+                  value={valueModify.fieldname}
                   onChange={(e) => {
                     e.preventDefault();
-                    setValueModify((prevData) => {
+                    setValueModify((prevdata) => {
                       return {
-                        ...prevData,
-                        name: e.target.value,
+                        ...prevdata,
+                        fieldname: e.target.value,
+                        value: "",
                       };
                     });
                   }}
@@ -102,8 +145,8 @@ const ModifyProduct = () => {
                   <option value="images-1">image-1</option>
                   <option value="images-2">image-2</option>
                 </select>
-                {!valueModify.name && (
-                  <p class="required__field">This field is required</p>
+                {!valueModify.fieldname && (
+                  <p className="required__field">This field is required</p>
                 )}
               </aside>
               <aside className="modify_product__hero">
@@ -112,12 +155,12 @@ const ModifyProduct = () => {
                 </label>
                 <input
                   type={
-                    valueModify.name == "year" ||
-                    valueModify.name == "price" ||
-                    valueModify.name == "capacity" ||
-                    valueModify.name == "discountPercentage" ||
-                    valueModify.name == "rating" ||
-                    valueModify.name == "stocks"
+                    valueModify.fieldname == "year" ||
+                    valueModify.fieldname == "price" ||
+                    valueModify.fieldname == "capacity" ||
+                    valueModify.fieldname == "discountPercentage" ||
+                    valueModify.fieldname == "rating" ||
+                    valueModify.fieldname == "stocks"
                       ? "number"
                       : "text"
                   }
@@ -125,18 +168,33 @@ const ModifyProduct = () => {
                   value={valueModify.value}
                   name="newvalue"
                   id="newvalue"
+                  placeholder="Enter the value"
                   onChange={(e) => {
                     e.preventDefault();
                     setValueModify((prevData) => {
-                      return {
-                        ...prevData,
-                        value: e.target.value,
-                      };
+                      if (
+                        valueModify.fieldname == "year" ||
+                        valueModify.fieldname == "price" ||
+                        valueModify.fieldname == "capacity" ||
+                        valueModify.fieldname == "discountPercentage" ||
+                        valueModify.fieldname == "rating" ||
+                        valueModify.fieldname == "stocks"
+                      ) {
+                        return {
+                          ...prevData,
+                          value: parseInt(e.target.value),
+                        };
+                      } else {
+                        return {
+                          ...prevData,
+                          value: e.target.value,
+                        };
+                      }
                     });
                   }}
                 />
                 {!valueModify.value && (
-                  <p class="required__field">This field is required</p>
+                  <p className="required__field">This field is required</p>
                 )}
               </aside>
               <aside className="modify_product__hero">
@@ -157,4 +215,4 @@ const ModifyProduct = () => {
   );
 };
 
-export default ModifyProduct;
+export default ProductsData(ModifyProduct);

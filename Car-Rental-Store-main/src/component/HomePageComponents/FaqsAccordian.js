@@ -5,27 +5,24 @@ import MyfaqsAccordian from "./MyfaqsAccordian";
 import bgImage from "../images/FAQ section Bg image/bg-image2.png";
 export default function FaqsAccordian(props) {
   const MainSection = styled.section`
-    /* border: 2px solid; */
-    height: 55rem;
-    /* background: url(${bgImage});
-    background-repeat: no-repeat;
-    background-position: 20px -70px;
-    background-size: 46rem 45rem; */
+ margin-bottom: 10rem;
+     /* background: url(${bgImage}); */
+  
     .faqContainer {
       display: flex;
       flex-direction: column;
       position: relative;
       top: 3rem;
-      height: 50rem;
+      /* height: 50rem; */
     }
     .faq-Page-Heading {
       text-align: center;
       font-size: 1.65rem;
       text-transform: capitalize;
-      font-family: Poppins,"san-serif";
+      font-family: Poppins, "san-serif";
     }
     .faq-Page-Sub-Heading {
-      font-family: Poppins,"san-serif";
+      font-family: Poppins, "san-serif";
       font-size: 2.5rem;
       letter-spacing: 1px;
       text-transform: capitalize;
@@ -44,7 +41,7 @@ export default function FaqsAccordian(props) {
     .faq-page-content {
       margin: 1rem 0;
       /* border: 2px solid; */
-      height: 29rem;
+      /* height: 29rem; */
       width: 100%;
       padding: 2rem 0;
       display: flex;
@@ -75,7 +72,7 @@ export default function FaqsAccordian(props) {
       display: flex;
       flex-direction: column;
       justify-content: left;
-      height: 11rem;
+      /* height: 11rem; */
       /* align-items: center; */
       box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.1);
       /* border: 2px solid; */

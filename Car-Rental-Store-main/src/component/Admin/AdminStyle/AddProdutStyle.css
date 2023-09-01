@@ -88,9 +88,9 @@
   padding: 6px 0rem;
   font-weight: bolder;
 }
-.label__hero span {
+/* .label__hero span {
   color: var(--text-color);
-}
+} */
 .required__field {
   font-size: 12px;
   font-family: Rubik;
