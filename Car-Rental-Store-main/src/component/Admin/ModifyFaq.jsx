@@ -17,6 +17,7 @@ const ModifyFaq = () => {
     question: "",
     answer: "",
   });
+
   const handleChange = (e) => {
     e.preventDefault();
     SetFaqBox((prevData) => {
@@ -42,18 +43,34 @@ const ModifyFaq = () => {
     doc
       .then((response) => {
         alert(response.data.message);
-        navigate("/admin/dashboard");
+        window.location.reload();
       })
       .catch((err) => {
         alert(err.response.data.message);
-        navigate("/admin/dashboard");
+        window.location.reload();
       });
     SetActive(undefined);
   };
   const handleDelete = (Index) => {
-    console.log(Index);
+    const doc = axios.delete(
+      `http://localhost:8000/faq/deletefaq/${Index}/${adminData.token}`
+    );
+    doc
+      .then((response) => {
+        // console.log(response);
+        alert(response.data.message);
+        navigate("/admin/dashboard");
+      })
+      .catch((err) => {
+        // console.log(err);
+        alert(err.response.data.message);
+        navigate("/admin/dashboard");
+      });
   };
-
+  // useEffect(() => {
+  //   sessionStorage.setItem("token", adminData.token);
+  // });
+  // console.log(adminData);
   return (
     <>
       <GlobalStyle />
@@ -72,7 +89,7 @@ const ModifyFaq = () => {
                 {FaqArray.map((items, index) => {
                   return (
                     <>
-                      <div className="modify_faq_box">
+                      <div key={items._id} className="modify_faq_box">
                         {Active === index ? (
                           <input
                             type="text"

@@ -26,15 +26,24 @@ exports.getAllFaq = async (req, res) => {
 exports.ModifyFaq = async (req, res) => {
   try {
     const { Index, FaqBox } = req.body;
-    console.log(FaqBox);
     const doc = await FaqModel.findByIdAndUpdate(
       { _id: Index },
       { $set: FaqBox },
       { new: true }
     );
-    console.log(doc);
     res.status(201).json({ message: "FAQ has been updated" });
   } catch (err) {
     res.status(400).json({ message: "Updating failed" });
+  }
+};
+exports.DeleteFaq = async (req, res) => {
+  try {
+    const Index = req.params.Index;
+    console.log("Inside the function", req.params);
+    const doc = await await FaqModel.findByIdAndDelete({ _id: Index });
+    res.status(201).json({ message: "FAQ has been deleted" });
+  } catch (err) {
+    console.log(err);
+    res.status(400).json({ message: "Deleting failed" });
   }
 };

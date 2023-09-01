@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { question } from "./MyFaqsAccordianQuestions";
 import MyfaqsAccordian from "./MyfaqsAccordian";
 import bgImage from "../images/FAQ section Bg image/bg-image2.png";
-export default function FaqsAccordian(props) {
+import { UseFaqValue } from "../Admin/FaqProvider";
+
+export default function FaqsAccordian() {
   const MainSection = styled.section`
- margin-bottom: 10rem;
-     /* background: url(${bgImage}); */
-  
+    margin-bottom: 10rem;
+    /* background: url(${bgImage}); */
+
     .faqContainer {
       display: flex;
       flex-direction: column;
@@ -120,7 +121,8 @@ export default function FaqsAccordian(props) {
       background-color: var(--white-color);
     }
   `;
-  const [data] = useState(question);
+  const { FaqArray, SetFaqArray } = UseFaqValue();
+  const [data] = useState(FaqArray);
   const [ActiveQuestionId, SetActiveQuestionId] = useState(null);
 
   const HandleToggle = (questionID) => {
@@ -141,13 +143,13 @@ export default function FaqsAccordian(props) {
           <div className="faq-page-content">
             <div className="faq-content-div-box">
               <div className="faq-content-div-box-content">
-                {data.map((CurrElement) => {
+                {data.map((CurrElement, Index) => {
                   return (
                     <MyfaqsAccordian
-                      key={CurrElement.id}
-                      isActive={ActiveQuestionId === CurrElement.id}
+                      key={Index}
+                      isActive={ActiveQuestionId === Index}
                       onToggle={() => {
-                        HandleToggle(CurrElement.id);
+                        HandleToggle(Index);
                       }}
                       {...CurrElement}
                     />

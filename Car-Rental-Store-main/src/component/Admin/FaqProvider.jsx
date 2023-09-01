@@ -1,5 +1,4 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { question } from "../HomePageComponents/MyFaqsAccordianQuestions";
 import axios from "axios";
 const FaqQuestionArray = createContext(undefined);
 const FaqProvider = ({ children }) => {
@@ -13,8 +12,8 @@ const FaqProvider = ({ children }) => {
       .catch((err) => {
         alert("something went wrong");
       });
-  });
- 
+  }, []);
+
   return (
     <>
       {FaqArray && (

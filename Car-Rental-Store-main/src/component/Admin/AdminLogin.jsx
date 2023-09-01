@@ -31,6 +31,13 @@ const AdminLogin = () => {
       doc
         .then((response) => {
           alert("Login Successful");
+          sessionStorage.setItem(
+            "AdminData",
+            JSON.stringify({
+              firstname: response.data.data.firstname,
+              token: response.data.data.token,
+            })
+          );
           updateAdminData(response.data.data);
           navigate("/admin/dashboard");
         })

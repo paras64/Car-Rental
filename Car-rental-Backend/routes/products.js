@@ -17,7 +17,6 @@ const auth = (req, res, next) => {
       algorithms: "RS256",
     });
     if (decode) {
- 
       next();
     } else {
       console.log("Invalid token");
