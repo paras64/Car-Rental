@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 const AdminDataContext = createContext();
 
 export const useAdminDataContext = () => {
@@ -8,10 +8,7 @@ export const useAdminDataContext = () => {
 const AdminProvider = ({ children }) => {
   const [adminData, setAdminData] = useState({
     firstname: "",
-    email: "",
-    password: "",
     token: "",
-    message: "",
   });
 
   const updateAdminData = (newData) => {
@@ -22,6 +19,7 @@ const AdminProvider = ({ children }) => {
       };
     });
   };
+
   return (
     <>
       <AdminDataContext.Provider value={{ adminData, updateAdminData }}>

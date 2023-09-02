@@ -4,7 +4,6 @@ import { useAdminDataContext } from "./AdminProvider";
 import { GlobalStyle } from "../styles/GlobalStyle";
 import { useNavigate } from "react-router-dom";
 import { UseFaqValue } from "./FaqProvider";
-
 import AddIcon from "@mui/icons-material/Add";
 import axios from "axios";
 const ModifyFaq = () => {
@@ -43,11 +42,9 @@ const ModifyFaq = () => {
     doc
       .then((response) => {
         alert(response.data.message);
-        window.location.reload();
       })
       .catch((err) => {
         alert(err.response.data.message);
-        window.location.reload();
       });
     SetActive(undefined);
   };

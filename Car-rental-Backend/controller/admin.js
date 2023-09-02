@@ -9,6 +9,26 @@ const privateKey = fs.readFileSync(
   path.join(__dirname, "../myprivate.pem"),
   "utf-8"
 );
+const publicKey = fs.readFileSync(
+  path.join(__dirname, "../mypublic.pem"),
+  "utf-8"
+);
+
+exports.GetData = async (req, res) => {
+  try {
+    const token = req.params.token;
+    const decode = jwt.verify(token, publicKey, { algorithms: "RS256" });
+    if (decode) {
+      res.status(200).json({ token: token });
+    } else {
+      console.log("Invalid token");
+      res.status(401).json({ message: "Unauthorized" });
+    }
+  } catch (err) {
+    console.error("JWT verification error:", err);
+    res.status(401).json({ message: "Unauthorized" });
+  }
+};
 
 exports.AdminLogin = async (req, res) => {
   try {

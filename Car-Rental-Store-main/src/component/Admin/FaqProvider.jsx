@@ -13,7 +13,7 @@ const FaqProvider = ({ children }) => {
         alert("something went wrong");
       });
   }, []);
-
+   
   return (
     <>
       {FaqArray && (

@@ -1,6 +1,16 @@
 const model = require("../model/users.js");
 const User = model.User;
 
+exports.getAllUsers = async (req, res) => {
+  try {
+    const doc = await User.find();
+    res.status(200).json({ doc: doc });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: "Something went wrong" });
+  }
+};
+
 exports.getOrders = async (req, res) => {
   const { email } = req.query;
   try {

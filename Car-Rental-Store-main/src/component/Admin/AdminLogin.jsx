@@ -39,6 +39,7 @@ const AdminLogin = () => {
             })
           );
           updateAdminData(response.data.data);
+          // updateAdminData(JSON.parse(sessionStorage.getItem("AdminData")));
           navigate("/admin/dashboard");
         })
         .catch((err) => {

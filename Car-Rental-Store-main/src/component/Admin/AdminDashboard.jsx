@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useAdminDataContext } from "./AdminProvider";
 import styled from "styled-components";
 import logo from "../images/Logo.png";
@@ -6,9 +6,9 @@ import HomeIcon from "@mui/icons-material/Home";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import SubscriptionsIcon from "@mui/icons-material/Subscriptions";
 import RateReviewIcon from "@mui/icons-material/RateReview";
-import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
+import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import InventoryIcon from "@mui/icons-material/Inventory";
-import ShoppingCartCheckoutIcon from '@mui/icons-material/ShoppingCartCheckout';
+import ShoppingCartCheckoutIcon from "@mui/icons-material/ShoppingCartCheckout";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { GlobalStyle } from "../styles/GlobalStyle";
 import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
@@ -22,11 +22,46 @@ import AdminAllProducts from "./AdminAllProducts";
 import AdminAllSubscribers from "./AdminAllSubscribers";
 import AdminAllTestimonials from "./AdminAllTestimonials";
 import AdminAllUsers from "./AdminAllUsers";
+import axios from "axios";
 
 const AdminDashboard = ({ productList }) => {
   const navigate = useNavigate();
   const { adminData, updateAdminData } = useAdminDataContext();
+  // const [adminData, updateAdminData] = useState({
+  //   firstname: "",
+  //   token: "",
+  // });
+  const { Users, SetUsers } = useState(undefined);
 
+  const GetAllUsers = () => {
+    const doc = axios.get("http://localhost:8000/user");
+    doc
+      .then((response) => {
+        SetUsers(response.data.doc);
+      })
+      .catch((err) => {
+        alert(err.response.data.message);
+      });
+  };
+  const GetAdminData = () => {
+    const token = JSON.parse(sessionStorage.getItem("AdminData")).token;
+    const doc = axios.get(`http://localhost:8000/admin/getdata/${token}`);
+    doc
+      .then((response) => {
+        updateAdminData({
+          firstname: JSON.parse(sessionStorage.getItem("AdminData")),
+          token: response.data.token,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  useEffect(() => {
+    GetAdminData();
+    GetAllUsers();
+  }, []);
+  // console.log(Users);
   const [componentActive, SetComponentActive] = useState({
     home: true,
     orders: false,
@@ -137,7 +172,7 @@ const AdminDashboard = ({ productList }) => {
       width: 15rem;
       border-radius: 10px;
       background-color: #075db9;
-  color: #fff;
+      color: #fff;
       font-family: Rubik;
       display: flex;
       flex-direction: column;
@@ -187,7 +222,7 @@ const AdminDashboard = ({ productList }) => {
   return (
     <>
       <GlobalStyle />
-      {adminData.token ? (
+      {adminData.token && adminData.token ? (
         <AdminDashboardSection className="admin__dashboard">
           <div className="dashboard__container">
             <div className="dashboard__sidebar">
@@ -332,7 +367,7 @@ const AdminDashboard = ({ productList }) => {
                   <h1 className="dashboard_hero_first_heading">
                     Welcome Back,{" "}
                     <span className="name_hero_heading">
-                      {adminData.firstname}
+                      {adminData.firstname.firstname}
                     </span>
                   </h1>
                 </div>
