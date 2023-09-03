@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
+import axios from "axios";
 const AdminDataContext = createContext();
 
 export const useAdminDataContext = () => {
@@ -19,7 +20,26 @@ const AdminProvider = ({ children }) => {
       };
     });
   };
-
+  const GetAdminData = () => {
+    if (!sessionStorage.length) {
+      return;
+    }
+    const token = JSON.parse(sessionStorage.getItem("AdminData")).token;
+    const doc = axios.get(`http://localhost:8000/admin/getdata/${token}`);
+    doc
+      .then((response) => {
+        updateAdminData({
+          firstname: JSON.parse(sessionStorage.getItem("AdminData")).firstname,
+          token: response.data.token,
+        });
+      })
+      .catch((err) => {
+         alert(err.response.data.message+" access")
+      });
+  };
+  useEffect(() => {
+    GetAdminData();
+  }, []);
   return (
     <>
       <AdminDataContext.Provider value={{ adminData, updateAdminData }}>

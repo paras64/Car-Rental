@@ -2,8 +2,8 @@ import React from "react";
 import { useAdminDataContext } from "./AdminProvider";
 import { GlobalStyle } from "../styles/GlobalStyle";
 import { useNavigate } from "react-router-dom";
-const AddUser = () => {;
-    const navigate = useNavigate();
+const AddUser = () => {
+  const navigate = useNavigate();
   const { adminData, updateAdminData } = useAdminDataContext();
   return (
     <>

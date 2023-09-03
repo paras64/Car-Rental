@@ -53,7 +53,6 @@ const AlertBox = ({ alert, setAlert }) => {
 function Booking(props) {
   const navigate = useNavigate();
   const { userData } = useUserDataContext();
-
   const [setModel, showSetModel] = useState(false);
   const [alert, setAlert] = useState(false);
   const [bookingData, SetbookingData] = useState({

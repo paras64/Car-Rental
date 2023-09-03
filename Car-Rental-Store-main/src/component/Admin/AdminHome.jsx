@@ -3,7 +3,6 @@ import styled from "styled-components";
 import ProductsData from "../HOC- higherOrderComponent/ProductsData";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import AutoFixHighIcon from "@mui/icons-material/AutoFixHigh";
-import ModeIcon from "@mui/icons-material/Mode";
 import DeleteIcon from "@mui/icons-material/Delete";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { useNavigate } from "react-router-dom";
@@ -40,7 +39,7 @@ const AdminHome = () => {
       font-family: "RUBIK";
       font-weight: bold;
       gap: 6px;
-      background: linear-gradient(to right, rgb(225 215 215), rgb(246 246 246))
+      background: linear-gradient(to right, rgb(225 215 215), rgb(246 246 246));
       transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out;
     }
     .admin__home__btn:hover {

@@ -27,41 +27,37 @@ import axios from "axios";
 const AdminDashboard = ({ productList }) => {
   const navigate = useNavigate();
   const { adminData, updateAdminData } = useAdminDataContext();
-  // const [adminData, updateAdminData] = useState({
-  //   firstname: "",
-  //   token: "",
-  // });
-  const { Users, SetUsers } = useState(undefined);
-
+  
+  const [Orders, SetOrders] = useState([]);
+  const [Users, SetUsers] = useState([]);
   const GetAllUsers = () => {
     const doc = axios.get("http://localhost:8000/user");
     doc
       .then((response) => {
         SetUsers(response.data.doc);
+
+        SetOrders(
+          response.data.doc
+            .map((items) => {
+              return items.orderdetails.length ? items.orderdetails : null;
+            })
+            .filter((items) => {
+              return items != null;
+            })
+            .flatMap((items) => {
+              return items;
+            })
+        );
       })
       .catch((err) => {
         alert(err.response.data.message);
       });
   };
-  const GetAdminData = () => {
-    const token = JSON.parse(sessionStorage.getItem("AdminData")).token;
-    const doc = axios.get(`http://localhost:8000/admin/getdata/${token}`);
-    doc
-      .then((response) => {
-        updateAdminData({
-          firstname: JSON.parse(sessionStorage.getItem("AdminData")),
-          token: response.data.token,
-        });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+
   useEffect(() => {
-    GetAdminData();
     GetAllUsers();
   }, []);
-  // console.log(Users);
+
   const [componentActive, SetComponentActive] = useState({
     home: true,
     orders: false,
@@ -367,7 +363,7 @@ const AdminDashboard = ({ productList }) => {
                   <h1 className="dashboard_hero_first_heading">
                     Welcome Back,{" "}
                     <span className="name_hero_heading">
-                      {adminData.firstname.firstname}
+                      {adminData.firstname}
                     </span>
                   </h1>
                 </div>
@@ -377,14 +373,23 @@ const AdminDashboard = ({ productList }) => {
                       <h1>Total Revenue</h1>
                       <CurrencyRupeeIcon className="second_aside__icons" />
                     </div>
-                    <p>Rs. 2049</p>
+                    <p>
+                      Rs.{" "}
+                      {/* { 
+                        Orders.reduce((accumulator, currentValue) => {
+                          return (
+                            accumulator.product.price +
+                            currentValue.product.price
+                          );
+                        })} */}
+                    </p>
                   </aside>
                   <aside className="second_aside">
                     <div>
                       <h1>Total Users</h1>
                       <AccountCircleIcon className="second_aside__icons" />
                     </div>
-                    <p>Rs. 2049</p>
+                    <p>{Users.length}</p>
                   </aside>
                   <aside className="second_aside">
                     <div>
@@ -398,7 +403,7 @@ const AdminDashboard = ({ productList }) => {
                       <h1>Total Orders</h1>
                       <ShoppingCartCheckoutIcon className="second_aside__icons" />
                     </div>
-                    <p>{productList.length}</p>
+                    <p>{Orders.length}</p>
                   </aside>
                 </div>
               </div>

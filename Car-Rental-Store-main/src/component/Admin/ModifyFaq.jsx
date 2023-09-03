@@ -6,9 +6,19 @@ import { useNavigate } from "react-router-dom";
 import { UseFaqValue } from "./FaqProvider";
 import AddIcon from "@mui/icons-material/Add";
 import axios from "axios";
+import AddFaq from "./AddFaq";
 const ModifyFaq = () => {
   const navigate = useNavigate();
-  const { FaqArray, SetFaqArray } = UseFaqValue();
+  const [setModel, showSetModel] = useState(false);
+
+  const closeModel = () => {
+    if (setModel) {
+      showSetModel(false);
+      return;
+    }
+    showSetModel(true);
+  };
+  const { FaqArray } = UseFaqValue();
   const { adminData } = useAdminDataContext();
   const [Active, SetActive] = useState(undefined);
   const [FaqBox, SetFaqBox] = useState({
@@ -42,9 +52,11 @@ const ModifyFaq = () => {
     doc
       .then((response) => {
         alert(response.data.message);
+        window.location.reload();
       })
       .catch((err) => {
         alert(err.response.data.message);
+        window.location.reload();
       });
     SetActive(undefined);
   };
@@ -54,20 +66,15 @@ const ModifyFaq = () => {
     );
     doc
       .then((response) => {
-        // console.log(response);
         alert(response.data.message);
-        navigate("/admin/dashboard");
+        window.location.reload();
       })
       .catch((err) => {
-        // console.log(err);
         alert(err.response.data.message);
-        navigate("/admin/dashboard");
+        window.location.reload();
       });
   };
-  // useEffect(() => {
-  //   sessionStorage.setItem("token", adminData.token);
-  // });
-  // console.log(adminData);
+
   return (
     <>
       <GlobalStyle />
@@ -77,7 +84,7 @@ const ModifyFaq = () => {
             <div className="modify_faq__content">
               <div className="modify_faq__content__top_part">
                 <h1>Modify FAQs</h1>
-                <button>
+                <button onClick={closeModel}>
                   <AddIcon />
                   Add new FAQ
                 </button>
@@ -153,6 +160,7 @@ const ModifyFaq = () => {
               </div>
             </div>
           </div>
+          {setModel && <AddFaq closeModel={closeModel} />}
         </section>
       ) : (
         <h1>Unauthorised access</h1>

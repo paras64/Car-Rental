@@ -12,7 +12,7 @@ const FaqController = require("../controller/faq");
 const auth = (req, res, next) => {
   try {
     const { adminData } = req.body;
-    console.log(req.body);
+
     const decode = jwt.verify(adminData.token, publicKey, {
       algorithms: "RS256",
     });
@@ -20,6 +20,7 @@ const auth = (req, res, next) => {
     if (decode) {
       next();
     } else {
+      console.log(decode);
       res.status(401).json({ message: "Unauthorized User" });
     }
   } catch (err) {
@@ -44,7 +45,7 @@ const Authorization = (req, res, next) => {
 };
 router
   .get("/", FaqController.getAllFaq)
-  .post("/createfaq", FaqController.CreateFaq)
+  .post("/createfaq", auth, FaqController.CreateFaq)
   .patch("/modifyfaq", auth, FaqController.ModifyFaq)
   .delete("/deletefaq/:Index/:token", Authorization, FaqController.DeleteFaq);
 exports.router = router;

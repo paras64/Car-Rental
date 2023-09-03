@@ -3,7 +3,7 @@ const User = model.User;
 
 exports.getAllUsers = async (req, res) => {
   try {
-    const doc = await User.find();
+    const doc = await User.find().populate("orderdetails.product");
     res.status(200).json({ doc: doc });
   } catch (err) {
     console.log(err);
