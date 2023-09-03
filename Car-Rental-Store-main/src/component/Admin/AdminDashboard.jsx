@@ -27,7 +27,7 @@ import axios from "axios";
 const AdminDashboard = ({ productList }) => {
   const navigate = useNavigate();
   const { adminData, updateAdminData } = useAdminDataContext();
-  
+
   const [Orders, SetOrders] = useState([]);
   const [Users, SetUsers] = useState([]);
   const GetAllUsers = () => {
@@ -375,13 +375,10 @@ const AdminDashboard = ({ productList }) => {
                     </div>
                     <p>
                       Rs.{" "}
-                      {/* { 
-                        Orders.reduce((accumulator, currentValue) => {
-                          return (
-                            accumulator.product.price +
-                            currentValue.product.price
-                          );
-                        })} */}
+                      {Orders.length &&
+                        Orders.reduce((sum, items) => {
+                          return sum + items.product.price;
+                        }, 0)}
                     </p>
                   </aside>
                   <aside className="second_aside">

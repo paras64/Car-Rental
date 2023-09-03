@@ -42,6 +42,7 @@ const UserOrdersRouter = require("./routes/users.js");
 const AdminRouter = require("./routes/admin.js");
 const FaqRouter = require("./routes/faq.js");
 //MIDDLEWARES
+
 app.use(cors());
 app.use(express.json());
 app.use("/products", ProductRouter.router);

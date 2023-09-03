@@ -10,7 +10,6 @@ import AddFaq from "./AddFaq";
 const ModifyFaq = () => {
   const navigate = useNavigate();
   const [setModel, showSetModel] = useState(false);
-
   const closeModel = () => {
     if (setModel) {
       showSetModel(false);
