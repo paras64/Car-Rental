@@ -51,7 +51,7 @@ const PhotoGallery = () => {
         <div className="photo-container">
           {PhotosOne.map((images, index) => {
             return (
-              <div className={`pics ${images.class}`}>
+              <div key={index} className={`pics ${images.class}`}>
                 <img src={images.photo} alt={`Photo${index}`} />
               </div>
             );

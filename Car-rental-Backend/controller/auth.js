@@ -46,7 +46,9 @@ exports.login = async (req, res) => {
     }
     const isAuth = bcrypt.compareSync(req.body.password, doc.password);
     if (isAuth) {
-      const token = jwt.sign(req.body, privateKey, { algorithm: "RS256" });
+      const token = jwt.sign(req.body, privateKey, {
+        algorithm: "RS256",
+      });
       doc.token = token;
       doc
         .save()

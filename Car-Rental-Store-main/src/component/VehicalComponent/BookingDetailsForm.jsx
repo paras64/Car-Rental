@@ -20,8 +20,8 @@ const BookingDetailsForm = ({
   const [productDetails, SetProductDetails] = useState(null);
   const [UserDetails, SetUserDetails] = useState(undefined);
   const [orderDetails, SetOrderDetails] = useState({
-    firstname: "",
-    lastname: "",
+    firstname: userData.token ? userData.firstname : "",
+    lastname: userData.token ? userData.lastname : "",
     product: "",
     pickuptime: "",
     dropofftime: "",
@@ -113,7 +113,7 @@ const BookingDetailsForm = ({
       alert("Please complete the required fields");
     }
   };
-
+console.log(orderDetails)
   return (
     <>
       <GlobalStyle />
@@ -245,7 +245,7 @@ const BookingDetailsForm = ({
                         id="firstname"
                         name="firstname"
                         placeholder="Enter your first name"
-                        value={UserDetails ? UserDetails.firstname : ""}
+                        value={orderDetails.firstname}
                         readOnly
                         required
                       />
@@ -260,7 +260,7 @@ const BookingDetailsForm = ({
                         id="lastname"
                         name="lastname"
                         placeholder="Enter your last name"
-                        value={UserDetails ? UserDetails.lastname : ""}
+                        value={orderDetails.lastname}
                         readOnly
                         required
                       />

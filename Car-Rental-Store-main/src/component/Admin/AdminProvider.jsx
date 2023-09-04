@@ -21,7 +21,7 @@ const AdminProvider = ({ children }) => {
     });
   };
   const GetAdminData = () => {
-    if (!sessionStorage.length) {
+    if (!JSON.parse(sessionStorage.getItem("AdminData"))) {
       return;
     }
     const token = JSON.parse(sessionStorage.getItem("AdminData")).token;
@@ -34,7 +34,7 @@ const AdminProvider = ({ children }) => {
         });
       })
       .catch((err) => {
-         alert(err.response.data.message+" access")
+        alert(err.response.data.message + " access");
       });
   };
   useEffect(() => {

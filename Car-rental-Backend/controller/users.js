@@ -1,5 +1,30 @@
 const model = require("../model/users.js");
 const User = model.User;
+const jwt = require("jsonwebtoken");
+const path = require("path");
+const fs = require("fs");
+const publicKey = fs.readFileSync(
+  path.join(__dirname, "../mypublic.pem"),
+  "utf-8"
+);
+exports.getUser = async (req, res) => {
+  try {
+    const decode = jwt.verify(req.params.token, publicKey, {
+      algorithms: "RS256",
+    });
+    if (!decode) {
+      res.status(400).json({ message: "unauthorised user" });
+      return;
+    }
+
+    const doc = await User.findOne({ email: decode.email }).populate(
+      "orderdetails.product"
+    );
+    res.status(200).json({ doc });
+  } catch (err) {
+    res.status(400).json({ message: "Something went wrong" });
+  }
+};
 
 exports.getAllUsers = async (req, res) => {
   try {
@@ -12,6 +37,7 @@ exports.getAllUsers = async (req, res) => {
 };
 
 exports.getOrders = async (req, res) => {
+  res.setHeader("Content-Type", "application/json");
   const { email } = req.query;
   try {
     const doc = await User.findOne({ email: email }).populate(

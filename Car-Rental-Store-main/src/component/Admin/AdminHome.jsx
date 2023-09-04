@@ -1,16 +1,15 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import ProductsData from "../HOC- higherOrderComponent/ProductsData";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import AutoFixHighIcon from "@mui/icons-material/AutoFixHigh";
-import DeleteIcon from "@mui/icons-material/Delete";
-import VisibilityIcon from "@mui/icons-material/Visibility";
 import { useNavigate } from "react-router-dom";
 import { GlobalStyle } from "../styles/GlobalStyle";
 import { useAllUserContext } from "./AllUserProvider";
 const AdminHome = () => {
   const navigate = useNavigate();
-  const { Users, Orders } = useAllUserContext();
+  const { Orders } = useAllUserContext();
+
   const AdminHomeSection = styled.section`
     /* border: 2px solid blue; */
     height: 100%;
@@ -74,23 +73,34 @@ const AdminHome = () => {
       border-radius: 5px;
       padding: 1rem 2rem;
       box-shadow: rgba(23, 23, 23, 0.24) 0px 1px 3px;
+      overflow: hidden;
+      background-color: var(--page-background-color);
     }
     .recent__orders_hero_crypus {
       display: flex;
       flex-direction: column;
       font-style: Poppins;
       gap: 5px;
+      width: 10rem;
+      align-items: center;
+      justify-content: center;
     }
     .recent__orders_hero_crypus h1 {
-      font-size: 18px;
+      font-size: 16px;
       color: var(--black-color);
+      font-family: "Poppins";
     }
     .recent__orders_hero_crypus p {
       font-size: 15px;
       color: var(--text-color);
       font-family: Rubik;
     }
+    .car__img__orders {
+      width: 10rem;
+      height: 6rem;
+    }
   `;
+
   return (
     <>
       <GlobalStyle />
@@ -125,35 +135,41 @@ const AdminHome = () => {
             <div className="recent__orders_details__container">
               <h1 className="recent__orders__heading">Recent Orders</h1>
               {Orders.length ? (
-                Orders.map((items, Index) => {
+                Orders.reverse().map((items, Index) => {
                   if (Index > 2) {
                     return;
                   }
                   return (
                     <>
-                      <aside className="recent__orders_hero">
+                      <aside key={items.id} className="recent__orders_hero">
                         <div className="recent__orders_hero_crypus">
                           <h1>Car Model</h1>
                           <p>{items.product.model}</p>
                         </div>
                         <div className="recent__orders_hero_crypus">
                           <h1>Customer Name </h1>
-                          <p>Kartik Gothwal</p>
+                          <p>
+                            {items.firstname} {items.lastname}
+                          </p>
                         </div>
                         <div className="recent__orders_hero_crypus">
                           <h1>Price</h1>
-                          <p>{items.product.price}</p>
+                          <p>₹ {items.product.price}</p>
                         </div>
                         <div className="recent__orders_hero_crypus">
-                          <h1>Pick-up Date</h1>
+                          <h1>PickUp Date</h1>
                           <p>{items.pickuptime}</p>
                         </div>
                         <div className="recent__orders_hero_crypus">
-                          <h1>Drop-off Date</h1>
+                          <h1>DropOff Date</h1>
                           <p>{items.dropofftime}</p>
                         </div>
                         <div className="recent__orders_hero_crypus">
-                          <img src="" alt="" />
+                          <img
+                            className="car__img__orders"
+                            src={items.product.images[0]}
+                            alt="car__img"
+                          />
                         </div>
                       </aside>
                     </>

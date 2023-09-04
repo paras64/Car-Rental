@@ -187,6 +187,7 @@ export default function Navbar() {
                     <p
                       className="user-btn_second"
                       onClick={() => {
+                        sessionStorage.clear();
                         updateUserData(initialUserData);
                         navigate("/login");
                       }}

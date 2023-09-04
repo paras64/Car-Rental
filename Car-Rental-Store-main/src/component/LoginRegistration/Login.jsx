@@ -37,10 +37,12 @@ const Login = () => {
       doc
         .then((response) => {
           updateUserData(response.data.data);
-          // localStorage.setItem(
-          //   "UserDetails",
-          //   JSON.stringify(response.data.data)
-          // );
+          sessionStorage.setItem(
+            "UserDetails",
+            JSON.stringify({
+              token: response.data.data.token,
+            })
+          );
           SetData({
             email: "",
             password: "",

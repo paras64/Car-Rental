@@ -18,7 +18,7 @@ const AddFaq = ({ closeModel }) => {
       };
     });
   };
-  console.log(adminData);
+
   const handleClick = (e) => {
     if (e) {
       e.preventDefault();
