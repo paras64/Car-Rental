@@ -61,6 +61,7 @@ const AdminHome = () => {
     }
     .recent__orders__heading {
       color: var(--btn-background-color);
+      font-family: Poppins;
     }
     .recent__orders_hero {
       /* border: 2px solid; */
@@ -158,11 +159,11 @@ const AdminHome = () => {
                         </div>
                         <div className="recent__orders_hero_crypus">
                           <h1>PickUp Date</h1>
-                          <p>{items.pickuptime}</p>
+                          <p>{items.pickupdate.split('-').reverse().join('/')}</p>
                         </div>
                         <div className="recent__orders_hero_crypus">
                           <h1>DropOff Date</h1>
-                          <p>{items.dropofftime}</p>
+                          <p>{items.dropoffdate.split('-').reverse().join('/')}</p>
                         </div>
                         <div className="recent__orders_hero_crypus">
                           <img
