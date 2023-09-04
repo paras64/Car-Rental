@@ -6,9 +6,11 @@ import AutoFixHighIcon from "@mui/icons-material/AutoFixHigh";
 import DeleteIcon from "@mui/icons-material/Delete";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { useNavigate } from "react-router-dom";
+import { GlobalStyle } from "../styles/GlobalStyle";
+import { useAllUserContext } from "./AllUserProvider";
 const AdminHome = () => {
   const navigate = useNavigate();
-
+  const { Users, Orders } = useAllUserContext();
   const AdminHomeSection = styled.section`
     /* border: 2px solid blue; */
     height: 100%;
@@ -19,13 +21,13 @@ const AdminHome = () => {
       height: 100%;
       width: 100%;
       display: grid;
-      grid-template-columns: 1fr 25rem;
+      grid-template-rows: 5rem 1fr;
     }
     .admin__home__content {
       /* border: 2px solid blue; */
       display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      grid-template-rows: 5rem 5rem;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+
       gap: 2rem;
     }
     .admin__home__btn {
@@ -47,46 +49,124 @@ const AdminHome = () => {
       color: var(--black-color);
     }
     .recent__orders_details {
-      border: 2px solid blue;
+      /* border: 2px solid blue; */
+      padding: 1rem 0rem;
+    }
+    .recent__orders_details__container {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      width: 100%;
+      gap: 20px;
+      /* border: 2px solid blue; */
+    }
+    .recent__orders__heading {
+      color: var(--btn-background-color);
+    }
+    .recent__orders_hero {
+      /* border: 2px solid; */
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      height: 5rem;
+      width: 100%;
+      border-radius: 5px;
+      padding: 1rem 2rem;
+      box-shadow: rgba(23, 23, 23, 0.24) 0px 1px 3px;
+    }
+    .recent__orders_hero_crypus {
+      display: flex;
+      flex-direction: column;
+      font-style: Poppins;
+      gap: 5px;
+    }
+    .recent__orders_hero_crypus h1 {
+      font-size: 18px;
+      color: var(--black-color);
+    }
+    .recent__orders_hero_crypus p {
+      font-size: 15px;
+      color: var(--text-color);
+      font-family: Rubik;
     }
   `;
   return (
-    <AdminHomeSection>
-      <div className="admin__home">
-        <div className="admin__home__content">
-          <button
-            className="admin__home__btn"
-            onClick={() => navigate("/admin/dashboard/addproduct")}
-          >
-            Add New Product <AddCircleIcon />
-          </button>
-          <button
-            className="admin__home__btn"
-            onClick={() => navigate("/admin/dashboard/modifyproduct")}
-          >
-            Modify Products <AutoFixHighIcon />
-          </button>
+    <>
+      <GlobalStyle />
+      <AdminHomeSection>
+        <div className="admin__home">
+          <div className="admin__home__content">
+            <button
+              className="admin__home__btn"
+              onClick={() => navigate("/admin/dashboard/addproduct")}
+            >
+              Add New Product <AddCircleIcon />
+            </button>
+            <button
+              className="admin__home__btn"
+              onClick={() => navigate("/admin/dashboard/modifyproduct")}
+            >
+              Modify Products <AutoFixHighIcon />
+            </button>
 
-          <button className="admin__home__btn">
-            Add New User <AddCircleIcon />
-          </button>
-          <button
-            className="admin__home__btn"
-            onClick={() => navigate("/admin/dashboard/modifyfaq")}
-          >
-            Add/Modify FAQs
-            <AutoFixHighIcon />
-          </button>
-          <button className="admin__home__btn">
-            View Contacts <VisibilityIcon />
-          </button>
-          <button className="admin__home__btn">
-            Delete Testimonials <DeleteIcon />
-          </button>
+            <button className="admin__home__btn">
+              Add New User <AddCircleIcon />
+            </button>
+            <button
+              className="admin__home__btn"
+              onClick={() => navigate("/admin/dashboard/modifyfaq")}
+            >
+              Add/Modify FAQs
+              <AutoFixHighIcon />
+            </button>
+          </div>
+          <div className="recent__orders_details">
+            <div className="recent__orders_details__container">
+              <h1 className="recent__orders__heading">Recent Orders</h1>
+              {Orders.length ? (
+                Orders.map((items, Index) => {
+                  if (Index > 2) {
+                    return;
+                  }
+                  return (
+                    <>
+                      <aside className="recent__orders_hero">
+                        <div className="recent__orders_hero_crypus">
+                          <h1>Car Model</h1>
+                          <p>{items.product.model}</p>
+                        </div>
+                        <div className="recent__orders_hero_crypus">
+                          <h1>Customer Name </h1>
+                          <p>Kartik Gothwal</p>
+                        </div>
+                        <div className="recent__orders_hero_crypus">
+                          <h1>Price</h1>
+                          <p>{items.product.price}</p>
+                        </div>
+                        <div className="recent__orders_hero_crypus">
+                          <h1>Pick-up Date</h1>
+                          <p>{items.pickuptime}</p>
+                        </div>
+                        <div className="recent__orders_hero_crypus">
+                          <h1>Drop-off Date</h1>
+                          <p>{items.dropofftime}</p>
+                        </div>
+                        <div className="recent__orders_hero_crypus">
+                          <img src="" alt="" />
+                        </div>
+                      </aside>
+                    </>
+                  );
+                })
+              ) : (
+                <h1>No Order had been done</h1>
+              )}
+            </div>
+          </div>
         </div>
-        <div className="recent__orders_details"></div>
-      </div>
-    </AdminHomeSection>
+      </AdminHomeSection>
+    </>
   );
 };
 

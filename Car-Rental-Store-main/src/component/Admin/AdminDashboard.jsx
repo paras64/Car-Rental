@@ -22,42 +22,12 @@ import AdminAllProducts from "./AdminAllProducts";
 import AdminAllSubscribers from "./AdminAllSubscribers";
 import AdminAllTestimonials from "./AdminAllTestimonials";
 import AdminAllUsers from "./AdminAllUsers";
-import axios from "axios";
+import { useAllUserContext } from "./AllUserProvider";
 
 const AdminDashboard = ({ productList }) => {
   const navigate = useNavigate();
   const { adminData, updateAdminData } = useAdminDataContext();
-
-  const [Orders, SetOrders] = useState([]);
-  const [Users, SetUsers] = useState([]);
-  const GetAllUsers = () => {
-    const doc = axios.get("http://localhost:8000/user");
-    doc
-      .then((response) => {
-        SetUsers(response.data.doc);
-
-        SetOrders(
-          response.data.doc
-            .map((items) => {
-              return items.orderdetails.length ? items.orderdetails : null;
-            })
-            .filter((items) => {
-              return items != null;
-            })
-            .flatMap((items) => {
-              return items;
-            })
-        );
-      })
-      .catch((err) => {
-        alert(err.response.data.message);
-      });
-  };
-
-  useEffect(() => {
-    GetAllUsers();
-  }, []);
-
+  const { Users, Orders } = useAllUserContext();
   const [componentActive, SetComponentActive] = useState({
     home: true,
     orders: false,
@@ -82,6 +52,7 @@ const AdminDashboard = ({ productList }) => {
       background-color: rgb(244 244 238);
       position: sticky;
       top: 20px;
+      height: 100vh;
     }
 
     .logo__hero {

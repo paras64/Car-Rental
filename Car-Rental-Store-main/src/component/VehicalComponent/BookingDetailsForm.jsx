@@ -20,6 +20,8 @@ const BookingDetailsForm = ({
   const [productDetails, SetProductDetails] = useState(null);
   const [UserDetails, SetUserDetails] = useState(undefined);
   const [orderDetails, SetOrderDetails] = useState({
+    firstname: "",
+    lastname: "",
     product: "",
     pickuptime: "",
     dropofftime: "",

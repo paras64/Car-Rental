@@ -29,6 +29,14 @@ const UserSchema = new Schema({
   },
   orderdetails: [
     {
+      firstname: {
+        type: String,
+        required: true,
+      },
+      lastname: {
+        type: String,
+        required: true,
+      },
       product: {
         type: Schema.Types.ObjectId,
         ref: "product",
