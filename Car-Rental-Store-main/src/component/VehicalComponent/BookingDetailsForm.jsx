@@ -36,14 +36,14 @@ const BookingDetailsForm = ({
   useEffect(() => {
     document.body.style.overflowY = "hidden";
     // const data = JSON.parse(localStorage.getItem("UserDetails"));
-    if (userData.token != "") {
+    if (userData.token !== "") {
       SetUserDetails(userData);
     }
 
     if (productList.length && bookingData) {
       SetProductDetails(
         productList.find((docs) => {
-          return docs.model == bookingData.seletedcar;
+          return docs.model === bookingData.seletedcar;
         })
       );
     }
@@ -113,7 +113,7 @@ const BookingDetailsForm = ({
       alert("Please complete the required fields");
     }
   };
-console.log(orderDetails)
+  console.log(orderDetails);
   return (
     <>
       <GlobalStyle />

@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./AdminStyle/ModifyProduct.css";
 import { GlobalStyle } from "../styles/GlobalStyle";
 import { useAdminDataContext } from "./AdminProvider";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import ProductsData from "../HOC- higherOrderComponent/ProductsData";
 import axios from "axios";
 const ModifyProduct = ({ productList }) => {
@@ -13,7 +13,16 @@ const ModifyProduct = ({ productList }) => {
     fieldname: "",
     value: "",
   });
-
+  const location = useLocation();
+  const productData = location.state;
+  useEffect(() => {
+    setValueModify((prevData) => {
+      return {
+        ...prevData,
+        productname: productData.model,
+      };
+    });
+  }, [productData]);
   const ResetAll = (e) => {
     if (e) {
       e.preventDefault();
@@ -155,12 +164,12 @@ const ModifyProduct = ({ productList }) => {
                 </label>
                 <input
                   type={
-                    valueModify.fieldname == "year" ||
-                    valueModify.fieldname == "price" ||
-                    valueModify.fieldname == "capacity" ||
-                    valueModify.fieldname == "discountPercentage" ||
-                    valueModify.fieldname == "rating" ||
-                    valueModify.fieldname == "stocks"
+                    valueModify.fieldname === "year" ||
+                    valueModify.fieldname === "price" ||
+                    valueModify.fieldname === "capacity" ||
+                    valueModify.fieldname === "discountPercentage" ||
+                    valueModify.fieldname === "rating" ||
+                    valueModify.fieldname === "stocks"
                       ? "number"
                       : "text"
                   }
@@ -173,12 +182,12 @@ const ModifyProduct = ({ productList }) => {
                     e.preventDefault();
                     setValueModify((prevData) => {
                       if (
-                        valueModify.fieldname == "year" ||
-                        valueModify.fieldname == "price" ||
-                        valueModify.fieldname == "capacity" ||
-                        valueModify.fieldname == "discountPercentage" ||
-                        valueModify.fieldname == "rating" ||
-                        valueModify.fieldname == "stocks"
+                        valueModify.fieldname === "year" ||
+                        valueModify.fieldname === "price" ||
+                        valueModify.fieldname === "capacity" ||
+                        valueModify.fieldname === "discountPercentage" ||
+                        valueModify.fieldname === "rating" ||
+                        valueModify.fieldname === "stocks"
                       ) {
                         return {
                           ...prevData,

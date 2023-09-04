@@ -54,6 +54,15 @@ exports.modifyProduct = async (req, res) => {
   }
 };
 
+exports.deleteProduct = async (req, res) => {
+  try {
+    const { ID } = req.params;
+    const doc = await Product.findByIdAndDelete(ID);
+    res.status(200).json({ message: "Product has been Deleted" });
+  } catch (err) {
+    res.status(400).json({ message: "Deleting failed" });
+  }
+};
 // {
 //   "title":"Lexus RCF",
 //   "year":2020,

@@ -27,10 +27,25 @@ const auth = (req, res, next) => {
     res.status(401).json({ message: "Unauthorized" });
   }
 };
-
+const Authorization = (req, res, next) => {
+  try {
+    const decode = jwt.verify(req.params.token, publicKey, {
+      algorithms: "RS256",
+    });
+    if (decode) {
+      next();
+    } else {
+      res.status(401).json({ message: "Unauthorized User" });
+    }
+  } catch (err) {
+    console.error("JWT verification error:", err);
+    res.status(401).json({ message: "Unauthorized User" });
+  }
+};
 router
   .get("/", ProductController.getAllProducts)
   .post("/addproduct", auth, ProductController.createProduct)
-  .patch("/modifyproduct", auth, ProductController.modifyProduct);
+  .patch("/modifyproduct", auth, ProductController.modifyProduct)
+  .delete("/deleteproduct/:token/:ID", Authorization, ProductController.deleteProduct);
 
 exports.router = router;
