@@ -28,6 +28,7 @@ const AdminAllUsers = () => {
       border-radius: 8px;
       overflow: hidden;
       box-shadow: rgba(23, 23, 23, 0.24) 0px 1px 3px;
+      
     }
     .all__users__optimus {
       width: 100%;
@@ -72,7 +73,6 @@ const AdminAllUsers = () => {
       color: var(--btn-background-color);
     }
     .all__users__orders_container {
- 
       background-color: var(--page-background-color);
     }
     .customer__name_heading {
@@ -109,11 +109,11 @@ const AdminAllUsers = () => {
                       <p>{items.email}</p>
                     </div>
                     <div className="all__users__content__prime">
-                      {Active ? (
+                      {Active == index ? (
                         <button
                           className="all__users__content__prime__btn"
                           onClick={() => {
-                            setActive(false);
+                            setActive(null);
                           }}
                         >
                           Close Orders
@@ -122,7 +122,7 @@ const AdminAllUsers = () => {
                         <button
                           className="all__users__content__prime__btn"
                           onClick={() => {
-                            setActive(true);
+                            setActive(index);
                           }}
                         >
                           View Orders
@@ -136,7 +136,7 @@ const AdminAllUsers = () => {
                     </div>
                   </aside>
 
-                  {Active ? (
+                  {Active == index ? (
                     items.orderdetails && items.orderdetails.length ? (
                       items.orderdetails.map((orderItems, index) => {
                         return (
