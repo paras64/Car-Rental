@@ -74,3 +74,13 @@ exports.Order = async (req, res) => {
     res.status(500).json({ message: "Something went wrong" });
   }
 };
+
+exports.deleteUser = async (req, res) => {
+  try {
+    const { ID } = req.params;
+    const doc = await User.findByIdAndDelete(ID);
+    res.status(200).json({ message: "User has been deleted" });
+  } catch (err) {
+    res.status(400).json({ message: "Something went wrong, deleteing failed" });
+  }
+};

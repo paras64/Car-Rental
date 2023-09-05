@@ -1,11 +1,11 @@
-import React from 'react'
+import React from "react";
 
 const AdminAllTestimonials = () => {
   return (
     <div>
-       <h1>AdminAllTestimonials</h1>
+      <h1>AdminAllTestimonials</h1>
     </div>
-  )
-}
+  );
+};
 
-export default AdminAllTestimonials
+export default AdminAllTestimonials;

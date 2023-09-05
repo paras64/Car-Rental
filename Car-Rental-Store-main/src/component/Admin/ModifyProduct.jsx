@@ -16,12 +16,14 @@ const ModifyProduct = ({ productList }) => {
   const location = useLocation();
   const productData = location.state;
   useEffect(() => {
-    setValueModify((prevData) => {
-      return {
-        ...prevData,
-        productname: productData.model,
-      };
-    });
+    if (productData && productData.model) {
+      setValueModify((prevData) => {
+        return {
+          ...prevData,
+          productname: productData.model,
+        };
+      });
+    }
   }, [productData]);
   const ResetAll = (e) => {
     if (e) {

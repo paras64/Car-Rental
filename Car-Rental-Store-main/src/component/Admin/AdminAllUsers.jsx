@@ -1,10 +1,26 @@
 import React, { useState } from "react";
 import { useAllUserContext } from "./AllUserProvider";
 import styled from "styled-components";
-
+import axios from "axios";
+import { useAdminDataContext } from "./AdminProvider";
 const AdminAllUsers = () => {
   const { Users } = useAllUserContext();
+  const { adminData } = useAdminDataContext();
   const [Active, setActive] = useState(null);
+  const handleDelete = (ID) => {
+    const doc = axios.delete(
+      `http://localhost:8000/user/deleteuser/${ID}/${adminData.token}`
+    );
+    doc
+      .then((response) => {
+        alert(response.data.message);
+        window.location.reload();
+      })
+      .catch((err) => {
+        alert(err.response.data.message);
+        window.location.reload();
+      });
+  };
   const AdminAllUsersSection = styled.section`
     height: 100%;
     width: 100%;
@@ -28,7 +44,6 @@ const AdminAllUsers = () => {
       border-radius: 8px;
       overflow: hidden;
       box-shadow: rgba(23, 23, 23, 0.24) 0px 1px 3px;
-      
     }
     .all__users__optimus {
       width: 100%;
@@ -87,7 +102,7 @@ const AdminAllUsers = () => {
       height: 6rem;
     }
   `;
-  console.log(Users);
+
   return (
     <AdminAllUsersSection>
       <div className="all_users__container">
@@ -130,7 +145,12 @@ const AdminAllUsers = () => {
                       )}
                     </div>
                     <div className="all__users__content__prime">
-                      <button className="all__users__content__prime__btn">
+                      <button
+                        className="all__users__content__prime__btn"
+                        onClick={() => {
+                          handleDelete(items._id);
+                        }}
+                      >
                         Delete User
                       </button>
                     </div>
