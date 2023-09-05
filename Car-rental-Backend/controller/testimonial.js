@@ -20,7 +20,7 @@ exports.getTestimonialData = (req, res) => {
         res.status(200).json(data);
       })
       .catch((err) => {
-        res.status(200).json(err);
+        res.status(200).json({ message: "Something went wrong" });
       });
   }
 };
@@ -36,4 +36,13 @@ exports.createTestimonial = (req, res) => {
     .catch((err) => {
       res.status(400).json({ message: "Something went wrong" });
     });
+};
+exports.deleteTestimonial = async (req, res) => {
+  try {
+    const { ID } = req.params;
+    const doc = await Testimonial.findByIdAndDelete(ID);
+    res.status(200).json({ message: "User has been deleted" });
+  } catch (err) {
+    res.status(400).json({ message: "Something went wrong, deleteing failed" });
+  }
 };
