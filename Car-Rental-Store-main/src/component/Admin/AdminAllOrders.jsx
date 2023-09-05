@@ -45,6 +45,7 @@ const AdminAllOrders = () => {
       font-size: 15px;
       color: var(--text-color);
       font-family: Rubik;
+      text-align: center;
     }
     .car__img__orders {
       width: 10rem;
@@ -56,7 +57,7 @@ const AdminAllOrders = () => {
       color: var(--btn-background-color);
     }
   `;
-  console.log(Orders);
+ 
   return (
     <>
       <GlobalStyle />

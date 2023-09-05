@@ -11,7 +11,6 @@ const AdminAllSubscribers = () => {
     );
     doc
       .then((data) => {
-        console.log(data);
         SetSubscribers(data.data.doc);
       })
       .catch((err) => {
@@ -86,7 +85,7 @@ const AdminAllSubscribers = () => {
       cursor: pointer;
     }
   `;
-  console.log(Subscribers);
+
   return (
     <AdminAllSubscribersSection>
       {/* {Subscribers.length ? ( */}
@@ -97,7 +96,7 @@ const AdminAllSubscribers = () => {
             Subscribers.map((items) => (
               <aside className="all__sub_hero" key={items.id}>
                 <div className="all__sub_hero_crypus">
-                  <h1>Customer name</h1>
+                  <h1>Customer Name</h1>
                   <p>{items.fullname}</p>
                 </div>
                 <div className="all__sub_hero_crypus">

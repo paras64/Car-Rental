@@ -210,17 +210,12 @@ const AdminAllProducts = ({ productList }) => {
       flex-direction: row;
       gap: 20px;
     }
-    .all_producthero_heading {
-      padding: 1rem 4rem;
-      font-size: 1.8rem;
-      font-family: Poppins;
-      color: var(--btn-background-color);
-    }
+   
   `;
 
   return (
     <AdminAllProducts>
-      <h1 className="all_producthero_heading"> All Product</h1>
+      <h2 className="all__products_heading">All Products</h2>
       <div className="all_product">
         {productList.length ? (
           productList.map((items, Index) => {

@@ -41,6 +41,14 @@ const UserSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "product",
       },
+      pickuplocation: {
+        type: String,
+        required: true,
+      },
+      dropofflocation: {
+        type: String,
+        required: true,
+      },
       pickuptime: {
         type: String,
         required: true,

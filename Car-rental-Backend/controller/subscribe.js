@@ -13,7 +13,7 @@ exports.createSubscribe = async (req, res) => {
     });
 };
 exports.getSubscribers = async (req, res) => {
-  console.log("inside the function");
+  
   try {
     const doc = await Subscribe.find();
     res.status(200).json({ doc });

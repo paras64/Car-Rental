@@ -9,7 +9,6 @@ const publicKey = fs.readFileSync(
 );
 const SubscribeController = require("../controller/subscribe.js");
 const Authorization = (req, res, next) => {
-     
   try {
     const decode = jwt.verify(req.params.token, publicKey, {
       algorithms: "RS256",
@@ -25,6 +24,6 @@ const Authorization = (req, res, next) => {
   }
 };
 router
-  .get("/getallsubs/:token",  SubscribeController.getSubscribers)
+  .get("/getallsubs/:token", Authorization, SubscribeController.getSubscribers)
   .post("/", SubscribeController.createSubscribe);
 exports.router = router;
