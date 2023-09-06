@@ -68,12 +68,12 @@ const OrdersAccordian = ({ orders }) => {
           </div>
           <div className="box__hero">
             <h1>Pick Up Date</h1>
-            <p>{orders.pickupdate}</p>
+            <p>{orders.pickupdate.split('-').reverse().join('/')}</p>
           </div>
 
           <div className="box__hero">
             <h1>Drop off Date</h1>
-            <p>{orders.dropoffdate}</p>
+            <p>{orders.dropoffdate.split('-').reverse().join('/')}</p>
           </div>
           <div className="box__hero">
             <h1>Charges</h1>
