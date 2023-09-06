@@ -14,6 +14,7 @@ const jwt = require("jsonwebtoken");
 const privateKey = process.env.PRIVATE_KEY;
 exports.forgotpassword = async (req, res) => {
   console.log(req.body);
+  console.log(privateKey);
   try {
     const doc = await User.findOne({ email: req.body.email });
     if (!doc) {
@@ -47,7 +48,7 @@ exports.forgotpassword = async (req, res) => {
     transporter.sendMail(mailOptions, function (err, info) {
       if (err) {
         console.log(err);
-        res.status(401).json({ message: "bad hey request", err: err });
+        res.status(401).json({ message: "bad request", err: err });
       } else {
         res
           .status(200)
@@ -56,7 +57,7 @@ exports.forgotpassword = async (req, res) => {
     });
   } catch (err) {
     console.log(err);
-    res.status(500).json({ message: "bad hello request", err: err });
+    res.status(500).json({ message: "bad request", err: err });
   }
 };
 
