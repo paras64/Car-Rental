@@ -76,7 +76,10 @@ export default function Footer() {
   const handleClick = (e) => {
     e.preventDefault();
     if (data.email && data.fullname) {
-      const doc = axios.post("https://car-rental-backend-1tpp.onrender.com/subscribe", data);
+      const doc = axios.post(
+        "https://car-rental-backend-1tpp.onrender.com/subscribe",
+        data
+      );
       doc
         .then((response) => {
           SetError("");
@@ -197,27 +200,27 @@ export default function Footer() {
                 <section className="socials-list">
                   <div className="socials-list-container">
                     <div className="social-icon">
-                      <a href="https://car-rental-store.vercel.app/">
+                      <a href="https://car-rental-five-indol.vercel.app/">
                         <InstagramIcon className="icons-socials" />
                       </a>
                     </div>
                     <div className="social-icon">
-                      <a href="https://car-rental-store.vercel.app/">
+                      <a href="https://car-rental-five-indol.vercel.app/">
                         <TwitterIcon className="icons-socials" />
                       </a>
                     </div>
                     <div className="social-icon">
-                      <a href="https://car-rental-store.vercel.app/">
+                      <a href="https://car-rental-five-indol.vercel.app/">
                         <FacebookIcon className="icons-socials" />
                       </a>
                     </div>
                     <div className="social-icon">
-                      <a href="https://car-rental-store.vercel.app/">
+                      <a href="https://car-rental-five-indol.vercel.app/">
                         <YouTubeIcon className="icons-socials" />
                       </a>
                     </div>
                     <div className="social-icon">
-                      <a href="https://car-rental-store.vercel.app/">
+                      <a href="https://car-rental-five-indol.vercel.app/">
                         <PinterestIcon className="icons-socials" />
                       </a>
                     </div>
@@ -303,11 +306,15 @@ export default function Footer() {
           </div>
           <div className="footer-container-second">
             <div className="footer-container-second-first-item">
-              <a href="#maps">SITE MAP</a>
-              <a href="#download">DOWNLOAD APP</a>
-              <a href="#">TERMS</a>
-              <a href="#">USER CONTENT PERMISSION TERMS</a>
-              <a href="#">CARRENTAL.COM</a>
+              <a href="https://linktr.ee/kartik.gothwal_">All My Links</a>
+              <a href="https://kartik-gothwal.vercel.app/">My Portfolio</a>
+              <a href="https://www.linkedin.com/in/kartikgothwal/">
+                My LinkedIn
+              </a>
+              <a href="https://twitter.com/KartikGothwal28">My Twitter</a>
+              <a href="https://car-rental-five-indol.vercel.app/">
+                CARRENTAL.COM
+              </a>
             </div>
             <div className="footer-container-second-second-item">
               <a href="https://kartik-gothwal.vercel.app/" target="_blank">
