@@ -5,12 +5,14 @@ const express = require("express");
 const nodemailer = require("nodemailer");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const path = require("path");
-const fs = require("fs");
-const privateKey = fs.readFileSync(
-  path.join(__dirname, "../myprivate.pem"),
-  "utf-8"
-);
+// const path = require("path");
+// const fs = require("fs");
+// const privateKey = fs.readFileSync(
+//   path.join(__dirname, "../myprivate.pem"),
+//   "utf-8"
+// );
+require("dotenv").config();
+const privateKey = process.env.PRIVATE_KEY;
 exports.forgotpassword = async (req, res) => {
   try {
     const doc = await User.findOne({ email: req.body.email });

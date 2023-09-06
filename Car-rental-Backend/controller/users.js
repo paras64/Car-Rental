@@ -1,12 +1,14 @@
 const model = require("../model/users.js");
 const User = model.User;
 const jwt = require("jsonwebtoken");
-const path = require("path");
-const fs = require("fs");
-const publicKey = fs.readFileSync(
-  path.join(__dirname, "../mypublic.pem"),
-  "utf-8"
-);
+// const path = require("path");
+// const fs = require("fs");
+// const publicKey = fs.readFileSync(
+//   path.join(__dirname, "../mypublic.pem"),
+//   "utf-8"
+// );
+require("dotenv").config();
+const publicKey = process.env.PUBLIC_KEY;
 exports.getUser = async (req, res) => {
   try {
     const decode = jwt.verify(req.params.token, publicKey, {

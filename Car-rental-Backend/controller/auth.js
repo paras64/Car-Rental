@@ -2,17 +2,20 @@ const model = require("../model/users.js");
 const User = model.User;
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const path = require("path");
-const fs = require("fs");
-const privateKey = fs.readFileSync(
-  path.join(__dirname, "../myprivate.pem"),
-  "utf-8"
-);
-const publicKey = fs.readFileSync(
-  path.join(__dirname, "../mypublic.pem"),
-  "utf-8"
-);
- 
+// const path = require("path");
+// const fs = require("fs");
+require("dotenv").config();
+const privateKey = process.env.PRIVATE_KEY;
+const publicKey = process.env.PUBLIC_KEY;
+// const privateKey = fs.readFileSync(
+//   path.join(__dirname, "../myprivate.pem"),
+//   "utf-8"
+// );
+// const publicKey = fs.readFileSync(
+//   path.join(__dirname, "../mypublic.pem"),
+//   "utf-8"
+// );
+
 exports.register = async (req, res) => {
   const doc = await User.findOne({ email: req.body.email });
   if (doc) {
