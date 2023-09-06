@@ -172,6 +172,7 @@ const BookingDetailsForm = ({
                         onChange={handleChange}
                         value={orderDetails.dropofftime}
                       />
+
                       <input
                         type="date"
                         name="dropoffdate"
@@ -249,7 +250,11 @@ const BookingDetailsForm = ({
                         readOnly
                         required
                       />
-                      <p>This field is required</p>
+                      {!orderDetails.firstname && (
+                        <p className="required__field">
+                          This field is required
+                        </p>
+                      )}
                     </div>
                     <div>
                       <label htmlFor="lastname">
@@ -264,7 +269,11 @@ const BookingDetailsForm = ({
                         readOnly
                         required
                       />
-                      <p>This field is required</p>
+                      {!orderDetails.lastname && (
+                        <p className="required__field">
+                          This field is required
+                        </p>
+                      )}
                     </div>
                   </div>
                   <div className="hero__forth_personal_details_form__sub">
@@ -281,7 +290,11 @@ const BookingDetailsForm = ({
                         value={orderDetails.contact}
                         onChange={handleChange}
                       />
-                      <p>This field is required</p>
+                      {!orderDetails.contact && (
+                        <p className="required__field">
+                          This field is required
+                        </p>
+                      )}
                     </div>
                     <div>
                       <label htmlFor="age">
@@ -297,7 +310,11 @@ const BookingDetailsForm = ({
                         value={orderDetails.age}
                         onChange={handleChange}
                       />
-                      <p>This field is required</p>
+                      {!orderDetails.age && (
+                        <p className="required__field">
+                          This field is required
+                        </p>
+                      )}
                     </div>
                   </div>
                   <div className="hero__forth_personal_details_form__sub">
@@ -315,7 +332,11 @@ const BookingDetailsForm = ({
                         readOnly
                         required
                       />
-                      <p>This field is required</p>
+                      {UserDetails && !UserDetails.email && (
+                        <p className="required__field">
+                          This field is required
+                        </p>
+                      )}
                     </div>
                   </div>
                   <div className="hero__forth_personal_details_form__sub">
@@ -332,7 +353,11 @@ const BookingDetailsForm = ({
                         value={orderDetails.address}
                         onChange={handleChange}
                       />
-                      <p>This field is required</p>
+                      {!orderDetails.address && (
+                        <p className="required__field">
+                          This field is required
+                        </p>
+                      )}
                     </div>
                   </div>
                   <div className="hero__forth_personal_details_form__sub">

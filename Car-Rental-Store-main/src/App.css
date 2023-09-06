@@ -31,3 +31,9 @@ html::-webkit-scrollbar-thumb {
   font-family: Poppins;
   color: var(--btn-background-color);
 }
+.required__field {
+  font-size: 12px;
+  font-family: Rubik;
+  margin-top: 7px;
+  color: red;
+}

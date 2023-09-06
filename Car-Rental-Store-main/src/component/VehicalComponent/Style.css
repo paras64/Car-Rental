@@ -236,11 +236,11 @@
   position: relative;
   outline: none;
 }
-.hero__forth_personal_details_form__sub div p {
+/* .hero__forth_personal_details_form__sub div p {
   color: var(--black-color);
   font-size: 10px;
   font-family: "Rubik";
-}
+} */
 .hero__forth_personal_details_form__sub:nth-child(4) input,
 .hero__forth_personal_details_form__sub:nth-child(3) input {
   width: 52.5rem;
