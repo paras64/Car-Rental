@@ -43,9 +43,10 @@ exports.forgotpassword = async (req, res) => {
       subject: "Car Rental Store: Reset Password",
       text: link,
     };
-
+    
     transporter.sendMail(mailOptions, function (err, info) {
       if (err) {
+        console.log(err);
         res.status(401).json({ message: "bad request", err: err });
       } else {
         res
@@ -54,6 +55,7 @@ exports.forgotpassword = async (req, res) => {
       }
     });
   } catch (err) {
+    console.log(err);
     res.status(500).json({ message: "bad request", err: err });
   }
 };
