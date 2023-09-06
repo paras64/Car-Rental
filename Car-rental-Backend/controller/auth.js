@@ -12,7 +12,7 @@ const publicKey = fs.readFileSync(
   path.join(__dirname, "../mypublic.pem"),
   "utf-8"
 );
-
+ 
 exports.register = async (req, res) => {
   const doc = await User.findOne({ email: req.body.email });
   if (doc) {
@@ -41,7 +41,9 @@ exports.login = async (req, res) => {
     const doc = await User.findOne({ email: req.body.email });
     if (!doc) {
       // User not found
-      res.status(401).json({ message: "Invalid email" });
+      res
+        .status(400)
+        .json({ message: "Invalid email, Please Register if not" });
       return;
     }
     const isAuth = bcrypt.compareSync(req.body.password, doc.password);
@@ -56,15 +58,15 @@ exports.login = async (req, res) => {
           res.status(200).json({ message: "Checking details...", data: data });
         })
         .catch((err) => {
-          res.status(400).json({ message: "Invalid Password", err: err });
+          res.status(400).json({ message: "Something went wrong" });
         });
     } else {
-      res.status(500).json({
+      res.status(400).json({
         message: "Incorrect Password, Please try again with correct details",
-        err: err,
       });
     }
   } catch (err) {
+    console.log(err);
     res.status(500).json({ message: "bad request", err: err });
   }
 };

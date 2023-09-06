@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import "./Style.css";
 import { NavLink } from "react-router-dom";
 import { GlobalStyle } from "../styles/GlobalStyle";
-import Navbar from "../Navbar";
 import axios from "axios";
 
 const ForgotPassword = () => {

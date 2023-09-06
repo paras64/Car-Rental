@@ -13,7 +13,8 @@ async function main() {
     `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.ejahxrh.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`
   );
 }
-
+// console.log(process.env.PRIVATE_KEY)
+// console.log(process.env.PUBLIC_KEY)
 //MIDDLEWARE AUTHENTIFICATION
 // const Authentification = (req, res, next) => {
 //   try {

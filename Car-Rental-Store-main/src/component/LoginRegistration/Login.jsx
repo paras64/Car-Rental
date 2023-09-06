@@ -56,13 +56,14 @@ const Login = () => {
           }, 2000);
         })
         .catch((err) => {
+          
           setloginAction({
             message: "",
             loading: true,
           });
           setTimeout(() => {
             setloginAction({
-              message: "Login failed, Please enter correct email and password",
+              message:err.response.data.message,
               loading: false,
             });
           }, 2000);
