@@ -1,16 +1,14 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { GlobalStyle } from "../styles/GlobalStyle";
-import plant1 from "../images/Testimonial/1.png";
 import plant3 from "../images/Testimonial/3.png";
-import user1 from "../images/Testimonial/user-1.png";
 import user2 from "../images/Testimonial/user-2.webp";
 import axios from "axios";
 export default function Testimonial() {
   const [testimonialData, SetTestimonialData] = useState([]);
   const getTestimonialData = async () => {
     await axios
-      .get("http://localhost:8000/testimonials?limit=2")
+      .get("https://car-rental-backend-1tpp.onrender.com/testimonials?limit=2")
       .then((response) => {
         SetTestimonialData(response.data);
       })

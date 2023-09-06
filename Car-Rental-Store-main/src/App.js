@@ -1,5 +1,4 @@
 import "./App.css";
-
 import Home from "./component/Home";
 import About from "./component/About";
 import TestimonialComponent from "./component//TestimonialComponent";
@@ -14,7 +13,6 @@ import Login from "./component/LoginRegistration/Login";
 import Registration from "./component/LoginRegistration/Registration";
 import ForgotPassword from "./component/LoginRegistration/ForgotPassword";
 import ConfirmPassword from "./component/LoginRegistration/ConfirmPassword";
-import BookingDetailsForm from "./component/VehicalComponent/BookingDetailsForm";
 import Orders from "./component/Orders";
 import Contact from "./component/Contact";
 import NotFound from "./NotFound";

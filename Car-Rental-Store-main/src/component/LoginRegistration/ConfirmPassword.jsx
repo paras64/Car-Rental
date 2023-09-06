@@ -96,7 +96,7 @@ const ConfirmPassword = () => {
     });
     if (confirmPassword.newPassword && confirmPassword.confirmNewPassword) {
       if (confirmPassword.newPassword === confirmPassword.confirmNewPassword) {
-        const doc = axios.post(`http://localhost:8000/forgotpassword/update`, {
+        const doc = axios.post(`https://car-rental-backend-1tpp.onrender.com/forgotpassword/update`, {
           newPassword: confirmPassword.newPassword,
           confirmNewPassword: confirmPassword.confirmNewPassword,
           userEmail,

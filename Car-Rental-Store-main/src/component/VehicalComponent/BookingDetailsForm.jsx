@@ -95,7 +95,7 @@ const BookingDetailsForm = ({
       orderDetails.age &&
       orderDetails.address
     ) {
-      const doc = axios.post("http://localhost:8000/user/bookorder", {
+      const doc = axios.post("https://car-rental-backend-1tpp.onrender.com/user/bookorder", {
         orderDetails,
         UserDetails,
       });

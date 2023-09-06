@@ -1,7 +1,6 @@
 import CorvetteImage from "../images/vehical images/corvette.png";
 import MustangImage from "../images/vehical images/Mustang.png";
 import ToyotaSupraImage from "../images/vehical images/supra.png";
-import TharImage from "../images/vehical images/thar.png";
 import WranglerImage from "../images/vehical images/wrangler.png";
 import RoverImage from "../images/vehical images/rover.png";
 import Hyundai from "../images/vehical images/PngItem_3411055.png";

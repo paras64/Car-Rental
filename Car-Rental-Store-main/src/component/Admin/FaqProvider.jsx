@@ -4,7 +4,7 @@ const FaqQuestionArray = createContext(undefined);
 const FaqProvider = ({ children }) => {
   const [FaqArray, SetFaqArray] = useState([]);
   useEffect(() => {
-    const faqdata = axios.get("http://localhost:8000/faq");
+    const faqdata = axios.get("https://car-rental-backend-1tpp.onrender.com/faq");
     faqdata
       .then((response) => {
         SetFaqArray(response.data);

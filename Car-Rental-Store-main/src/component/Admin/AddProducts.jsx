@@ -52,7 +52,7 @@ const AddProducts = () => {
       addProductData.images[1]
     ) {
       if (adminData.token) {
-        const doc = axios.post("http://localhost:8000/products/addproduct", {
+        const doc = axios.post("https://car-rental-backend-1tpp.onrender.com/products/addproduct", {
           adminData,
           addProductData,
         });

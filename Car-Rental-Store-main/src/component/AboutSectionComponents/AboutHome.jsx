@@ -1,5 +1,4 @@
 import React from "react";
-import aboutHomeImg from "../images/About section images/aboutHome.jpg";
 import styled from "styled-components";
 import { GlobalStyle } from "../styles/GlobalStyle";
 

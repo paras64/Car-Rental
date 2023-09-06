@@ -17,7 +17,7 @@ const AdminAllProducts = ({ productList }) => {
   const { adminData } = useAdminDataContext();
   const handleDeleteBtn = (ID) => {
     const doc = axios.delete(
-      `http://localhost:8000/products/deleteproduct/${adminData.token}/${ID}`
+      `https://car-rental-backend-1tpp.onrender.com/products/deleteproduct/${adminData.token}/${ID}`
     );
     doc
       .then((response) => {

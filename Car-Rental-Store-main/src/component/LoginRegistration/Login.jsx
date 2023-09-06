@@ -33,7 +33,7 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (data.email && data.password) {
-      const doc = axios.post("http://localhost:8000/auth/login", data);
+      const doc = axios.post("https://car-rental-backend-1tpp.onrender.com/auth/login", data);
       doc
         .then((response) => {
           updateUserData(response.data.data);

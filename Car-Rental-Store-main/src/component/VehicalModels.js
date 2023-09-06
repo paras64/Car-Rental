@@ -1,12 +1,9 @@
 import React from "react";
 import Navbar from "./Navbar";
 import AboutHome from "./AboutSectionComponents/AboutHome";
-// import Navbar from './Navbar'
 import Booking from "./HomePageComponents/Booking";
 import HomeImg from "./images/About section images/aboutHome2.jpg";
 import styled from "styled-components";
-import VehicalCollection from "./HomePageComponents/VehicalCollectionDetailsApi";
-// import CarCollection from "./VehicalComponent/CarCollection";
 import CarFleet from "../component/VehicalComponent/CarsFleet";
 import PopularCars from "./VehicalComponent/PopularCars";
 import Footer from "./Footer";

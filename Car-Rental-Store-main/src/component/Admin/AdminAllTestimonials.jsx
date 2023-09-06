@@ -9,7 +9,7 @@ const AdminAllTestimonials = () => {
   const handleDelete = (ID) => {
     console.log(ID)
     const doc = axios.delete(
-      `http://localhost:8000/testimonials/deletetestimonial/${ID}/${adminData.token}`
+      `https://car-rental-backend-1tpp.onrender.com/testimonials/deletetestimonial/${ID}/${adminData.token}`
     );
     doc
       .then((response) => {
@@ -25,7 +25,7 @@ const AdminAllTestimonials = () => {
   };
   const getTestimonialData = async () => {
     await axios
-      .get("http://localhost:8000/testimonials ")
+      .get("https://car-rental-backend-1tpp.onrender.com/testimonials ")
       .then((response) => {
         SetTestimonial(response.data);
       })

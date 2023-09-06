@@ -40,7 +40,7 @@ const ModifyProduct = ({ productList }) => {
     if (valueModify.productname && valueModify.fieldname && valueModify.value) {
       if (adminData.token) {
         const doc = axios.patch(
-          "http://localhost:8000/products/modifyproduct",
+          "https://car-rental-backend-1tpp.onrender.com/products/modifyproduct",
           {
             adminData,
             valueModify,

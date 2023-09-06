@@ -33,7 +33,7 @@ const AddFaq = ({ closeModel }) => {
       );
       return;
     }
-    const doc = axios.post("http://localhost:8000/faq/createfaq", {
+    const doc = axios.post("https://car-rental-backend-1tpp.onrender.com/faq/createfaq", {
       FaqData,
       adminData,
     });

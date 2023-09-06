@@ -9,7 +9,7 @@ const AdminAllUsers = () => {
   const [Active, setActive] = useState(null);
   const handleDelete = (ID) => {
     const doc = axios.delete(
-      `http://localhost:8000/user/deleteuser/${ID}/${adminData.token}`
+      `https://car-rental-backend-1tpp.onrender.com/user/deleteuser/${ID}/${adminData.token}`
     );
     doc
       .then((response) => {

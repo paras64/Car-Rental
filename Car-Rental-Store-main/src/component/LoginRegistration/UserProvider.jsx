@@ -23,7 +23,7 @@ const UserProvider = ({ children }) => {
       return;
     }
     const token = JSON.parse(sessionStorage.getItem("UserDetails")).token;
-    const queryCall = `http://localhost:8000/user/getuser/${token}`;
+    const queryCall = `https://car-rental-backend-1tpp.onrender.com/user/getuser/${token}`;
     const doc = axios.get(queryCall);
     doc
       .then((response) => {

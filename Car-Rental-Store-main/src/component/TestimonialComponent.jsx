@@ -3,7 +3,6 @@ import styled from "styled-components";
 import Testimonial from "./HomePageComponents/Testimonial";
 import AboutHome from "./AboutSectionComponents/AboutHome";
 import TestimonialHome from "./TestimonialComponent/TestimonialHome";
-import HomeImg from "./images/About section images/aboutHome2.jpg";
 import Footer from "./Footer";
 import WhyUs from "./HomePageComponents/WhyUs";
 import Navbar from "./Navbar";

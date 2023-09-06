@@ -76,7 +76,7 @@ export default function Footer() {
   const handleClick = (e) => {
     e.preventDefault();
     if (data.email && data.fullname) {
-      const doc = axios.post("http://localhost:8000/subscribe", data);
+      const doc = axios.post("https://car-rental-backend-1tpp.onrender.com/subscribe", data);
       doc
         .then((response) => {
           SetError("");

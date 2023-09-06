@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-
 import MahindraImage from "../images/banner/tesla.png";
 import MercedesImage from "../images/banner/Mercedes_logo_PNG19.png";
 import lamboImage from "../images/banner/Lamborghini_logo_PNG1.png";

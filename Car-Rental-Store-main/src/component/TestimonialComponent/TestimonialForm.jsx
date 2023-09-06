@@ -58,7 +58,7 @@ const TestimonialForm = () => {
         return;
       }
       const doc = axios.post(
-        "http://localhost:8000/testimonials/addtestimonial",
+        "https://car-rental-backend-1tpp.onrender.com/testimonials/addtestimonial",
         feedbackData
       );
       doc

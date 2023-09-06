@@ -143,7 +143,7 @@ const OrdersSummary = () => {
   const fetchOrdersData = (UserData) => {
     const { email } = UserData;
     const doc = axios.get(
-      `http://localhost:8000/user/getorders?email=${email}`
+      `https://car-rental-backend-1tpp.onrender.com/user/getorders?email=${email}`
     );
     doc
       .then((response) => {
@@ -155,10 +155,6 @@ const OrdersSummary = () => {
   };
 
   useEffect(() => {
-    // if (localStorage.length) {
-    //   let UserData = JSON.parse(localStorage.getItem("UserDetails"));
-    //   fetchOrdersData(UserData);
-    // }
     if (userData.orderdetails) {
       fetchOrdersData(userData);
     }

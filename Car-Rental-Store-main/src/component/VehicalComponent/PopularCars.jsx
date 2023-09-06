@@ -92,18 +92,6 @@ const PopularCars = ({ productList }) => {
           ) : (
             <p>No popular cars available</p>
           )}
-          {/* <CarCard
-            CarImg={CarImg}
-            popularCars={popularCars}
-            imgWidth={"21rem"}
-            cardWidth="25rem"
-          />
-          <CarCard
-            CarImg={CarImg}
-            popularCars={popularCars}
-            imgWidth={"21rem"}
-            cardWidth="25rem"
-          /> */}
         </div>
       </div>
     </PopularCarssection>

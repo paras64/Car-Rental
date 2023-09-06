@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import carBgImg from "../images/banner/bg-1.png";
 import styled from "styled-components";
-import CarImageDemo from "../images/VehicalCollection/PngItem_135037.png";
 import LamborginiLogo from "../images/VehicalCollection/car-logos/Lamborghini_Logo.svg.png";
 import PersonIcon from "@mui/icons-material/Person";
 import MinorCrashOutlinedIcon from "@mui/icons-material/MinorCrashOutlined";
@@ -38,7 +37,6 @@ const CarCard = (props) => {
   };
 
   if (!props.carsData) {
-    // If props.carsData is undefined, return null or a loading message
     return <p>Loading...</p>;
   }
   const CardCardSection = styled.section`

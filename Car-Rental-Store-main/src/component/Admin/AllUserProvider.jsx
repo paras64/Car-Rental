@@ -11,7 +11,7 @@ const AllUserProvider = ({ children }) => {
   const [Users, SetUsers] = useState([]);
   const [Orders, SetOrders] = useState([]);
   const GetAllUsers = () => {
-    const doc = axios.get("http://localhost:8000/user");
+    const doc = axios.get("https://car-rental-backend-1tpp.onrender.com/user");
     doc
       .then((response) => {
         SetUsers(response.data.doc);

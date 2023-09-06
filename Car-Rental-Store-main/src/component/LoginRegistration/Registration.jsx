@@ -41,7 +41,7 @@ const Registration = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (data.firstname && data.lastname && data.email && data.password) {
-      const doc = axios.post("http://localhost:8000/auth/register", data);
+      const doc = axios.post("https://car-rental-backend-1tpp.onrender.com/auth/register", data);
       doc
         .then((response) => {
           SetData({

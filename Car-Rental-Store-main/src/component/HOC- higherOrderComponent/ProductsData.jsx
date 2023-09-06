@@ -7,14 +7,14 @@ const ProductsData = (OriginalComponent, limit) => {
     const getProductsData = () => {
       if (limit) {
         axios
-          .get(`http://localhost:8000/products?limit=${limit}`)
+          .get(`https://car-rental-backend-1tpp.onrender.com/products?limit=${limit}`)
           .then((response) => {
             setProducts(response.data);
           })
           .catch((error) => console.log("error heere with axios", error));
       } else {
         axios
-          .get(`http://localhost:8000/products`)
+          .get(`https://car-rental-backend-1tpp.onrender.com/products`)
           .then((response) => {
             setProducts(response.data);
           })

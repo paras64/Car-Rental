@@ -25,7 +25,7 @@ const AdminProvider = ({ children }) => {
       return;
     }
     const token = JSON.parse(sessionStorage.getItem("AdminData")).token;
-    const doc = axios.get(`http://localhost:8000/admin/getdata/${token}`);
+    const doc = axios.get(`https://car-rental-backend-1tpp.onrender.com/admin/getdata/${token}`);
     doc
       .then((response) => {
         updateAdminData({

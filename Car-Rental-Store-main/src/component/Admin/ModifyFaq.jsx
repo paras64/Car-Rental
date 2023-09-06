@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./AdminStyle/Modifyfaq.css";
 import { useAdminDataContext } from "./AdminProvider";
 import { GlobalStyle } from "../styles/GlobalStyle";
@@ -43,7 +43,7 @@ const ModifyFaq = () => {
     SetActive(Index);
   };
   const handleSubmit = (Index) => {
-    const doc = axios.patch("http://localhost:8000/faq/modifyfaq", {
+    const doc = axios.patch("https://car-rental-backend-1tpp.onrender.com/faq/modifyfaq", {
       Index,
       adminData,
       FaqBox,
@@ -61,7 +61,7 @@ const ModifyFaq = () => {
   };
   const handleDelete = (Index) => {
     const doc = axios.delete(
-      `http://localhost:8000/faq/deletefaq/${Index}/${adminData.token}`
+      `https://car-rental-backend-1tpp.onrender.com/faq/deletefaq/${Index}/${adminData.token}`
     );
     doc
       .then((response) => {

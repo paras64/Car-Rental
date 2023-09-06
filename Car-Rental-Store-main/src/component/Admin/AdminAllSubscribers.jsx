@@ -7,7 +7,7 @@ const AdminAllSubscribers = () => {
   const { adminData } = useAdminDataContext();
   const getAllSubscribersData = () => {
     const doc = axios.get(
-      `http://localhost:8000/subscribe/getallsubs/${adminData.token}`
+      `https://car-rental-backend-1tpp.onrender.com/subscribe/getallsubs/${adminData.token}`
     );
     doc
       .then((data) => {

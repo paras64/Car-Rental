@@ -31,7 +31,7 @@ const ForgotPassword = () => {
       loading: true,
     }));
     try {
-      const doc = axios.post("http://localhost:8000/forgotpassword", userData);
+      const doc = axios.post("https://car-rental-backend-1tpp.onrender.com/forgotpassword", userData);
       doc
         .then((response) => {
           setUserData({

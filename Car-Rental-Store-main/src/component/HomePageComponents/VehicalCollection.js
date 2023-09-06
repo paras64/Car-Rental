@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { GlobalStyle } from "../styles/GlobalStyle";
 import styled from "styled-components";
 import { FaGasPump, FaWeight } from "react-icons/fa";
@@ -126,7 +126,7 @@ function VehicalCollection({ productList, limit }) {
     .vehicals-details {
       padding: 10px;
       width: 26rem;
-    height: 30rem;
+      height: 30rem;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -149,7 +149,7 @@ function VehicalCollection({ productList, limit }) {
     .vehical-detail-container {
       border-radius: 20px;
       height: 8rem;
-    width: 11rem;
+      width: 11rem;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -205,7 +205,7 @@ function VehicalCollection({ productList, limit }) {
                   {productList.map((VehicalDetails, index) => {
                     return (
                       <button
-                      key={index}
+                        key={index}
                         className={`vehical-names ${
                           activeButton === index ? "active" : ""
                         } `}
