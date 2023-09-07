@@ -306,13 +306,25 @@ export default function Footer() {
           </div>
           <div className="footer-container-second">
             <div className="footer-container-second-first-item">
-              <a href="https://linktr.ee/kartik.gothwal_">All My Links</a>
-              <a href="https://kartik-gothwal.vercel.app/">My Portfolio</a>
-              <a href="https://www.linkedin.com/in/kartikgothwal/">
+              <a href="https://linktr.ee/kartik.gothwal_" target="_blank">
+                All My Links
+              </a>
+              <a href="https://kartik-gothwal.vercel.app/" target="_blank">
+                My Portfolio
+              </a>
+              <a
+                href="https://www.linkedin.com/in/kartikgothwal/"
+                target="_blank"
+              >
                 My LinkedIn
               </a>
-              <a href="https://twitter.com/KartikGothwal28">My Twitter</a>
-              <a href="https://car-rental-five-indol.vercel.app/">
+              <a href="https://twitter.com/KartikGothwal28" target="_blank">
+                My Twitter
+              </a>
+              <a
+                href="https://car-rental-five-indol.vercel.app/"
+                target="_blank"
+              >
                 CARRENTAL.COM
               </a>
             </div>
