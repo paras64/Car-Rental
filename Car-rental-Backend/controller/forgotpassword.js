@@ -7,13 +7,14 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 // const path = require("path");
 // const fs = require("fs");
-// const privateKey = fs.readFileSync(
+// // const privateKey = fs.readFileSync(
 //   path.join(__dirname, "../myprivate.pem"),
 //   "utf-8"
 // );
-require("dotenv").config();
 const privateKey = process.env.PRIVATE_KEY;
 exports.forgotpassword = async (req, res) => {
+  console.log(req.body);
+  console.log(privateKey);
   try {
     const doc = await User.findOne({ email: req.body.email });
     if (!doc) {
@@ -27,7 +28,7 @@ exports.forgotpassword = async (req, res) => {
       algorithm: "RS256",
       expiresIn: "5m",
     });
-    const link = `http://localhost:8000/forgotpassword/${doc._id}/${token}`;
+    const link = `https://car-rental-backend-1tpp.onrender.com/forgotpassword/${doc._id}/${token}`;
 
     var transporter = nodemailer.createTransport({
       service: "gmail",

@@ -41,6 +41,7 @@ const ForgotPassword = () => {
           });
         })
         .catch((error) => {
+          console.log(error)
           setUserData((prevData) => {
             return {
               ...prevData,
