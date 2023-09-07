@@ -13,8 +13,8 @@ const jwt = require("jsonwebtoken");
 // );
 const privateKey = process.env.PRIVATE_KEY;
 exports.forgotpassword = async (req, res) => {
-  console.log(req.body);
-  console.log(privateKey);
+  console.log("Hey", req.body);
+  console.log("Hey", privateKey);
   try {
     const doc = await User.findOne({ email: req.body.email });
     if (!doc) {
@@ -44,7 +44,7 @@ exports.forgotpassword = async (req, res) => {
       subject: "Car Rental Store: Reset Password",
       text: link,
     };
-    
+
     transporter.sendMail(mailOptions, function (err, info) {
       if (err) {
         console.log(err);
@@ -57,7 +57,7 @@ exports.forgotpassword = async (req, res) => {
     });
   } catch (err) {
     console.log(err);
-    res.status(500).json({ message: "bad request", err: err });
+    res.status(400).json({ message: "bad request", err: err });
   }
 };
 
@@ -92,6 +92,6 @@ exports.updatePassword = async (req, res) => {
     );
     res.status(202).send("Password has been modified");
   } catch (err) {
-    res.status(304).send("Bad Request, Try again");
+    res.status(400).send("Bad Request, Try again");
   }
 };
