@@ -95,12 +95,9 @@ Before you begin, ensure you have met the following requirements:
 2. Browse the available car models.
 3. Select a car you want to rent and follow the rental process.
 
-### Admin Guide
 
-#### Admin Login
 
-1. Access the admin panel by visiting http://yourwebsite.com/admin or a similar URL.
-2. Enter the admin username and password to log in.
+##Admin Roles
 
 #### Managing Products
 
