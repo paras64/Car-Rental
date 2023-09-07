@@ -2,17 +2,6 @@ const model = require("../model/admin");
 const AdminModel = model.AdminModel;
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-// const path = require("path");
-// const fs = require("fs");
-
-// const privateKey = fs.readFileSync(
-//   path.join(__dirname, "../myprivate.pem"),
-//   "utf-8"
-// );
-// const publicKey = fs.readFileSync(
-//   path.join(__dirname, "../mypublic.pem"),
-//   "utf-8"
-// );
 require("dotenv").config();
 const privateKey = process.env.PRIVATE_KEY;
 const publicKey = process.env.PUBLIC_KEY;

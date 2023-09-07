@@ -31,6 +31,7 @@ const ForgotPassword = () => {
       loading: true,
     }));
     try {
+      console.log(userData)
       const doc = axios.post("https://car-rental-backend-1tpp.onrender.com/forgotpassword", userData);
       doc
         .then((response) => {
