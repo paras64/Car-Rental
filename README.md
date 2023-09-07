@@ -96,8 +96,7 @@ Before you begin, ensure you have met the following requirements:
 3. Select a car you want to rent and follow the rental process.
 
 
-
-##Admin Roles
+## Admin Roles
 
 #### Managing Products
 
