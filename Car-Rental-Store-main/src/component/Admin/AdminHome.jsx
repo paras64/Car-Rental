@@ -95,6 +95,7 @@ const AdminHome = () => {
       font-size: 15px;
       color: var(--text-color);
       font-family: Rubik;
+      text-align: center;
     }
     .car__img__orders {
       width: 10rem;
