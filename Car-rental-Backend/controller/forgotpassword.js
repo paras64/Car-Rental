@@ -12,9 +12,10 @@ const jwt = require("jsonwebtoken");
 //   "utf-8"
 // );
 const privateKey = process.env.PRIVATE_KEY;
+const publicKey = process.env.PUBLIC_KEY;
 exports.forgotpassword = async (req, res) => {
-  console.log("Hey", req.body);
-  console.log("Hey", privateKey);
+  // console.log("Hey", req.body);
+  // console.log("Hey", privateKey);
   try {
     const doc = await User.findOne({ email: req.body.email });
     if (!doc) {
@@ -23,8 +24,8 @@ exports.forgotpassword = async (req, res) => {
         .json({ message: "Invalid email, Please check and try again" });
       return;
     }
-    secret = privateKey + doc.password;
-    const token = jwt.sign({ email: doc.email, id: doc._id }, secret, {
+    // secret = privateKey + doc.password;
+    const token = jwt.sign({ email: doc.email, id: doc._id }, privateKey, {
       algorithm: "RS256",
       expiresIn: "5m",
     });
@@ -69,8 +70,8 @@ exports.getForgotRequest = async (req, res) => {
     return;
   }
   try {
-    secret = privateKey + doc.password;
-    const verify = jwt.verify(token, secret, { algorithm: "RS256" });
+    // secret = privateKey + doc.password;
+    const verify = jwt.verify(token, publicKey, { algorithm: "RS256" });
     console.log(verify);
     res.redirect(`http://localhost:3000/confirmpassword/${doc.email}`);
   } catch (err) {
