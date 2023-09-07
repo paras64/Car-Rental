@@ -15,7 +15,7 @@ Welcome to the Car Rental website! This platform allows users to explore and ren
   - [User Login](#user-login)
   - [Forgot Password](#forgot-password)
   - [Browsing and Renting Cars](#browsing-and-renting-cars)
-- [Admin Guide](#admin-guide)
+- [Admin Roles](#admin-roles)
   - [Admin Login](#admin-login)
   - [Managing Products](#managing-products)
   - [Managing Users](#managing-users)
