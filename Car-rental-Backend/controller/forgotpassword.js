@@ -57,7 +57,6 @@ exports.forgotpassword = async (req, res) => {
       }
     });
   } catch (err) {
-    console.log(err);
     res.status(400).json({ message: "bad request", err: err });
   }
 };
@@ -73,7 +72,9 @@ exports.getForgotRequest = async (req, res) => {
     // secret = privateKey + doc.password;
     const verify = jwt.verify(token, publicKey, { algorithm: "RS256" });
     console.log(verify);
-    res.redirect(`http://localhost:3000/confirmpassword/${doc.email}`);
+    res.redirect(
+      `https://car-rental-five-indol.vercel.app/confirmpassword/${doc.email}`
+    );
   } catch (err) {
     res.status(401).send("<h1 >User Not Verified</h1>");
   }
