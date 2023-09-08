@@ -33,10 +33,13 @@ const AddFaq = ({ closeModel }) => {
       );
       return;
     }
-    const doc = axios.post("https://car-rental-backend-1tpp.onrender.com/faq/createfaq", {
-      FaqData,
-      adminData,
-    });
+    const doc = axios.post(
+      "https://car-rental-backend-1tpp.onrender.com/faq/createfaq",
+      {
+        FaqData,
+        adminData,
+      }
+    );
     doc
       .then((response) => {
         alert(response.data.message);
@@ -84,7 +87,11 @@ const AddFaq = ({ closeModel }) => {
                       onChange={handleChange}
                     />
                     <aside className="faq__crypus">
-                      <p className="required__field">This field is required</p>
+                      {!FaqData.question && (
+                        <p className="required__field">
+                          This field is required
+                        </p>
+                      )}
                       <p className="character__counts">
                         {FaqData.question.length}/65{" "}
                       </p>
@@ -108,7 +115,11 @@ const AddFaq = ({ closeModel }) => {
                       onChange={handleChange}
                     ></textarea>
                     <aside className="faq__crypus">
-                      <p className="required__field">This field is required</p>
+                      {!FaqData.answer && (
+                        <p className="required__field">
+                          This field is required
+                        </p>
+                      )}
                       <p className="character__counts">
                         {FaqData.answer.length}/210
                       </p>
