@@ -126,10 +126,7 @@ const BookingDetailsForm = ({
       alert("Please complete the required fields");
     }
   };
-  console.log("bookingData", bookingData);
-  console.log("productDetails", productDetails);
 
-  console.log("orderDetails", orderDetails);
   return (
     <>
       <GlobalStyle />
