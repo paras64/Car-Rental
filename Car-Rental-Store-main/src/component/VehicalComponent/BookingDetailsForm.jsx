@@ -61,7 +61,7 @@ const BookingDetailsForm = ({
         };
       });
     }
-    if (productDetails) {
+    if (productDetails.id) {
       SetOrderDetails((prevData) => {
         return {
           ...prevData,
@@ -117,7 +117,7 @@ const BookingDetailsForm = ({
   };
   console.log("bookingData", bookingData);
   console.log("productDetails", productDetails);
- 
+
   console.log("orderDetails", orderDetails);
   return (
     <>
