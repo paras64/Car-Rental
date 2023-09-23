@@ -69,7 +69,7 @@ function Booking(props) {
     }
     showSetModel(true);
   };
-
+ 
   const handleClick = (e) => {
     if (e) {
       e.preventDefault();
