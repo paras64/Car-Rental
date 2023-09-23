@@ -82,6 +82,7 @@ const BookingDetailsForm = ({
   };
 
   const handleSubmit = (e) => {
+    console.log(orderDetails);
     e.preventDefault();
     if (
       orderDetails.product &&
@@ -95,10 +96,13 @@ const BookingDetailsForm = ({
       orderDetails.age &&
       orderDetails.address
     ) {
-      const doc = axios.post("https://car-rental-backend-1tpp.onrender.com/user/bookorder", {
-        orderDetails,
-        UserDetails,
-      });
+      const doc = axios.post(
+        "https://car-rental-backend-1tpp.onrender.com/user/bookorder",
+        {
+          orderDetails,
+          UserDetails,
+        }
+      );
       doc
         .then((response) => {
           alert(response.data.message);
