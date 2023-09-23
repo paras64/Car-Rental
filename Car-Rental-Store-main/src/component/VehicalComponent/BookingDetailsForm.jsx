@@ -116,7 +116,8 @@ const BookingDetailsForm = ({
     }
   };
   console.log("bookingData", bookingData);
-  console.log("ProductsData", ProductsData);
+  console.log("productDetails", productDetails);
+ 
   console.log("orderDetails", orderDetails);
   return (
     <>
