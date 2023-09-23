@@ -61,7 +61,7 @@ const BookingDetailsForm = ({
         };
       });
     }
-    if (productDetails.id) {
+    if (productDetails) {
       SetOrderDetails((prevData) => {
         return {
           ...prevData,
@@ -73,6 +73,17 @@ const BookingDetailsForm = ({
       document.body.style.overflowY = "scroll";
     };
   }, [productList, bookingData]);
+
+  useEffect(() => {
+    if (productDetails) {
+      SetOrderDetails((prevData) => {
+        return {
+          ...prevData,
+          product: productDetails._id,
+        };
+      });
+    }
+  }, [productDetails]);
 
   const handleChange = (e) => {
     SetOrderDetails((prevData) => {
