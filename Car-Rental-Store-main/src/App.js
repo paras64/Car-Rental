@@ -1,7 +1,7 @@
 import "./App.css";
-import { lazy } from "react";
+import { lazy, Suspense } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-
+import Loading from "./Loading";
 const VehicalModels = lazy(() => import("./component/VehicalModels"));
 const Login = lazy(() => import("./component/LoginRegistration/Login"));
 const Registration = lazy(() =>
@@ -63,81 +63,168 @@ function App() {
           <AllUserProvider>
             <FaqProvider>
               <Routes>
-                <Route exact path="/" element={<Home />} />
-                <Route exact path="/about" element={<About />} />
+                <Route
+                  exact
+                  path="/"
+                  element={
+                    <Suspense fallback={<Loading />}>
+                      <Home />
+                    </Suspense>
+                  }
+                />
+
+                <Route
+                  exact
+                  path="/about"
+                  element={
+                    <Suspense fallback={<Loading />}>
+                      <About />
+                    </Suspense>
+                  }
+                />
                 <Route
                   exact
                   path="/testimonial"
-                  element={<TestimonialComponent />}
+                  element={
+                    <Suspense fallback={<Loading />}>
+                      <TestimonialComponent />
+                    </Suspense>
+                  }
                 />
                 <Route
                   exact
                   path="/vehicalsmodels"
                   element={<VehicalModels />}
                 />
-                <Route exact path="/ourteam" element={<Ourteam />} />
-                <Route exact path="/support" element={<Contact />} />
-                <Route exact path="/login" element={<Login />} />
-                <Route exact path="/register" element={<Registration />} />
+                <Route
+                  exact
+                  path="/ourteam"
+                  element={
+                    <Suspense fallback={<Loading />}>
+                      <Ourteam />
+                    </Suspense>
+                  }
+                />
+                <Route
+                  exact
+                  path="/support"
+                  element={
+                    <Suspense fallback={<Loading />}>
+                      <Contact />
+                    </Suspense>
+                  }
+                />
+                <Route
+                  exact
+                  path="/login"
+                  element={
+                    <Suspense fallback={<Loading />}>
+                      <Login />
+                    </Suspense>
+                  }
+                />
+                <Route
+                  exact
+                  path="/register"
+                  element={
+                    <Suspense fallback={<Loading />}>
+                      <Registration />
+                    </Suspense>
+                  }
+                />
                 <Route
                   exact
                   path="/forgotpassword"
-                  element={<ForgotPassword />}
+                  element={
+                    <Suspense fallback={<Loading />}>
+                      <ForgotPassword />
+                    </Suspense>
+                  }
                 />
-                <Route exact path="/orders" element={<Orders />} />
+                <Route
+                  exact
+                  path="/orders"
+                  element={
+                    <Suspense fallback={<Loading />}>
+                      <Orders />
+                    </Suspense>
+                  }
+                />
 
                 <Route
                   exact
                   path="/admin/login"
                   element={
-                    <AdminProvider>
-                      <AdminLogin />
-                    </AdminProvider>
+                    <Suspense fallback={<Loading />}>
+                      <AdminProvider>
+                        <AdminLogin />
+                      </AdminProvider>
+                    </Suspense>
                   }
                 />
                 <Route
                   exact
                   path="/admin/dashboard"
                   element={
-                    <AdminProvider>
-                      <AdminDashboard />
-                    </AdminProvider>
+                    <Suspense fallback={<Loading />}>
+                      <AdminProvider>
+                        <AdminDashboard />
+                      </AdminProvider>
+                    </Suspense>
                   }
                 />
                 <Route
                   exact
                   path="/admin/dashboard/addproduct"
                   element={
-                    <AdminProvider>
-                      <AddProducts />
-                    </AdminProvider>
+                    <Suspense fallback={<Loading />}>
+                      <AdminProvider>
+                        <AddProducts />
+                      </AdminProvider>
+                    </Suspense>
                   }
                 />
                 <Route
                   exact
                   path="/admin/dashboard/modifyproduct"
                   element={
-                    <AdminProvider>
-                      <ModifyProduct />
-                    </AdminProvider>
+                    <Suspense fallback={<Loading />}>
+                      <AdminProvider>
+                        <ModifyProduct />
+                      </AdminProvider>
+                    </Suspense>
                   }
                 />
                 <Route
                   exact
                   path="/admin/dashboard/modifyfaq"
                   element={
-                    <AdminProvider>
-                      <ModifyFaq />
-                    </AdminProvider>
+                    <Suspense fallback={<Loading />}>
+                      <AdminProvider>
+                        <ModifyFaq />
+                      </AdminProvider>
+                    </Suspense>
                   }
                 />
 
                 <Route
                   exact
                   path="/confirmpassword/:userEmail"
-                  element={<ConfirmPassword />}
+                  element={
+                    <Suspense fallback={<Loading />}>
+                      <ConfirmPassword />
+                    </Suspense>
+                  }
                 />
-                <Route exact path="*" element={<NotFound />} />
+                <Route
+                  exact
+                  path="*"
+                  element={
+                    <Suspense fallback={<Loading />}>
+                      <NotFound />
+                    </Suspense>
+                  }
+                />
               </Routes>
             </FaqProvider>
           </AllUserProvider>
