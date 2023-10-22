@@ -1,4 +1,5 @@
 import "./App.css";
+import { lazy } from "react";
 import Home from "./component/Home";
 import About from "./component/About";
 import TestimonialComponent from "./component//TestimonialComponent";
