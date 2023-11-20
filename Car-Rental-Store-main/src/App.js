@@ -7,7 +7,6 @@ import {
   BrowserRouter as Router,
   Route,
   Routes,
-  useLocation,
 } from "react-router-dom";
 import VehicalModels from "./component/VehicalModels";
 import Login from "./component/LoginRegistration/Login";
