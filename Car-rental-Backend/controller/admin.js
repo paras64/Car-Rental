@@ -63,41 +63,41 @@ exports.AdminLogin = async (req, res) => {
   }
 };
 
-// exports.AdminRegister = async (req, res) => {
-//   const doc = await AdminModel.findOne({ email: req.body.email });
-//   if (doc) {
-//     console.log(doc);
-//     res
-//       .status(401)
-//       .json({ message: "Admin User already exists, Please login" });
-//     return;
-//   }
-//   const admin = new AdminModel({
-//     firstname: req.body.firstname,
-//     lastname: req.body.lastname,
-//     email: req.body.email,
-//     password: req.body.password,
-//   });
-//   const token = jwt.sign(
-//     {
-//       email: req.body.email,
-//       password: req.body.password,
-//     },
-//     privateKey,
-//     {
-//       algorithm: "RS256",
-//       expiresIn: "1800",
-//     }
-//   );
-//   const hash = bcrypt.hashSync(req.body.password, 10);
-//   admin.password = hash;
-//   admin.token = token;
-//   admin
-//     .save()
-//     .then((data) => {
-//       res.status(201).json({ message: "Admin has been created" });
-//     })
-//     .catch((err) => {
-//       res.status(401).json({ message: "Something went wrong" });
-//     });
-// };
+exports.AdminRegister = async (req, res) => {
+  const doc = await AdminModel.findOne({ email: req.body.email });
+  if (doc) {
+    console.log(doc);
+    res
+      .status(401)
+      .json({ message: "Admin User already exists, Please login" });
+    return;
+  }
+  const admin = new AdminModel({
+    firstname: req.body.firstname,
+    lastname: req.body.lastname,
+    email: req.body.email,
+    password: req.body.password,
+  });
+  const token = jwt.sign(
+    {
+      email: req.body.email,
+      password: req.body.password,
+    },
+    privateKey,
+    {
+      algorithm: "RS256",
+      expiresIn: "1800",
+    }
+  );
+  const hash = bcrypt.hashSync(req.body.password, 10);
+  admin.password = hash;
+  admin.token = token;
+  admin
+    .save()
+    .then((data) => {
+      res.status(201).json({ message: "Admin has been created" });
+    })
+    .catch((err) => {
+      res.status(401).json({ message: "Something went wrong" });
+    });
+};
