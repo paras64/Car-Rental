@@ -1,31 +1,36 @@
 import "./App.css";
-import { lazy } from "react";
-import Home from "./component/Home";
-import About from "./component/About";
+import { Suspense, lazy } from "react";
 import TestimonialComponent from "./component//TestimonialComponent";
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-} from "react-router-dom";
-import VehicalModels from "./component/VehicalModels";
-import Login from "./component/LoginRegistration/Login";
-import Registration from "./component/LoginRegistration/Registration";
-import ForgotPassword from "./component/LoginRegistration/ForgotPassword";
-import ConfirmPassword from "./component/LoginRegistration/ConfirmPassword";
-import Orders from "./component/Orders";
-import Contact from "./component/Contact";
-import NotFound from "./NotFound";
-import Ourteam from "./component/Ourteam";
-import AdminLogin from "./component/Admin/AdminLogin";
-import AdminDashboard from "./component/Admin/AdminDashboard";
-import AdminProvider from "./component/Admin/AdminProvider";
-import AddProducts from "./component/Admin/AddProducts";
-import UserProvider from "./component/LoginRegistration/UserProvider";
-import ModifyProduct from "./component/Admin/ModifyProduct";
-import ModifyFaq from "./component/Admin/ModifyFaq";
-import FaqProvider from "./component/Admin/FaqProvider";
-import AllUserProvider from "./component/Admin/AllUserProvider";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Loader from "./component/Loader";
+const Home = lazy(() => import("./component/Home"));
+const About = lazy(() => import("./component/About"));
+const VehicalModels = lazy(() => import("./component/VehicalModels"));
+const Login = lazy(() => import("./component/LoginRegistration/Login"));
+const Registration = lazy(() =>
+  import("./component/LoginRegistration/Registration")
+);
+const ForgotPassword = lazy(() =>
+  import("./component/LoginRegistration/ForgotPassword")
+);
+const ConfirmPassword = lazy(() =>
+  import("./component/LoginRegistration/ConfirmPassword")
+);
+const Orders = lazy(() => import("./component/Orders"));
+const Contact = lazy(() => import("./component/Contact"));
+const NotFound = lazy(() => import("./NotFound"));
+const Ourteam = lazy(() => import("./component/Ourteam"));
+const AdminLogin = lazy(() => import("./component/Admin/AdminLogin"));
+const AdminDashboard = lazy(() => import("./component/Admin/AdminDashboard"));
+const AdminProvider = lazy(() => import("./component/Admin/AdminProvider"));
+const AddProducts = lazy(() => import("./component/Admin/AddProducts"));
+const UserProvider = lazy(() =>
+  import("./component/LoginRegistration/UserProvider")
+);
+const ModifyProduct = lazy(() => import("./component/Admin/ModifyProduct"));
+const ModifyFaq = lazy(() => import("./component/Admin/ModifyFaq"));
+const FaqProvider = lazy(() => import("./component/Admin/FaqProvider"));
+const AllUserProvider = lazy(() => import("./component/Admin/AllUserProvider"));
 function App() {
   return (
     <>
@@ -34,35 +39,106 @@ function App() {
           <AllUserProvider>
             <FaqProvider>
               <Routes>
-                <Route exact path="/" element={<Home />} />
-                <Route exact path="/about" element={<About />} />
+                <Route
+                  exact
+                  path="/"
+                  element={
+                    <Suspense fallback={<Loader />}>
+                      <Home />
+                    </Suspense>
+                  }
+                />
+                <Route
+                  exact
+                  path="/about"
+                  element={
+                    <Suspense fallback={<Loader />}>
+                      <About />
+                    </Suspense>
+                  }
+                />
                 <Route
                   exact
                   path="/testimonial"
-                  element={<TestimonialComponent />}
+                  element={
+                    <Suspense fallback={<Loader />}>
+                      <TestimonialComponent />
+                    </Suspense>
+                  }
                 />
                 <Route
                   exact
                   path="/vehicalsmodels"
-                  element={<VehicalModels />}
+                  element={
+                    <Suspense fallback={<Loader />}>
+                      <VehicalModels />
+                    </Suspense>
+                  }
                 />
-                <Route exact path="/ourteam" element={<Ourteam />} />
-                <Route exact path="/support" element={<Contact />} />
-                <Route exact path="/login" element={<Login />} />
-                <Route exact path="/register" element={<Registration />} />
+
+                <Route
+                  exact
+                  path="/ourteam"
+                  element={
+                    <Suspense fallback={<Loader />}>
+                      <Ourteam />
+                    </Suspense>
+                  }
+                />
+                <Route
+                  exact
+                  path="/support"
+                  element={
+                    <Suspense fallback={<Loader />}>
+                      <Contact />
+                    </Suspense>
+                  }
+                />
+                <Route
+                  exact
+                  path="/login"
+                  element={
+                    <Suspense fallback={<Loader />}>
+                      <Login />
+                    </Suspense>
+                  }
+                />
+                <Route
+                  exact
+                  path="/register"
+                  element={
+                    <Suspense fallback={<Loader />}>
+                      <Registration />
+                    </Suspense>
+                  }
+                />
                 <Route
                   exact
                   path="/forgotpassword"
-                  element={<ForgotPassword />}
+                  element={
+                    <Suspense fallback={<Loader />}>
+                      <ForgotPassword />
+                    </Suspense>
+                  }
                 />
-                <Route exact path="/orders" element={<Orders />} />
+                <Route
+                  exact
+                  path="/orders"
+                  element={
+                    <Suspense fallback={<Loader />}>
+                      <Orders />
+                    </Suspense>
+                  }
+                />
 
                 <Route
                   exact
                   path="/admin/login"
                   element={
                     <AdminProvider>
-                      <AdminLogin />
+                      <Suspense fallback={<Loader />}>
+                        <AdminLogin />
+                      </Suspense>
                     </AdminProvider>
                   }
                 />
@@ -71,7 +147,9 @@ function App() {
                   path="/admin/dashboard"
                   element={
                     <AdminProvider>
-                      <AdminDashboard />
+                      <Suspense fallback={<Loader />}>
+                        <AdminDashboard />
+                      </Suspense>
                     </AdminProvider>
                   }
                 />
@@ -80,7 +158,9 @@ function App() {
                   path="/admin/dashboard/addproduct"
                   element={
                     <AdminProvider>
-                      <AddProducts />
+                      <Suspense fallback={<Loader />}>
+                        <AddProducts />
+                      </Suspense>
                     </AdminProvider>
                   }
                 />
@@ -89,7 +169,9 @@ function App() {
                   path="/admin/dashboard/modifyproduct"
                   element={
                     <AdminProvider>
-                      <ModifyProduct />
+                      <Suspense fallback={<Loader />}>
+                        <ModifyProduct />
+                      </Suspense>
                     </AdminProvider>
                   }
                 />
@@ -98,7 +180,9 @@ function App() {
                   path="/admin/dashboard/modifyfaq"
                   element={
                     <AdminProvider>
-                      <ModifyFaq />
+                      <Suspense fallback={<Loader />}>
+                        <ModifyFaq />
+                      </Suspense>
                     </AdminProvider>
                   }
                 />
@@ -106,9 +190,30 @@ function App() {
                 <Route
                   exact
                   path="/confirmpassword/:userEmail"
-                  element={<ConfirmPassword />}
+                  element={
+                    <Suspense fallback={<Loader />}>
+                      <ConfirmPassword />
+                    </Suspense>
+                  }
                 />
-                <Route exact path="*" element={<NotFound />} />
+                <Route
+                  exact
+                  path="*"
+                  element={
+                    <Suspense fallback={<Loader />}>
+                      <NotFound />
+                    </Suspense>
+                  }
+                />
+                <Route
+                  exact
+                  path="/loading"
+                  element={
+                    <Suspense fallback={<Loader />}>
+                      <Loader />
+                    </Suspense>
+                  }
+                />
               </Routes>
             </FaqProvider>
           </AllUserProvider>
