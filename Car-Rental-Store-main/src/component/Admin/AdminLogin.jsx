@@ -27,7 +27,10 @@ const AdminLogin = () => {
   const handleClick = (e) => {
     e.preventDefault();
     if (adminData.email && adminData.password) {
-      const doc = axios.post("https://car-rental-backend-1tpp.onrender.com/admin/login", adminData);
+      const doc = axios.post(
+        "https://car-rental-backend-1tpp.onrender.com/admin/login",
+        adminData
+      );
       doc
         .then((response) => {
           alert("Login Successful");
