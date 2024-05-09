@@ -77,7 +77,7 @@ export default function Footer() {
     e.preventDefault();
     if (data.email && data.fullname) {
       const doc = axios.post(
-        "https://car-rental-backend-1tpp.onrender.com/subscribe",
+        "https://www.google.com/",
         data
       );
       doc
@@ -200,27 +200,27 @@ export default function Footer() {
                 <section className="socials-list">
                   <div className="socials-list-container">
                     <div className="social-icon">
-                      <a href="https://car-rental-five-indol.vercel.app/">
+                      <a href="https://www.google.com/">
                         <InstagramIcon className="icons-socials" />
                       </a>
                     </div>
                     <div className="social-icon">
-                      <a href="https://car-rental-five-indol.vercel.app/">
+                      <a href="https://www.google.com/">
                         <TwitterIcon className="icons-socials" />
                       </a>
                     </div>
                     <div className="social-icon">
-                      <a href="https://car-rental-five-indol.vercel.app/">
+                      <a href="https://www.google.com/">
                         <FacebookIcon className="icons-socials" />
                       </a>
                     </div>
                     <div className="social-icon">
-                      <a href="https://car-rental-five-indol.vercel.app/">
+                      <a href="https://www.google.com/">
                         <YouTubeIcon className="icons-socials" />
                       </a>
                     </div>
                     <div className="social-icon">
-                      <a href="https://car-rental-five-indol.vercel.app/">
+                      <a href="https://www.google.com/">
                         <PinterestIcon className="icons-socials" />
                       </a>
                     </div>
@@ -306,21 +306,6 @@ export default function Footer() {
           </div>
           <div className="footer-container-second">
             <div className="footer-container-second-first-item">
-              <a href="https://linktr.ee/kartik.gothwal_" target="_blank">
-                All My Links
-              </a>
-              <a href="https://kartik-gothwal.vercel.app/" target="_blank">
-                My Portfolio
-              </a>
-              <a
-                href="https://www.linkedin.com/in/kartikgothwal/"
-                target="_blank"
-              >
-                My LinkedIn
-              </a>
-              <a href="https://twitter.com/KartikGothwal28" target="_blank">
-                My Twitter
-              </a>
               <a
                 href="https://car-rental-five-indol.vercel.app/"
                 target="_blank"
@@ -329,8 +314,8 @@ export default function Footer() {
               </a>
             </div>
             <div className="footer-container-second-second-item">
-              <a href="https://kartik-gothwal.vercel.app/" target="_blank">
-                Designed by - Kartik Gothwal
+              <a href="https://www.google.com/" target="_blank">
+                Designed by - Paras,Priyansh,Mitul,Pratik
               </a>
               <a
                 className="footer-container-second-second-item-btn"
@@ -348,8 +333,7 @@ export default function Footer() {
             <p className="terms-condition-para">
               This is intended for customer. By signing up, you understand and
               agree to our terms that your data will be collected and used
-              subject to our <span>Designed by - </span>
-              <span>Kartik Gothwal</span>
+              subject to our
             </p>
           </div>
         </div>
